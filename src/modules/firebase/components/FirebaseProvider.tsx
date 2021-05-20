@@ -1,6 +1,11 @@
 import firebase from 'firebase/app';
 import React, { useEffect } from 'react';
 
+import 'firebase/auth';
+import 'firebase/firestore';
+import 'firebase/storage';
+import 'firebase/functions';
+
 export const FirebaseProvider: React.FC = ({ children }) => {
   function initFirebase() {
     if (!firebase.apps.length) {

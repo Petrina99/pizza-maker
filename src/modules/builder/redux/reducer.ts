@@ -15,12 +15,12 @@ export const PizzaReducer = (
   action: ActionUnion<typeof Actions>,
 ) => {
   switch (action.type) {
-    case 'type/add':
+    case 'topping/add':
       return {
         ...state,
         toppings: [...state.toppings, action.payload],
       };
-    case 'type/remove':
+    case 'topping/remove':
       return {
         ...state,
         toppings: state.toppings.filter(
