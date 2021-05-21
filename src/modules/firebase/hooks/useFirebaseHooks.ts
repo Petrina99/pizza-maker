@@ -1,21 +1,30 @@
 import firebase from 'firebase/app';
 
-export const useFirebaseHook = (collectionId: string) => {
+export const useFirebaseHooks = (collectionId: string) => {
   function getCollectionRefrence() {
     return firebase.app().firestore().collection(collectionId);
   }
 
-  function pushData(data: any) {
-    getCollectionRefrence().add(data);
+  function pushUser(name: string, data: any) {
+    getCollectionRefrence().doc(name).set(data);
   }
 
-  async function getData() {
+  async function getSpecificUser(name: string) {
     const resultPromise = await getCollectionRefrence()
-      .where('description', '==', 'test')
+      .where('email', '==', name)
       .get();
 
+    if (!resultPromise) {
+      return false;
+    }
+
+    return true;
+  }
+
+  async function getAllUsers() {
+    const resultPromise = await getCollectionRefrence().get();
     const resolvedItems = resultPromise.docs.map((doc) => {
-      return doc.id, doc.data();
+      return { id: doc.id, ...doc.data() };
     });
 
     return resolvedItems;
@@ -23,7 +32,8 @@ export const useFirebaseHook = (collectionId: string) => {
 
   return {
     getCollectionRefrence,
-    pushData,
-    getData,
+    pushUser,
+    getAllUsers,
+    getSpecificUser,
   };
 };

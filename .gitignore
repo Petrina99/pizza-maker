@@ -13,8 +13,7 @@
 
 
 #environment variable files
-.env*
-!.env.template
+.env
 
 # misc
 .DS_Store

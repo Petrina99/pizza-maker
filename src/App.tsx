@@ -2,6 +2,5 @@ import React from 'react';
 import './App.css';
 
 export const App: React.FC = () => {
-  return (<div></div>;)
+  return <div>Bla</div>;
 };
-

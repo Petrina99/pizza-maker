@@ -3,11 +3,11 @@ import { User } from '../models';
 import { UserAction } from './userAction';
 
 interface State {
-  user: User[];
+  users: User[];
 }
 
 const INITIAL_STATE: State = {
-  user: [],
+  users: [],
 };
 
 export const UserReducer = (
@@ -18,12 +18,7 @@ export const UserReducer = (
     case 'user/add':
       return {
         ...state,
-        user: [...state.user, action.payload],
-      };
-    case 'user/remove':
-      return {
-        ...state,
-        user: state.user.filter((item) => item.id !== action.payload.id),
+        users: [...state.users, action.payload],
       };
     default:
       return state;
