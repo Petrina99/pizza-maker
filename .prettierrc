@@ -1,6 +1,7 @@
 {
   "tabWidth": 4,
   "singleQuote": true,
+  "jsxSingleQuote": true,
   "prettier.jsxBracketSameLine": true,
   "trailingComma": "all",
   "overrides": [

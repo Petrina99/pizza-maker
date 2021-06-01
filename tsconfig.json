@@ -19,9 +19,25 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react",
-    "typeRoots": ["types", "node_modules/@types"]
+    "jsx": "react-jsx",
+    "typeRoots": [
+      "types",
+      "node_modules/@types"
+    ],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "noFallthroughCasesInSwitch": true
   },
-  "include": ["src", "types"],
-  "exclude": ["node_modules", "public", ".cache"]
+  "include": [
+    "src",
+    "types"
+  ],
+  "exclude": [
+    "node_modules",
+    "public",
+    ".cache"
+  ]
 }

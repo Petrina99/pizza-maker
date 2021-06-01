@@ -1,6 +1,11 @@
 import React from 'react';
 import './App.css';
+import { Auth } from './modules';
 
 export const App: React.FC = () => {
-  return <div>Bla</div>;
+  return (
+    <div>
+      <Auth />
+    </div>
+  );
 };

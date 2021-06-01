@@ -1,5 +1,5 @@
 import firebase from 'firebase/app';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import 'firebase/auth';
 import 'firebase/firestore';
@@ -7,6 +7,8 @@ import 'firebase/storage';
 import 'firebase/functions';
 
 export const FirebaseProvider: React.FC = ({ children }) => {
+  const [isReady, setIsReady] = useState(false);
+
   function initFirebase() {
     if (!firebase.apps.length) {
       firebase.initializeApp({
@@ -18,9 +20,14 @@ export const FirebaseProvider: React.FC = ({ children }) => {
         appId: process.env.REACT_APP_APP_ID,
       });
     }
+
+    setIsReady(true);
   }
 
   useEffect(initFirebase, []);
 
+  if (!isReady) {
+    return <>Loading...</>;
+  }
   return <>{children}</>;
 };
