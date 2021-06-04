@@ -1,4 +1,4 @@
-import { Topping } from '../models';
+import { Topping } from '../../redux/models';
 
 export const toppings: Topping[] = [
   {

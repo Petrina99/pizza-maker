@@ -2,12 +2,7 @@ import { combineReducers, createStore } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 
 import { AppState } from '../models';
-import {
-  PizzaReducer,
-  UserReducer,
-  ErrorReducer,
-  ButtonReducer,
-} from '../../builder';
+import { PizzaReducer, UserReducer, ErrorReducer } from '../../redux';
 
 export const configureStore = () => {
   return createStore(
@@ -15,7 +10,6 @@ export const configureStore = () => {
       reducer: PizzaReducer,
       userReducer: UserReducer,
       errorReducer: ErrorReducer,
-      buttonReducer: ButtonReducer,
     }),
     {},
     composeWithDevTools(),

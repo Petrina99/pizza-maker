@@ -1,13 +1,12 @@
 import { ActionUnion } from '../../redux-store';
-import { Error } from '../models';
-import { ErrorAction } from './errorAction';
+import { ErrorAction } from '../actions';
 
 interface State {
-  errors: Error[];
+  error: string;
 }
 
 const INITIAL_STATE: State = {
-  errors: [],
+  error: '',
 };
 
 export const ErrorReducer = (
@@ -18,7 +17,7 @@ export const ErrorReducer = (
     case 'error/add':
       return {
         ...state,
-        errors: [...state.errors, action.payload],
+        error: action.payload,
       };
     default:
       return state;

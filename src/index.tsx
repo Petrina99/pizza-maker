@@ -4,16 +4,14 @@ import './index.css';
 import { App } from './App';
 import { Provider } from 'react-redux';
 
-import { FirebaseProvider, FirebaseAuthProvider } from './modules';
+import { FirebaseProvider } from './modules';
 import { configureStore } from './modules';
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={configureStore()}>
       <FirebaseProvider>
-        <FirebaseAuthProvider>
-          <App />
-        </FirebaseAuthProvider>
+        <App />
       </FirebaseProvider>
     </Provider>
   </React.StrictMode>,

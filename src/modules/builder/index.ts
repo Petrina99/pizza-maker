@@ -1,4 +1,4 @@
-export * from './models';
+export * from '../redux/models';
 export * from './fixtures';
-export * from './redux';
+export * from '../redux';
 export * from './components';

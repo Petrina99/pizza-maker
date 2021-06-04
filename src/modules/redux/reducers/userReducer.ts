@@ -1,13 +1,13 @@
 import { ActionUnion } from '../../redux-store';
+import { UserAction } from '../actions';
 import { User } from '../models';
-import { UserAction } from './userAction';
 
 interface State {
-  users: User[];
+  user: User | null;
 }
 
 const INITIAL_STATE: State = {
-  users: [],
+  user: null,
 };
 
 export const UserReducer = (
@@ -18,7 +18,7 @@ export const UserReducer = (
     case 'user/add':
       return {
         ...state,
-        users: [...state.users, action.payload],
+        user: action.payload,
       };
     default:
       return state;

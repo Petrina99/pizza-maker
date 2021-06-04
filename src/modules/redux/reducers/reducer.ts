@@ -1,6 +1,6 @@
 import { ActionUnion } from '../../redux-store';
 import { Topping } from '../models';
-import { Actions } from './action';
+import { Actions } from '../actions';
 
 interface State {
   toppings: Topping[];
