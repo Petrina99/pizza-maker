@@ -1,24 +1,23 @@
 import { ActionUnion } from '../../redux-store';
-import { UserAction } from '../actions';
-import { User } from '../models';
+import { MessageAction } from '../actions';
 
 interface State {
-  user: User | null | string;
+  message: string;
 }
 
 const INITIAL_STATE: State = {
-  user: '',
+  message: '',
 };
 
-export const UserReducer = (
+export const MessageReducer = (
   state: State = INITIAL_STATE,
-  action: ActionUnion<typeof UserAction>,
+  action: ActionUnion<typeof MessageAction>,
 ) => {
   switch (action.type) {
-    case 'user/add':
+    case 'msg/add':
       return {
         ...state,
-        user: action.payload,
+        message: action.payload,
       };
     default:
       return state;

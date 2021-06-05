@@ -1,2 +1,1 @@
-export * from './useFirebaseHooks';
-export * from './useAuth';
+export * from './firebase-hooks';

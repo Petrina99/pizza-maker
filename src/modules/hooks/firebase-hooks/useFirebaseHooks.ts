@@ -5,8 +5,8 @@ export const useFirebaseHooks = (collectionId: string) => {
     return firebase.app().firestore().collection(collectionId);
   }
 
-  function pushUser(name: string) {
-    getCollectionRefrence().doc(name);
+  function pushUser(name: string, data: any) {
+    getCollectionRefrence().doc(name).set(data);
   }
 
   async function getSpecificUser(name: string) {

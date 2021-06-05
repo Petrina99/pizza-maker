@@ -5,10 +5,11 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { ErrorAction } from '../../redux';
 
-import { useAuth } from '../../hooks';
+import { useAuth, useFirebaseHooks } from '../../hooks';
 export const Register: React.FC = () => {
   const { error } = useSelector((state: AppState) => state.errorReducer);
   const { register, googleSignIn } = useAuth();
+  const { pushUser } = useFirebaseHooks('orders');
   const dispatch = useDispatch();
 
   const [email, setEmail] = useState('');
@@ -24,7 +25,6 @@ export const Register: React.FC = () => {
 
   function handlePasswordChange(e: React.ChangeEvent<HTMLInputElement>) {
     const { value } = e.currentTarget;
-
     setPassword(value);
     dispatch(ErrorAction.add(''));
   }
@@ -45,9 +45,26 @@ export const Register: React.FC = () => {
       );
     }
 
-    if (isValid) {
+    if (isValid && email && password) {
       register(email, password);
-      console.log(error);
+      pushUser(email, {
+        order: {
+          adress: '',
+          discount: false,
+          payment: 'cash or cc',
+          price: 0,
+          size: '',
+          toppings: {
+            chilli: false,
+            corn: false,
+            egg: false,
+            pineapple: false,
+            meat: false,
+            shrooms: false,
+            bacon: false,
+          },
+        },
+      });
     }
   }
 
@@ -67,7 +84,6 @@ export const Register: React.FC = () => {
     <>
       <form onSubmit={handleSignUp}>
         <h1>Create an account</h1>
-        <p>{error}</p>
         <label htmlFor='email'>E-mail</label>
         <br />
         <br />
@@ -94,6 +110,7 @@ export const Register: React.FC = () => {
         <button type='button' onClick={showPassword}>
           Show password
         </button>
+        <p>{error}</p>
         <br />
         <br />
         <button type='submit'>Register</button>

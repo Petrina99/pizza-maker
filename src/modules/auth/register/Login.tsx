@@ -6,9 +6,11 @@ import { AppState } from '../../redux-store';
 import { ErrorAction } from '../../redux';
 
 import { useAuth } from '../../hooks';
+
+import { Link } from 'react-router-dom';
 export const Login: React.FC = () => {
   const { error } = useSelector((state: AppState) => state.errorReducer);
-  const { login, rememberMe } = useAuth();
+  const { login, rememberMe, googleSignIn } = useAuth();
 
   const dispatch = useDispatch();
 
@@ -48,6 +50,10 @@ export const Login: React.FC = () => {
     }
   };
 
+  function handleGoogle() {
+    googleSignIn();
+  }
+
   return (
     <>
       <form onSubmit={handleLogin}>
@@ -74,8 +80,15 @@ export const Login: React.FC = () => {
         </button>
         <br />
         <br />
-        <button type='submit'>Login</button>
+        <Link to='/login'>
+          <button type='submit'>Login</button>
+        </Link>
       </form>
+      <p>Or</p>
+      <br />
+      <button type='button' onClick={handleGoogle}>
+        Sign in with google
+      </button>
       <button onClick={setPersistence}>Remember me</button>
     </>
   );

@@ -1,6 +1,6 @@
 import firebase from 'firebase/app';
 import { useDispatch } from 'react-redux';
-import { ErrorAction, UserAction } from '../redux';
+import { ErrorAction, UserAction, MessageAction } from '../../redux';
 
 export const useAuth = () => {
   const dispatch = useDispatch();
@@ -101,6 +101,38 @@ export const useAuth = () => {
         }
       });
   }
+
+  function resetPassword(email: string) {
+    firebase
+      .app()
+      .auth()
+      .sendPasswordResetEmail(email)
+      .then(() => {
+        dispatch(
+          MessageAction.add(
+            `A link for your password reset has been sent to ${email}.`,
+          ),
+        );
+      })
+      .catch((err: firebase.FirebaseError) => {
+        switch (err.code) {
+          case 'auth/invalid-email':
+            return dispatch(
+              ErrorAction.add(
+                'Email address that you have entered is not valid.',
+              ),
+            );
+          case 'auth/user-not-found':
+            return dispatch(
+              ErrorAction.add(
+                'There is no user corresponding to the email adress',
+              ),
+            );
+          default:
+            return;
+        }
+      });
+  }
   return {
     register,
     login,
@@ -108,5 +140,6 @@ export const useAuth = () => {
     googleSignIn,
     authSubscription,
     rememberMe,
+    resetPassword,
   };
 };

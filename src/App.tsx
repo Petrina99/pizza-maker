@@ -1,11 +1,12 @@
 import React from 'react';
 import './App.css';
-import { Auth } from './modules';
+import { Routing } from './modules';
+import { BrowserRouter } from 'react-router-dom';
 
 export const App: React.FC = () => {
   return (
-    <div>
-      <Auth />
-    </div>
+    <BrowserRouter>
+      <Routing />
+    </BrowserRouter>
   );
 };
