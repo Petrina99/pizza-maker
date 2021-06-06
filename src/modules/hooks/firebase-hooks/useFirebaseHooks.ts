@@ -9,7 +9,12 @@ export const useFirebaseHooks = (collectionId: string) => {
     getCollectionRefrence().doc(name).set(data);
   }
 
-  async function getSpecificUser(name: string) {
+  function pushOrder(name: string, data: any) {
+    getCollectionRefrence().doc(name).update(data);
+  }
+
+  /* not sure what to do with these 2 but will keep them if i need them */
+  async function getSpecific(name: string) {
     const resultPromise = await getCollectionRefrence()
       .where('email', '==', name)
       .get();
@@ -21,19 +26,19 @@ export const useFirebaseHooks = (collectionId: string) => {
     return true;
   }
 
-  async function getAllUsers() {
+  async function getAll() {
     const resultPromise = await getCollectionRefrence().get();
-    const resolvedItems = resultPromise.docs.map((doc) => {
-      return { id: doc.id, ...doc.data() };
+    const result = resultPromise.docs.map((doc) => {
+      return doc.data();
     });
-
-    return resolvedItems;
+    return result;
   }
 
   return {
     getCollectionRefrence,
     pushUser,
-    getAllUsers,
-    getSpecificUser,
+    getAll,
+    getSpecific,
+    pushOrder,
   };
 };

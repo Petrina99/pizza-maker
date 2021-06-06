@@ -9,7 +9,7 @@ import { useAuth, useFirebaseHooks } from '../../hooks';
 export const Register: React.FC = () => {
   const { error } = useSelector((state: AppState) => state.errorReducer);
   const { register, googleSignIn } = useAuth();
-  const { pushUser } = useFirebaseHooks('orders');
+  const { pushUser } = useFirebaseHooks('users');
   const dispatch = useDispatch();
 
   const [email, setEmail] = useState('');
@@ -32,6 +32,7 @@ export const Register: React.FC = () => {
   function handleSignUp(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
+    /* regex for pass validation */
     const regex =
       /^(?=.*[0-9])(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?])[a-zA-Z0-9!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]{8,}$/g;
 
@@ -45,26 +46,10 @@ export const Register: React.FC = () => {
       );
     }
 
+    /* registers a user on firebase auth and adds them in the DB */
     if (isValid && email && password) {
       register(email, password);
-      pushUser(email, {
-        order: {
-          adress: '',
-          discount: false,
-          payment: 'cash or cc',
-          price: 0,
-          size: '',
-          toppings: {
-            chilli: false,
-            corn: false,
-            egg: false,
-            pineapple: false,
-            meat: false,
-            shrooms: false,
-            bacon: false,
-          },
-        },
-      });
+      pushUser(email, { email: email });
     }
   }
 

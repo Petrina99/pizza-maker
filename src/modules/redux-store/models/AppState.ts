@@ -3,6 +3,7 @@ import {
   UserReducer,
   ErrorReducer,
   MessageReducer,
+  SizeReducer,
 } from '../../redux';
 
 export interface AppState {
@@ -10,4 +11,5 @@ export interface AppState {
   userReducer: ReturnType<typeof UserReducer>;
   errorReducer: ReturnType<typeof ErrorReducer>;
   messageReducer: ReturnType<typeof MessageReducer>;
+  sizeReducer: ReturnType<typeof SizeReducer>;
 }

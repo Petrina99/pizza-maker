@@ -7,6 +7,7 @@ import {
   UserReducer,
   ErrorReducer,
   MessageReducer,
+  SizeReducer,
 } from '../../redux';
 
 export const configureStore = () => {
@@ -16,6 +17,7 @@ export const configureStore = () => {
       userReducer: UserReducer,
       errorReducer: ErrorReducer,
       messageReducer: MessageReducer,
+      sizeReducer: SizeReducer,
     }),
     {},
     composeWithDevTools(),

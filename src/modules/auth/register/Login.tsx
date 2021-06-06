@@ -10,6 +10,7 @@ import { useAuth } from '../../hooks';
 import { Link } from 'react-router-dom';
 export const Login: React.FC = () => {
   const { error } = useSelector((state: AppState) => state.errorReducer);
+
   const { login, rememberMe, googleSignIn } = useAuth();
 
   const dispatch = useDispatch();

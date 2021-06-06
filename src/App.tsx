@@ -1,12 +1,15 @@
 import React from 'react';
 import './App.css';
-import { Routing } from './modules';
+import { ToppingSelector, PizzaSize, Discount, Finisher } from './modules';
 import { BrowserRouter } from 'react-router-dom';
 
 export const App: React.FC = () => {
   return (
     <BrowserRouter>
-      <Routing />
+      <ToppingSelector />
+      <PizzaSize />
+      <Discount />
+      <Finisher />
     </BrowserRouter>
   );
 };

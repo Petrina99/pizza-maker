@@ -5,9 +5,11 @@ import { ErrorAction, UserAction, MessageAction } from '../../redux';
 export const useAuth = () => {
   const dispatch = useDispatch();
 
+  /* provider for google sign in with popup */
   const provider: firebase.auth.GoogleAuthProvider =
     new firebase.auth.GoogleAuthProvider();
 
+  /* catching errors and pushing them to errorReducer in all components */
   function register(email: string, pass: string) {
     firebase
       .app()
@@ -54,6 +56,8 @@ export const useAuth = () => {
     firebase.app().auth().signOut();
   }
 
+  /* listener that listens to all changes in firebase auth if user doesnt exist it returns null 
+  dispatching the user to redux */
   function authSubscription() {
     const subscription = firebase
       .app()
@@ -61,7 +65,7 @@ export const useAuth = () => {
       .onAuthStateChanged(async (user) => {
         console.log({ user });
         if (!user) {
-          dispatch(UserAction.add({ user }));
+          dispatch(UserAction.add({ user: '' }));
           console.log(user);
         }
         console.log(user?.email);
@@ -73,6 +77,7 @@ export const useAuth = () => {
     };
   }
 
+  /* not sure if i should put LOCAL or SESSION, for now its local and works fine */
   function rememberMe() {
     firebase.app().auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL);
   }
@@ -102,6 +107,7 @@ export const useAuth = () => {
       });
   }
 
+  /* sends a reset password link to an email + added a reducer just for this message */
   function resetPassword(email: string) {
     firebase
       .app()
@@ -133,6 +139,7 @@ export const useAuth = () => {
         }
       });
   }
+
   return {
     register,
     login,
