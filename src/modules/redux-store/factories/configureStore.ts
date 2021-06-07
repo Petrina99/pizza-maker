@@ -8,6 +8,7 @@ import {
   ErrorReducer,
   MessageReducer,
   SizeReducer,
+  DiscountReducer,
 } from '../../redux';
 
 export const configureStore = () => {
@@ -18,6 +19,7 @@ export const configureStore = () => {
       errorReducer: ErrorReducer,
       messageReducer: MessageReducer,
       sizeReducer: SizeReducer,
+      discountReducer: DiscountReducer,
     }),
     {},
     composeWithDevTools(),

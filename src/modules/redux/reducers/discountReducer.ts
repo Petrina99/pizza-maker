@@ -1,24 +1,23 @@
 import { ActionUnion } from '../../redux-store';
-import { UserAction } from '../actions';
-import { User } from '../models';
+import { DiscountAction } from '../actions';
 
 interface State {
-  user: User | undefined | string;
+  discount: boolean;
 }
 
 const INITIAL_STATE: State = {
-  user: undefined,
+  discount: false,
 };
 
-export const UserReducer = (
+export const DiscountReducer = (
   state: State = INITIAL_STATE,
-  action: ActionUnion<typeof UserAction>,
+  action: ActionUnion<typeof DiscountAction>,
 ) => {
   switch (action.type) {
-    case 'user/add':
+    case 'discount/add':
       return {
         ...state,
-        user: action.payload,
+        discount: action.payload,
       };
     default:
       return state;

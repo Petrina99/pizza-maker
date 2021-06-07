@@ -18,7 +18,7 @@ export const Login: React.FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [inputType, setInputType] = useState('password');
-
+  const [linkPath, setLinkPath] = useState('/login');
   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.currentTarget;
 
@@ -33,10 +33,11 @@ export const Login: React.FC = () => {
     dispatch(ErrorAction.add(''));
   };
 
-  const handleLogin = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
-    login(email, password);
+  const handleLogin = () => {
+    if (email && password && !error) {
+      login(email, password);
+      setLinkPath('/builder');
+    }
   };
 
   function setPersistence() {
@@ -57,7 +58,7 @@ export const Login: React.FC = () => {
 
   return (
     <>
-      <form onSubmit={handleLogin}>
+      <form>
         <h1>Sign in</h1>
         <p>{error}</p>
         <input
@@ -81,10 +82,12 @@ export const Login: React.FC = () => {
         </button>
         <br />
         <br />
-        <Link to='/login'>
-          <button type='submit'>Login</button>
-        </Link>
       </form>
+      <Link to={linkPath}>
+        <button type='button' onClick={handleLogin}>
+          Login
+        </button>
+      </Link>
       <p>Or</p>
       <br />
       <button type='button' onClick={handleGoogle}>

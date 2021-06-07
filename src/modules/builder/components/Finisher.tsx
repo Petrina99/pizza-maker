@@ -8,42 +8,52 @@ import { AppState } from '../../redux-store';
 export const Finisher: React.FC = () => {
   const { toppings } = useSelector((state: AppState) => state.reducer);
   const { size } = useSelector((state: AppState) => state.sizeReducer);
+  const { discount } = useSelector((state: AppState) => state.discountReducer);
+
+  console.log(discount);
+  const discountReduce = discount ? 0.25 : 1;
 
   const [quantity, setQuantity] = useState(0);
   const [price, setPrice] = useState(0);
   const [sizePrice, setSizePrice] = useState(0);
+  const [message, setMessage] = useState('');
 
   const handlePrice = () => {
-    const priceRef = 3;
-    const toppingsPrice = toppings.length;
+    if (quantity !== 0) {
+      const startingPrice = 3;
+      const toppingPrice = toppings.length;
 
-    if (size === 'S') {
-      setSizePrice(1);
+      if (size === 'S') {
+        setSizePrice(1);
+      }
+
+      if (size === 'M') {
+        setSizePrice(4);
+      }
+
+      if (size === 'L') {
+        setSizePrice(7);
+      }
+
+      const priceWithoutDiscount =
+        (startingPrice + toppingPrice + sizePrice) * quantity;
+      const discountNumber = priceWithoutDiscount * discountReduce;
+      setPrice(priceWithoutDiscount - discountNumber);
     }
 
-    if (size === 'M') {
-      setSizePrice(2);
+    if (quantity === 0) {
+      setMessage('Please select the number of pizzas you want.');
     }
-
-    if (size === 'L') {
-      setSizePrice(3);
-    }
-
-    const pizza = toppingsPrice === 0 ? priceRef : priceRef + toppingsPrice;
-    const pizzaSize = pizza * sizePrice;
-    const finalPrice = pizzaSize * quantity;
-
-    setPrice(Math.floor(finalPrice));
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { value } = e.currentTarget;
+    const { valueAsNumber } = e.currentTarget;
 
-    if (value) {
-      setQuantity(parseInt(value));
+    if (valueAsNumber !== 0) {
+      setQuantity(valueAsNumber);
     }
 
-    if (value === '0') {
+    if (valueAsNumber === 0) {
       setQuantity(0);
     }
 
@@ -54,8 +64,13 @@ export const Finisher: React.FC = () => {
     <>
       <div>
         <img src={pizza} />
-        <input type='number' onChange={handleChange} min='0' />
+        <br />
+        <input type='number' onChange={handleChange} value={quantity} />
+        <button type='button' onClick={handlePrice}>
+          Check price
+        </button>
         <p>QTY</p>
+        <p>{message}</p>
         <p>${price}</p>
         <p>ORDER TOTAL</p>
       </div>

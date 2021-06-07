@@ -1,5 +1,5 @@
 import firebase from 'firebase';
 
 export interface User {
-  user: firebase.User | undefined | null | string;
+  user: firebase.User | undefined | string;
 }

@@ -66,10 +66,11 @@ export const useAuth = () => {
         console.log({ user });
         if (!user) {
           dispatch(UserAction.add({ user: '' }));
-          console.log(user);
         }
-        console.log(user?.email);
-        dispatch(UserAction.add({ user }));
+
+        if (user) {
+          dispatch(UserAction.add({ user: user }));
+        }
       });
 
     return () => {
@@ -116,7 +117,7 @@ export const useAuth = () => {
       .then(() => {
         dispatch(
           MessageAction.add(
-            `A link for your password reset has been sent to ${email}.`,
+            `A link for your password reset has been sent to your email.`,
           ),
         );
       })

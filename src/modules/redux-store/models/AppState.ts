@@ -4,6 +4,7 @@ import {
   ErrorReducer,
   MessageReducer,
   SizeReducer,
+  DiscountReducer,
 } from '../../redux';
 
 export interface AppState {
@@ -12,4 +13,5 @@ export interface AppState {
   errorReducer: ReturnType<typeof ErrorReducer>;
   messageReducer: ReturnType<typeof MessageReducer>;
   sizeReducer: ReturnType<typeof SizeReducer>;
+  discountReducer: ReturnType<typeof DiscountReducer>;
 }

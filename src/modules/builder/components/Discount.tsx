@@ -1,10 +1,19 @@
 import React, { useState } from 'react';
 
+import { useDispatch } from 'react-redux';
+import { DiscountAction } from '../../redux';
+
+import { useFirebaseHooks } from '../../hooks';
 export const Discount: React.FC = () => {
   const [input, setInput] = useState('');
   const [message, setMessage] = useState('');
+  const [discount, setDiscount] = useState('');
 
-  const discount = 'pizza2021';
+  const { getAll } = useFirebaseHooks('discount');
+
+  getAll().then((item) => setDiscount(item[0].code));
+
+  const dispatch = useDispatch();
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.currentTarget;
 
@@ -17,6 +26,7 @@ export const Discount: React.FC = () => {
 
     if (value === discount) {
       setMessage('Success! Discount applied.');
+      dispatch(DiscountAction.add(true));
     }
 
     if (value !== discount) {
