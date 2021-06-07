@@ -8,5 +8,11 @@ export const SignOut: React.FC = () => {
     signOut();
   };
 
-  return <button onClick={logout}>Log out</button>;
+  return (
+    <>
+      <button type='button' onClick={logout}>
+        Log out
+      </button>
+    </>
+  );
 };

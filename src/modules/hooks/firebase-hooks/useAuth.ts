@@ -65,11 +65,11 @@ export const useAuth = () => {
       .onAuthStateChanged(async (user) => {
         console.log({ user });
         if (!user) {
-          dispatch(UserAction.add({ user: '' }));
+          dispatch(UserAction.add(''));
         }
 
         if (user) {
-          dispatch(UserAction.add({ user: user }));
+          dispatch(UserAction.add(user?.email));
         }
       });
 
@@ -88,9 +88,12 @@ export const useAuth = () => {
       .app()
       .auth()
       .signInWithPopup(provider)
-      .then((result) => {
-        const user = result.user;
-        console.log(user?.email);
+      .then(() => {
+        dispatch(
+          MessageAction.add(
+            'User succesfully authenticated. Click on the button to continue.',
+          ),
+        );
       })
       .catch((err: firebase.FirebaseError) => {
         switch (err.code) {

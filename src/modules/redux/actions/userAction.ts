@@ -1,6 +1,5 @@
 import { createAction } from '../../redux-store';
-import { User } from '../models';
 
 export const UserAction = {
-  add: (item: User) => createAction('user/add', item),
+  add: (item: string | null) => createAction('user/add', item),
 };

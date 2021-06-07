@@ -1,13 +1,11 @@
 import { ActionUnion } from '../../redux-store';
 import { UserAction } from '../actions';
-import { User } from '../models';
-
 interface State {
-  user: User | undefined | string;
+  user: string | null;
 }
 
 const INITIAL_STATE: State = {
-  user: undefined,
+  user: '',
 };
 
 export const UserReducer = (

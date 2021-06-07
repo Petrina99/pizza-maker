@@ -1,9 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 
 import { Switch, Route } from 'react-router-dom';
-
-import { useSelector } from 'react-redux';
-import { AppState } from '../redux-store';
 
 import {
   RegisterView,
@@ -11,28 +8,18 @@ import {
   ResetPasswordView,
   PizzaMaker,
 } from '../../views';
+
+import { useSelector } from 'react-redux';
+import { AppState } from '../redux-store';
+
 export const Routing: React.FC = () => {
   const { user } = useSelector((state: AppState) => state.userReducer);
+
   console.log(user);
-  const [registerPath, setRegisterPath] = useState('/');
-  const [builderPath, setBuilderPath] = useState('/builder');
-
-  const handleFirstPage = () => {
-    if (user) {
-      setRegisterPath('/register');
-      setBuilderPath('/');
-    }
-    setRegisterPath('/');
-    setBuilderPath('/builder');
-  };
-
-  useEffect(() => {
-    handleFirstPage();
-  }, []);
 
   return (
     <Switch>
-      <Route exact path={registerPath}>
+      <Route exact path={!user ? '/' : '/register'}>
         <RegisterView />
       </Route>
       <Route path='/login'>
@@ -41,7 +28,7 @@ export const Routing: React.FC = () => {
       <Route path='/reset-pass'>
         <ResetPasswordView />
       </Route>
-      <Route path={builderPath}>
+      <Route path={user ? '/' : '/builder'}>
         <PizzaMaker />
       </Route>
       <Route exact path='/order'></Route>
