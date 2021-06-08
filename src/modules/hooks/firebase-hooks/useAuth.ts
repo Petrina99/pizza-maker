@@ -1,10 +1,10 @@
 import firebase from 'firebase/app';
+
 import { useDispatch } from 'react-redux';
 import { ErrorAction, UserAction, MessageAction } from '../../redux';
 
 export const useAuth = () => {
   const dispatch = useDispatch();
-
   /* provider for google sign in with popup */
   const provider: firebase.auth.GoogleAuthProvider =
     new firebase.auth.GoogleAuthProvider();
@@ -63,13 +63,17 @@ export const useAuth = () => {
       .app()
       .auth()
       .onAuthStateChanged(async (user) => {
-        console.log({ user });
         if (!user) {
-          dispatch(UserAction.add(''));
+          dispatch(
+            UserAction.add({ email: null, message: 'User logged out.' }),
+          );
         }
 
         if (user) {
-          dispatch(UserAction.add(user?.email));
+          dispatch(
+            UserAction.add({ email: user.email, message: 'User exists.' }),
+          );
+          console.log(user.email);
         }
       });
 

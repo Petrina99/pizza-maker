@@ -1,12 +1,16 @@
 import { ActionUnion } from '../../redux-store';
 import { DiscountAction } from '../actions';
-
+import { DiscountModel } from '../models';
 interface State {
-  discount: boolean;
+  discount: DiscountModel;
 }
 
 const INITIAL_STATE: State = {
-  discount: false,
+  discount: {
+    code: '',
+    valid: false,
+    message: '',
+  },
 };
 
 export const DiscountReducer = (

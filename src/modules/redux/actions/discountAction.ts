@@ -1,5 +1,6 @@
 import { createAction } from '../../redux-store';
+import { DiscountModel } from '../models';
 
 export const DiscountAction = {
-  add: (item: boolean) => createAction('discount/add', item),
+  add: (item: DiscountModel) => createAction('discount/add', item),
 };

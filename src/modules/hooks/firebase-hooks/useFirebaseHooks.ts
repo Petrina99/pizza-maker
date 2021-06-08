@@ -9,8 +9,8 @@ export const useFirebaseHooks = (collectionId: string) => {
     getCollectionReference().doc(name).set(data);
   }
 
-  function pushOrder(name: string, data: any) {
-    getCollectionReference().doc(name).update(data);
+  function pushOrder(data: any) {
+    getCollectionReference().doc().set(data);
   }
 
   /* not sure what to do with these 2 but will keep them if i need them */

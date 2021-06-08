@@ -1,36 +1,58 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { AppState } from '../../redux-store';
 import { DiscountAction } from '../../redux';
 
 import { useFirebaseHooks } from '../../hooks';
 export const Discount: React.FC = () => {
   const [input, setInput] = useState('');
-  const [message, setMessage] = useState('');
-  const [discount, setDiscount] = useState('');
+  const { discount } = useSelector((state: AppState) => state.discountReducer);
 
   const { getAll } = useFirebaseHooks('discount');
 
-  getAll().then((item) => setDiscount(item[0].code));
-
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    getAll().then((item) =>
+      dispatch(
+        DiscountAction.add({ code: item[0].code, valid: false, message: '' }),
+      ),
+    );
+  }, []);
+
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.currentTarget;
 
     setInput(value);
-    setMessage('');
+    dispatch(
+      DiscountAction.add({
+        code: discount.code,
+        valid: false,
+        message: '',
+      }),
+    );
   };
 
-  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-    const { value } = e.currentTarget;
-
-    if (value === discount) {
-      setMessage('Success! Discount applied.');
-      dispatch(DiscountAction.add(true));
+  const handleClick = () => {
+    if (input === discount.code) {
+      dispatch(
+        DiscountAction.add({
+          code: discount.code,
+          valid: true,
+          message: 'Success.',
+        }),
+      );
     }
 
-    if (value !== discount) {
-      setMessage('Oops! Wrong code.');
+    if (input !== discount.code) {
+      dispatch(
+        DiscountAction.add({
+          code: discount.code,
+          valid: false,
+          message: 'Error. Wrong code.',
+        }),
+      );
     }
   };
 
@@ -46,7 +68,7 @@ export const Discount: React.FC = () => {
       <button type='button' value={input} onClick={handleClick}>
         Apply
       </button>
-      <p>{message}</p>
+      <p>{discount.message}</p>
     </>
   );
 };

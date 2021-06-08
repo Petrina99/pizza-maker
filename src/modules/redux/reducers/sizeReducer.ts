@@ -6,7 +6,7 @@ interface State {
 }
 
 const INITIAL_STATE: State = {
-  size: '',
+  size: 'S',
 };
 
 export const SizeReducer = (

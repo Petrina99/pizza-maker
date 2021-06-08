@@ -7,7 +7,6 @@ import { ErrorAction } from '../../redux';
 
 import { useAuth, useFirebaseHooks } from '../../hooks';
 
-//import { Link } from 'react-router-dom';
 export const Register: React.FC = () => {
   const { error } = useSelector((state: AppState) => state.errorReducer);
   //const { message } = useSelector((state: AppState) => state.messageReducer);
@@ -29,21 +28,14 @@ export const Register: React.FC = () => {
     dispatch(ErrorAction.add(''));
   }
 
-  /*const GoogleButton: React.FC = () => {
-    return (
-      <Link to='/builder'>
-        <button type='button'>Make some pizza.</button>
-      </Link>
-    );
-  };*/
-
   function handlePasswordChange(e: React.ChangeEvent<HTMLInputElement>) {
     const { value } = e.currentTarget;
     setPassword(value);
     dispatch(ErrorAction.add(''));
   }
 
-  function handleSignUp() {
+  function handleSignUp(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
     /* regex for pass validation */
     const regex =
       /^(?=.*[0-9])(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?])[a-zA-Z0-9!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]{8,}$/g;
@@ -56,14 +48,12 @@ export const Register: React.FC = () => {
           'Please enter a valid password that is at least 8 characters long and that it contains numbers and special characters.',
         ),
       );
-      //setLinkPath('/');
     }
 
     /* registers a user on firebase auth and adds them in the DB */
     if (isValid && email && password && !error) {
       register(email, password);
       pushUser(email, { email: email });
-      // setLinkPath('/builder');
     }
   }
 
@@ -81,7 +71,7 @@ export const Register: React.FC = () => {
 
   return (
     <>
-      <form>
+      <form onSubmit={handleSignUp}>
         <h1>Create an account</h1>
         <label htmlFor='email'>E-mail</label>
         <br />
@@ -112,10 +102,8 @@ export const Register: React.FC = () => {
         <p>{error}</p>
         <br />
         <br />
+        <button type='submit'>Register</button>
       </form>
-      <button type='button' onClick={handleSignUp}>
-        Register
-      </button>
       <p>Or</p>
       <br />
       <button type='button' onClick={handleGoogle}>

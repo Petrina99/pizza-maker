@@ -7,7 +7,7 @@ import { ErrorAction } from '../../redux';
 
 import { useAuth } from '../../hooks';
 
-import { Link } from 'react-router-dom';
+//import { useHistory } from 'react-router-dom';
 
 export const Login: React.FC = () => {
   const { error } = useSelector((state: AppState) => state.errorReducer);
@@ -16,10 +16,11 @@ export const Login: React.FC = () => {
 
   const dispatch = useDispatch();
 
+  //const history = useHistory();
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [inputType, setInputType] = useState('password');
-  const [linkPath, setLinkPath] = useState('/');
 
   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.currentTarget;
@@ -38,10 +39,6 @@ export const Login: React.FC = () => {
   const handleLogin = () => {
     if (email && password && !error) {
       login(email, password);
-    }
-
-    if (error) {
-      setLinkPath('/login');
     }
   };
 
@@ -82,17 +79,15 @@ export const Login: React.FC = () => {
           value={password}
           required
         />
-        <button onClick={showPassword} type='button'>
+        <button type='button' onClick={showPassword}>
           Show Password
         </button>
         <br />
         <br />
       </form>
-      <Link to={linkPath}>
-        <button type='button' onClick={handleLogin}>
-          Login
-        </button>
-      </Link>
+      <button type='button' onClick={handleLogin}>
+        Login
+      </button>
       <p>Or</p>
       <br />
       <button type='button' onClick={handleGoogle}>

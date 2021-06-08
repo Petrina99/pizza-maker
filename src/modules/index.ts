@@ -6,3 +6,4 @@ export * from './redux';
 export * from './auth';
 export * from './routing';
 export * from './order';
+export * from './success';

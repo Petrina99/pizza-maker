@@ -1,9 +1,10 @@
 import React from 'react';
 
-import { OrderDetails } from '../../modules';
+import { OrderDetails, Header } from '../../modules';
 export const Order: React.FC = () => {
   return (
     <>
+      <Header />
       <OrderDetails />
     </>
   );

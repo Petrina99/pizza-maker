@@ -4,75 +4,56 @@ import pizza from '../../../images/pizza.svg';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { AppState } from '../../redux-store';
-import { ErrorAction } from '../../redux';
+import { QuantityAction } from '../../redux';
 
-import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 import { usePrice } from '../../hooks';
 
 export const Finisher: React.FC = () => {
   const { toppings } = useSelector((state: AppState) => state.reducer);
   const { size } = useSelector((state: AppState) => state.sizeReducer);
-  const { discount } = useSelector((state: AppState) => state.discountReducer);
-  const { error } = useSelector((state: AppState) => state.errorReducer);
   const { price } = useSelector((state: AppState) => state.priceReducer);
-
+  const { qty } = useSelector((state: AppState) => state.quantityReducer);
+  //fix link path and routing
   const dispatch = useDispatch();
 
-  console.log(discount);
+  const history = useHistory();
 
-  const [quantity, setQuantity] = useState(0);
-  const [linkPath, setLinkPath] = useState('/info');
+  const { setPrice } = usePrice(qty, size);
 
-  const { setPrice } = usePrice(quantity, size);
+  const [error, setError] = useState('');
 
   const handlePrice = () => {
-    if (quantity !== 0 && size) {
+    if (qty !== 0 && toppings.length) {
       setPrice();
-      dispatch(ErrorAction.add(''));
+      setError('');
     }
 
-    if (quantity === 0) {
-      dispatch(
-        ErrorAction.add('Please select the number of pizzas you want to order'),
-      );
+    if (qty === 0) {
+      setError('Please select the number of pizzas you want to order');
     }
 
-    if (!size) {
-      dispatch(ErrorAction.add('Please choose the size of your pizza'));
+    if (!toppings.length) {
+      setError('Please select atleast 1 topping');
     }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { valueAsNumber } = e.currentTarget;
 
-    setQuantity(valueAsNumber);
+    dispatch(QuantityAction.add(valueAsNumber));
   };
 
-  const handleSubmit = () => {
-    if (!toppings.length) {
-      setLinkPath('/');
-      dispatch(ErrorAction.add('Please select atleast 1 topping'));
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    if (price === 0) {
+      setError('Please click on the check price before buying.');
     }
 
-    if (!size) {
-      setLinkPath('/');
-      dispatch(ErrorAction.add('Please select the size of your pizza.'));
-    }
-
-    if (quantity === 0) {
-      setLinkPath('/');
-      dispatch(ErrorAction.add('Please select the number of pizzas you want.'));
-    }
-
-    if (quantity === 0 && !toppings.length && !size) {
-      setLinkPath('/');
-      dispatch(ErrorAction.add('Please fill out all of the choices.'));
-    }
-
-    if (price !== 0) {
-      dispatch(ErrorAction.add(''));
-      setLinkPath('/info');
+    if (price !== 0 && error === '') {
+      history.push('/order');
     }
   };
 
@@ -81,19 +62,17 @@ export const Finisher: React.FC = () => {
       <div>
         <img src={pizza} />
         <br />
-        <input type='number' onChange={handleChange} value={quantity} />
-        <p>QTY</p>
-        <button type='button' onClick={handlePrice}>
-          Check price
-        </button>
-        <p>{error}</p>
-        <p>${price}</p>
-        <p>ORDER TOTAL</p>
-        <Link to={linkPath}>
-          <button type='button' onClick={handleSubmit}>
-            Buy Pizza! Pizza!
+        <form onSubmit={handleSubmit}>
+          <input type='number' onChange={handleChange} required />
+          <p>QTY</p>
+          <button type='button' onClick={handlePrice}>
+            Check price
           </button>
-        </Link>
+          <p>{error}</p>
+          <p>${price}</p>
+          <p>ORDER TOTAL</p>
+          <button type='submit'>Buy Pizza! Pizza!</button>
+        </form>
       </div>
     </>
   );

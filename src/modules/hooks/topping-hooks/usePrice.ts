@@ -26,7 +26,7 @@ export const usePrice = (quantity: number, size: string) => {
 
     const quantityMultiply = priceWithoutDiscount * quantity;
 
-    const discountNumber = discount ? quantityMultiply * 0.1 : 0;
+    const discountNumber = discount.valid ? quantityMultiply * 0.1 : 0;
 
     const finalPrice = quantityMultiply - discountNumber;
     dispatch(PriceAction.add(finalPrice));
