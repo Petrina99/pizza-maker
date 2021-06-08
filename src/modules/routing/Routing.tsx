@@ -7,6 +7,7 @@ import {
   LoginView,
   ResetPasswordView,
   PizzaMaker,
+  Order,
 } from '../../views';
 
 import { useSelector } from 'react-redux';
@@ -22,17 +23,19 @@ export const Routing: React.FC = () => {
       <Route exact path={!user ? '/' : '/register'}>
         <RegisterView />
       </Route>
+      <Route path={user ? '/' : '/builder'}>
+        <PizzaMaker />
+      </Route>
       <Route path='/login'>
         <LoginView />
       </Route>
       <Route path='/reset-pass'>
         <ResetPasswordView />
       </Route>
-      <Route path={user ? '/' : '/builder'}>
-        <PizzaMaker />
+      <Route path='/info'>
+        <Order />
       </Route>
-      <Route exact path='/order'></Route>
-      <Route exact path='/order-success'></Route>
+      <Route exact path='/success'></Route>
     </Switch>
   );
 };

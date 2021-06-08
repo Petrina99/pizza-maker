@@ -5,6 +5,8 @@ import {
   MessageReducer,
   SizeReducer,
   DiscountReducer,
+  PriceReducer,
+  QuantityReducer,
 } from '../../redux';
 
 export interface AppState {
@@ -14,4 +16,6 @@ export interface AppState {
   messageReducer: ReturnType<typeof MessageReducer>;
   sizeReducer: ReturnType<typeof SizeReducer>;
   discountReducer: ReturnType<typeof DiscountReducer>;
+  priceReducer: ReturnType<typeof PriceReducer>;
+  quantityReducer: ReturnType<typeof QuantityReducer>;
 }

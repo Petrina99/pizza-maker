@@ -9,6 +9,8 @@ import {
   MessageReducer,
   SizeReducer,
   DiscountReducer,
+  PriceReducer,
+  QuantityReducer,
 } from '../../redux';
 
 export const configureStore = () => {
@@ -20,6 +22,8 @@ export const configureStore = () => {
       messageReducer: MessageReducer,
       sizeReducer: SizeReducer,
       discountReducer: DiscountReducer,
+      priceReducer: PriceReducer,
+      quantityReducer: QuantityReducer,
     }),
     {},
     composeWithDevTools(),
