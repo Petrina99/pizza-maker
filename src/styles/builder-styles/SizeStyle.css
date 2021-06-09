@@ -1,0 +1,42 @@
+.size-select{
+  flex-basis: 60%;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+}
+
+#button-group{
+  width: 438px;
+  height: 88px;
+  display: flex;
+  flex-wrap: nowrap;
+  background: #ECECF3;
+  border-radius: 72px;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+}
+
+.active-size{
+  width: 135px;
+  height: 68px;
+  border-radius: 36px;
+  box-shadow: 0px 8px 20px 0px #0000001A;
+  margin: 0 6px;
+  border: 0;
+  font-size: 16px;
+  font-family: 'Avenir';
+  cursor: pointer;
+}
+
+.inactive-size{
+  width: 135px;
+  height: 68px;
+  border-radius: 36px;
+  background: #ECECF3;
+  margin: 0 6px;
+  border: 0;
+  font-size: 16px;
+  font-family: 'Avenir';
+  cursor: pointer;
+}

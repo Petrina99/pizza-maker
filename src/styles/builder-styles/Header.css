@@ -1,0 +1,46 @@
+.builder{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  padding-bottom: 0;
+  padding-top: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+  background: #FAFAFA;
+  justify-content: center;
+}
+
+.header{
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  flex-basis: 60%;
+}
+
+.header p{
+  width: 80px;
+  height: 24px;
+  font-size: 16px;
+  font-weight: 800;
+  font-style: normal;
+  line-height: 24px;
+}
+
+.header img{
+  width: 40px;
+  height: 48px;
+}
+
+.logout-btn{
+  width: 128px;
+  height: 40px;
+  border: 1px solid #DBDBDB;
+  background: #FAFAFA;
+  border-radius: 36px;
+  color: #383838;
+  font-family: 'Avenir';
+  height: 40px;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 0px 24px;
+}

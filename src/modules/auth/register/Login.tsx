@@ -7,6 +7,9 @@ import { ErrorAction } from '../../redux';
 
 import { useAuth } from '../../hooks';
 
+import eye from '../../../images/visibility-button.svg';
+import hide from '../../../images/hide.svg';
+
 //import { useHistory } from 'react-router-dom';
 
 export const Login: React.FC = () => {
@@ -59,41 +62,59 @@ export const Login: React.FC = () => {
   }
 
   return (
-    <>
-      <form>
+    <div className='login-div'>
+      <form className='login-form'>
         <h1>Sign in</h1>
-        <p>{error}</p>
-        <input
-          type='email'
-          name='email'
-          placeholder='Enter your email.'
-          onChange={handleEmailChange}
-          value={email}
-          required
-        />
-        <input
-          type={inputType}
-          name='password'
-          placeholder='Enter your password'
-          onChange={handlePasswordChange}
-          value={password}
-          required
-        />
-        <button type='button' onClick={showPassword}>
-          Show Password
-        </button>
-        <br />
-        <br />
+        <div className='input-login'>
+          <label htmlFor='email'>Email</label>
+          <input
+            type='email'
+            name='email'
+            placeholder='Enter your email.'
+            onChange={handleEmailChange}
+            value={email}
+            required
+          />
+          <label htmlFor='password'>Password</label>
+          <input
+            type={inputType}
+            name='password'
+            placeholder='Enter your password'
+            onChange={handlePasswordChange}
+            value={password}
+            required
+          />
+          <img
+            src={inputType === 'password' ? eye : hide}
+            onClick={showPassword}
+          />
+        </div>
+        {error ? (
+          <div className='error-login'>
+            <p>{error}</p>
+          </div>
+        ) : (
+          ''
+        )}
+        <div className='submit-login'>
+          <button type='button' onClick={handleLogin} className='log-btn'>
+            Login
+          </button>
+          <button
+            type='button'
+            onClick={setPersistence}
+            className='remember-btn'
+          >
+            Remember me
+          </button>
+          <div className='log-google'>
+            <p>Or</p>
+            <button type='button' onClick={handleGoogle}>
+              Sign in with google
+            </button>
+          </div>
+        </div>
       </form>
-      <button type='button' onClick={handleLogin}>
-        Login
-      </button>
-      <p>Or</p>
-      <br />
-      <button type='button' onClick={handleGoogle}>
-        Sign in with google
-      </button>
-      <button onClick={setPersistence}>Remember me</button>
-    </>
+    </div>
   );
 };

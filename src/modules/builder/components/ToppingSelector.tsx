@@ -13,13 +13,17 @@ import {
 export const ToppingSelector: React.FC = () => {
   return (
     <>
-      <Chilli />
-      <Corn />
-      <Egg />
-      <Pineapple />
-      <Meat />
-      <Shrooms />
-      <Bacon />
+      <p className='title'>Toppings! Toppings!</p>
+      <div className='topping-selector'>
+        <Chilli />
+        <Corn />
+        <Egg />
+        <Pineapple />
+        <Meat />
+        <Shrooms />
+        <Bacon />
+      </div>
+      <p className='price-par'>Total price +$3.00</p>
     </>
   );
 };

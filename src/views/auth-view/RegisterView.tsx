@@ -7,12 +7,12 @@ export const RegisterView: React.FC = () => {
   return (
     <>
       <Register />
-      <p>
-        Already have an account? <strong>Sign in</strong> instead.
+      <p className='login-p'>
+        Already have an account?
+        <Link to='/login' className='login-link'>
+          <strong> Sign in</strong>
+        </Link>
       </p>
-      <Link to='/login'>
-        <button>Sign in</button>
-      </Link>
     </>
   );
 };

@@ -7,6 +7,9 @@ import { ErrorAction } from '../../redux';
 
 import { useAuth, useFirebaseHooks } from '../../hooks';
 
+import eye from '../../../images/visibility-button.svg';
+import hide from '../../../images/hide.svg';
+
 export const Register: React.FC = () => {
   const { error } = useSelector((state: AppState) => state.errorReducer);
   //const { message } = useSelector((state: AppState) => state.messageReducer);
@@ -45,7 +48,7 @@ export const Register: React.FC = () => {
     if (!isValid) {
       dispatch(
         ErrorAction.add(
-          'Please enter a valid password that is at least 8 characters long and that it contains numbers and special characters.',
+          'Your password should be 8+ characters long, contain a number and a special character',
         ),
       );
     }
@@ -70,45 +73,51 @@ export const Register: React.FC = () => {
   }
 
   return (
-    <>
-      <form onSubmit={handleSignUp}>
+    <div className='reg-div'>
+      <form onSubmit={handleSignUp} className='reg-form'>
         <h1>Create an account</h1>
-        <label htmlFor='email'>E-mail</label>
-        <br />
-        <br />
-        <input
-          type='email'
-          name='email'
-          placeholder='name@gmail.com'
-          onChange={handleEmailChange}
-          value={email}
-          required
-        />
-        <br />
-        <br />
-        <label htmlFor='password'>Password</label>
-        <br />
-        <br />
-        <input
-          type={inputType}
-          name='password'
-          placeholder='Choose your password'
-          onChange={handlePasswordChange}
-          required
-        />
-        <button type='button' onClick={showPassword}>
-          Show password
-        </button>
-        <p>{error}</p>
-        <br />
-        <br />
-        <button type='submit'>Register</button>
+        <div className='input-div'>
+          <label htmlFor='email'>Email</label>
+          <input
+            type='email'
+            name='email'
+            placeholder='name@gmail.com'
+            onChange={handleEmailChange}
+            value={email}
+            required
+          />
+          <label htmlFor='password'>Password</label>
+          <input
+            type={inputType}
+            name='password'
+            placeholder='Choose your password'
+            onChange={handlePasswordChange}
+            required
+          />
+          <img
+            src={inputType === 'password' ? eye : hide}
+            onClick={showPassword}
+          />
+        </div>
+        {error ? (
+          <div className='error'>
+            <p>{error}</p>
+          </div>
+        ) : (
+          ''
+        )}
+        <div className='submit-div'>
+          <button type='submit' className='reg-btn'>
+            Register
+          </button>
+          <div className='reg-google'>
+            <p>Or</p>
+            <button type='button' onClick={handleGoogle}>
+              Sign in with google
+            </button>
+          </div>
+        </div>
       </form>
-      <p>Or</p>
-      <br />
-      <button type='button' onClick={handleGoogle}>
-        Sign in with google
-      </button>
-    </>
+    </div>
   );
 };

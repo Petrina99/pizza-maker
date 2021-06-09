@@ -7,14 +7,21 @@ export const Shrooms: React.FC = () => {
   const [isActive, setIsActive] = useState('off');
   const id = 6;
 
+  const btnStyle = isActive === 'off' ? 'btn-inactive' : 'btn-active';
+
   const { handleButton } = useAdd(id, setIsActive);
 
   return (
-    <>
-      <button value={isActive} name='Shrooms' onClick={handleButton}>
+    <button
+      value={isActive}
+      name='Shrooms'
+      onClick={handleButton}
+      className={btnStyle}
+    >
+      <div>
         <img src={shrooms} />
-        <p>Shrooms</p>
-      </button>
-    </>
+      </div>
+      <p className='topping'>Shrooms</p>
+    </button>
   );
 };

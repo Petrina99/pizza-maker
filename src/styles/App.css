@@ -1,0 +1,13 @@
+body{
+  margin: 0;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  background: #FAFAFA;
+  font-family: 'Avenir';
+}
+
+@font-face {
+  font-family: 'Avenir';
+  src: url(../fonts/AvenirLTStd-Roman.otf);
+}

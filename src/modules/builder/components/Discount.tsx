@@ -59,16 +59,18 @@ export const Discount: React.FC = () => {
   return (
     <>
       <h2>Get the discount</h2>
-      <input
-        type='text'
-        id='discount'
-        placeholder='Enter discount code'
-        onChange={handleInput}
-      />
-      <button type='button' value={input} onClick={handleClick}>
-        Apply
-      </button>
-      <p>{discount.message}</p>
+      <div className='discount-input'>
+        <input
+          type='text'
+          id='discount'
+          placeholder='Enter discount code'
+          onChange={handleInput}
+        />
+        <button type='button' value={input} onClick={handleClick}>
+          Apply
+        </button>
+        <p>{discount.message}</p>
+      </div>
     </>
   );
 };

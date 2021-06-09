@@ -22,7 +22,8 @@ export const usePrice = (quantity: number, size: string) => {
       sizePrice = sizePrice + 7;
     }
 
-    const priceWithoutDiscount = startingPrice + toppings.length + sizePrice;
+    const toppingPrice = toppings.length * 3;
+    const priceWithoutDiscount = startingPrice + toppingPrice + sizePrice;
 
     const quantityMultiply = priceWithoutDiscount * quantity;
 

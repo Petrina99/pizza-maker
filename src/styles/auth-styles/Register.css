@@ -1,0 +1,135 @@
+#root{
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+  margin: 0;
+  padding: 0;
+  justify-content: center;
+}
+
+.reg-div{
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 40px;
+}
+
+.reg-form{
+  display: flex;
+  flex-wrap: wrap;
+  flex-basis: 70%;
+  margin: 10px;
+  height: 600px;
+  border: 1px solid #F2F2F2;
+  background: #FFFFFF;
+  border-radius: 20px;
+  padding: 50px;
+  justify-content: center;
+}
+
+.reg-form h1{
+  flex-basis: 100%;
+  text-align: center;
+  font-size: 50px;
+  margin-top: 30px;
+  margin-bottom: -50px;
+}
+
+.error{
+  flex-basis: 60%;
+  display: flex;
+  justify-content: center;
+  height: 30px;
+}
+
+.error p{
+  flex-basis: 100%;
+  text-align: center;
+  color: red;
+  font-size: 16px;
+}
+
+.input-div{
+  display: flex;
+  flex-wrap: wrap;
+  flex-basis: 100%;
+}
+
+.input-div label{
+  flex-basis: 20%;
+  height: 30px;
+  font-size: 25px;
+}
+
+.input-div input{
+  flex-basis: 60%;
+  height: 30px;
+  border: 0px;
+  background: #ECECF3;
+  border-radius: 72px;
+  text-align: center;
+}
+
+.input-div img{
+  flex-basis: 5%;
+  width: 20px;
+  height: 30px;
+  cursor: pointer;
+}
+
+.submit-div{
+  flex-basis: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.reg-btn{
+  flex-basis: 30%;
+  border: 0px;
+  background: #B95DE4;
+  border-radius: 48px;
+  color: white;
+  font-family: 'Avenir';
+  height: 40px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.reg-google{
+  flex-basis: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.reg-google p{
+  flex-basis: 100%;
+  text-align: center;
+  margin-top: -30px;
+}
+
+.reg-google button{
+  flex-basis: 30%;
+  border: 0px;
+  background: #B95DE4;
+  border-radius: 48px;
+  color: white;
+  font-family: 'Avenir';
+  height: 40px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.login-p{
+  text-align: center;
+  flex-basis: 100%;
+  font-size: 20px;
+}
+
+.login-link{
+  text-decoration: none;
+  color: #B95DE4;
+}

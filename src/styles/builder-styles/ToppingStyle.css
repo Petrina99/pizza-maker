@@ -1,0 +1,113 @@
+.btn-inactive{
+  width: 98px;
+  height: 148px;
+  background: #FFFFFF;
+  border: 1px solid #F2F2F2;
+  box-sizing: border-box;
+  box-shadow: 0px 12px 16px rgba(0, 0, 0, 0.03);
+  border-radius: 56px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  cursor: pointer;
+  margin-right: 15px;
+  padding-bottom: 33px;
+  padding-top: 11px;
+  padding-left: 11px;
+  padding-right: 11px;
+}
+
+.btn-active{
+  width: 98px;
+  height: 148px;
+  background: #E5C3F5;
+  border: 1px solid #F2F2F2;
+  box-sizing: border-box;
+  box-shadow: 0px 12px 16px rgba(0, 0, 0, 0.03);
+  border-radius: 56px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  cursor: pointer;
+  margin-right: 15px;
+  padding-bottom: 33px;
+  padding-top: 11px;
+  padding-left: 11px;
+  padding-right: 11px;
+}
+
+.btn-inactive p{
+  flex-basis: 100%;
+}
+
+.btn-active p{
+  flex-basis: 100%;
+}
+
+.btn-inactive div{
+  width: 76px;
+  height: 76px;
+  line-height: 36px;
+  background: #FFFFFF;
+  box-shadow: 0px 12px 28px rgba(0, 0, 0, 0.03);
+  border-radius: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn-active div{
+  width: 76px;
+  height: 76px;
+  opacity: 0.3;
+  line-height: 36px;
+  background: #FFFFFF;
+  box-shadow: 0px 12px 28px rgba(0, 0, 0, 0.03);
+  border-radius: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn-active div img{
+  opacity: 1;
+}
+
+.topping-selector{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content:space-between;
+  flex-basis: 60%;
+}
+
+.title{
+  flex-basis: 100%;
+  text-align: center;
+  font-weight: 800;
+  font-size: 40px;
+  line-height: 48px;
+  margin-top: 60px;
+  margin-bottom: 24px;
+}
+
+.topping{
+  font-family: Avenir;
+  font-style: normal;
+  font-weight: 800;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.price-par{
+  flex-basis: 100%;
+  text-align: center;
+  font-family: Avenir;
+  font-style: normal;
+  font-weight: normal;  
+  font-size: 16px;
+  line-height: 24px;
+  margin-top: 24px;
+  margin-bottom: 60px;
+}

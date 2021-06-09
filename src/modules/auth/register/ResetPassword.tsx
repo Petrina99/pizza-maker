@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { AppState } from '../../redux-store';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { ErrorAction } from '../../redux';
+import { ErrorAction, MessageAction } from '../../redux';
 
 import { useAuth } from '../../hooks';
 
@@ -21,6 +21,7 @@ export const ResetPassword: React.FC = () => {
 
     setEmail(value);
     dispatch(ErrorAction.add(''));
+    dispatch(MessageAction.add(''));
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -39,17 +40,17 @@ export const ResetPassword: React.FC = () => {
   };
 
   return (
-    <>
-      <form onSubmit={handleSubmit}>
+    <div className='reset-div'>
+      <form onSubmit={handleSubmit} className='reset-form'>
         <label htmlFor='email'>
           Enter the email adress of an account that you want to reset your
-          password for.
+          password for:
         </label>
         <input type='email' value={email} onChange={handleEmail} />
-        <p>{message}</p>
-        <p>{error}</p>
         <button type='submit'>Reset password</button>
+        <p className='reset-msg'>{message}</p>
+        <p className='reset-err'>{error}</p>
       </form>
-    </>
+    </div>
   );
 };

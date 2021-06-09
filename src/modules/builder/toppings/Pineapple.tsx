@@ -8,14 +8,21 @@ export const Pineapple: React.FC = () => {
   const [isActive, setIsActive] = useState('off');
   const id = 4;
 
+  const btnStyle = isActive === 'off' ? 'btn-inactive' : 'btn-active';
+
   const { handleButton } = useAdd(id, setIsActive);
 
   return (
-    <>
-      <button value={isActive} name='Pineapple' onClick={handleButton}>
+    <button
+      value={isActive}
+      name='Pineapple'
+      onClick={handleButton}
+      className={btnStyle}
+    >
+      <div>
         <img src={pineapple} />
-        <p>Pineapple</p>
-      </button>
-    </>
+      </div>
+      <p className='topping'>Pineapple</p>
+    </button>
   );
 };

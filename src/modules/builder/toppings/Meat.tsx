@@ -8,14 +8,21 @@ export const Meat: React.FC = () => {
   const [isActive, setIsActive] = useState('off');
   const id = 5;
 
+  const btnStyle = isActive === 'off' ? 'btn-inactive' : 'btn-active';
+
   const { handleButton } = useAdd(id, setIsActive);
 
   return (
-    <>
-      <button data-id={id} value={isActive} name='Meat' onClick={handleButton}>
+    <button
+      value={isActive}
+      name='Meat'
+      onClick={handleButton}
+      className={btnStyle}
+    >
+      <div>
         <img src={meat} />
-        <p>Meat</p>
-      </button>
-    </>
+      </div>
+      <p className='topping'>Meat</p>
+    </button>
   );
 };

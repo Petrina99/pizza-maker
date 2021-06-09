@@ -9,10 +9,8 @@ export const SignOut: React.FC = () => {
   };
 
   return (
-    <>
-      <button type='button' onClick={logout}>
-        Log out
-      </button>
-    </>
+    <button type='button' onClick={logout} className='logout-btn'>
+      Log out
+    </button>
   );
 };

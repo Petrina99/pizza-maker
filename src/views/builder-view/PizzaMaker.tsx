@@ -9,12 +9,12 @@ import {
 } from '../../modules';
 export const PizzaMaker: React.FC = () => {
   return (
-    <>
+    <div className='builder'>
       <Header />
       <ToppingSelector />
       <PizzaSize />
       <Discount />
       <Finisher />
-    </>
+    </div>
   );
 };
