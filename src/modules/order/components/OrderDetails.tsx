@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
-import { useSelector } from 'react-redux';
-
+import { useSelector, useDispatch } from 'react-redux';
+import { DiscountAction } from '../../redux';
 import { AppState } from '../../redux-store';
 
 import { useFirebaseHooks } from '../../hooks';
@@ -19,6 +19,8 @@ export const OrderDetails: React.FC = () => {
 
   const { pushOrder } = useFirebaseHooks('orders');
 
+  const dispatch = useDispatch();
+
   const history = useHistory();
 
   const [adress, setAdress] = useState('');
@@ -27,6 +29,8 @@ export const OrderDetails: React.FC = () => {
   const [country, setCountry] = useState('');
   const [payment, setPayment] = useState('COD');
   const [error, setError] = useState('');
+  const [ccNumber, setCCNumber] = useState(0);
+  const [input, setInput] = useState('');
 
   const handleAdress = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.currentTarget;
@@ -80,9 +84,14 @@ export const OrderDetails: React.FC = () => {
         size: size,
         discount: discount.valid,
         payment: payment,
+        CC: payment === 'CC' ? ccNumber : 'Payed with cash',
         toppings: toppings.sort((a, b) => a.id - b.id).map((item) => item.name),
       });
       history.push('/success');
+    }
+
+    if (payment === 'CC' && isNaN(ccNumber)) {
+      setError('Please enter a valid credit card number.');
     }
 
     if (isNaN(postalCode)) {
@@ -91,6 +100,54 @@ export const OrderDetails: React.FC = () => {
 
     if (!adress || !city || !postalCode || !country) {
       setError('Please fill out all the required fields.');
+    }
+  };
+
+  const handleCC = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.currentTarget;
+
+    if (value.length !== 16) {
+      setError('Credit card number not valid.');
+    }
+
+    if (value.length === 16) {
+      setError('');
+      setCCNumber(parseInt(value));
+    }
+  };
+
+  const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.currentTarget;
+
+    setInput(value);
+    dispatch(
+      DiscountAction.add({
+        code: discount.code,
+        valid: false,
+        message: '',
+      }),
+    );
+  };
+
+  const handleClick = () => {
+    if (input === discount.code) {
+      dispatch(
+        DiscountAction.add({
+          code: discount.code,
+          valid: true,
+          message: 'Success.',
+        }),
+      );
+    }
+
+    if (input !== discount.code) {
+      dispatch(
+        DiscountAction.add({
+          code: discount.code,
+          valid: false,
+          message: 'Error. Wrong code.',
+        }),
+      );
     }
   };
 
@@ -108,8 +165,21 @@ export const OrderDetails: React.FC = () => {
           <p>Delivery</p>
           <p>Free delivery within 1 hour or you don't have to pay.</p>
         </div>
-        <p>{discount.valid ? 'Discount applied' : ''}</p>
-        <button type='button'>Apply</button>
+        {discount.valid ? (
+          'Discount applied'
+        ) : (
+          <div>
+            <input
+              type='text'
+              placeholder='Enter discount code'
+              onChange={handleInput}
+              value={input}
+            />
+            <button type='button' onClick={handleClick}>
+              Apply
+            </button>
+          </div>
+        )}
         <p>
           Total price <span>${price}</span>
         </p>
@@ -150,6 +220,11 @@ export const OrderDetails: React.FC = () => {
             <option value='COD'>Cash on delivery</option>
             <option value='CC'>Credit card</option>
           </select>
+          {payment === 'CC' ? (
+            <input type='text' name='CC number' onChange={handleCC} />
+          ) : (
+            ''
+          )}
         </div>
       </form>
       <button type='button' onClick={handleFinish} value={payment}>
