@@ -23,7 +23,7 @@ export const Success: React.FC = () => {
   const handleAnother = () => {
     toppings.map((item) => dispatch(Actions.remove(item.id)));
     dispatch(SizeAction.add('S'));
-    dispatch(QuantityAction.add(0));
+    dispatch(QuantityAction.add(1));
     dispatch(
       DiscountAction.add({ code: discount.code, valid: false, message: '' }),
     );
@@ -32,12 +32,18 @@ export const Success: React.FC = () => {
   };
 
   return (
-    <>
+    <div className='success-sect'>
       <Header />
       <SuccessPage />
-      <button type='button' onClick={handleAnother}>
-        Buy another
-      </button>
-    </>
+      <div className='buy-another'>
+        <button
+          type='button'
+          onClick={handleAnother}
+          className='buy-another-btn'
+        >
+          Buy another
+        </button>
+      </div>
+    </div>
   );
 };

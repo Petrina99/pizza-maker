@@ -1,0 +1,172 @@
+.order-div{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.order{
+  flex-basis: 60%;
+  background: #FFFFFF;
+  box-shadow: 0px 20px 28px rgba(0, 0, 0, 0.03);
+  border-radius: 28px;
+  display: flex;
+  flex-direction: row;
+  margin-top: 50px;
+  flex-wrap: wrap;
+  padding-left: 49px;
+  padding-right: 45px;
+  padding-top: 48px;
+  padding-bottom: 52px;
+  justify-content: space-between;
+}
+
+.order-title{
+  flex-basis: 100%;
+  text-align: center;
+  font-family: 'Avenir';
+  font-style: normal;
+  font-weight: 800;
+  font-size: 36px;
+  margin-bottom: 30px;
+}
+
+.info{
+  flex-basis: 50%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.info p:first-child{
+  flex-basis: 100%;
+  font-family: 'Avenir';
+  font-style: normal;
+  font-weight: 800;
+  font-size: 20px;
+}
+
+.info p:nth-child(2){
+  flex-basis: 100%;
+  font-family: 'Avenir';
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  color: #8C8C8C;
+}
+
+.info p:nth-child(3){
+  font-family: 'Avenir';
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  flex-basis: 100%;
+}
+
+.qty-numb{
+  font-family: 'Avenir';
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  flex-basis: 100%;
+}
+
+.delivery{
+  border-top: 1px dashed #DBDBDB;
+  border-bottom: 1px dashed #DBDBDB;
+  flex-basis: 100%;
+}
+
+.delivery p:first-child{
+  font-family: 'Avenir';
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  color: #979797;
+}
+
+.deliver p:last-child{
+  font-family: Avenir;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  color: #979797;
+}
+
+.discount-valid{
+  flex-basis: 100%;
+  font-family: Avenir;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  color: black;
+}
+
+.discount-apply{
+  display: flex;
+  flex-wrap: nowrap;
+  flex-basis: 100%;
+  margin-top: 24px;
+}
+
+.discount-apply input{
+  flex-basis: 100%;
+  height: 56px;
+  border-radius: 72px;
+  background: #ECECF3;
+  font-family: Avenir;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 20px;
+  line-height: 28px;
+  color: #8C8C8C;
+  padding-left: 40px;
+  border: none;
+}
+
+.discount-apply button{
+  flex-basis: 30%;
+  height: 45px;
+  border-radius: 36px;
+  border: 1px solid #DBDBDB;
+  background: #ECECF3;
+  margin-left: -176px;
+  margin-top: 8px;
+  font-family: Avenir;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.info-price{
+  flex-basis: 70%;
+  margin-top: 28px;
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+}
+
+.info-price p:first-child{
+  text-align: start;
+  flex-basis: 50%;
+  font-family: 'Avenir';
+  font-style: normal;
+  font-weight: 800;
+  font-size: 16px;
+  color: #8C8C8C;
+  display: flex;
+  justify-content: start;
+}
+
+.info-price p:last-child{
+  flex-basis: 50%;
+  font-family: 'Avenir';
+  font-style: normal;
+  font-weight: 800;
+  font-size: 32px;
+  color: #B95DE4;
+  display: flex;
+  justify-content: end;
+}

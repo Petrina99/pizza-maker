@@ -73,7 +73,7 @@ export const OrderDetails: React.FC = () => {
   };
 
   const handleFinish = () => {
-    if (!error) {
+    if (!error && adress && city && postalCode && country) {
       pushOrder({
         user: user.email,
         adress: adress,
@@ -152,23 +152,24 @@ export const OrderDetails: React.FC = () => {
   };
 
   return (
-    <>
-      <div>
-        <h3>Order details</h3>
+    <div className='order'>
+      <p className='order-title'>Almost done!</p>
+      <div className='info'>
+        <p>Order details</p>
         <p>TOPPINGS</p>
         <p>
           {toppings.sort((a, b) => a.id - b.id).map((item) => item.name + ', ')}
           Size: {size}
         </p>
-        <p>QTY: {qty}</p>
-        <div>
+        <p className='qty-numb'>QTY: {qty}</p>
+        <div className='delivery'>
           <p>Delivery</p>
           <p>Free delivery within 1 hour or you don't have to pay.</p>
         </div>
         {discount.valid ? (
-          'Discount applied'
+          <p className='discount-valid'>Discount applied.</p>
         ) : (
-          <div>
+          <div className='discount-apply'>
             <input
               type='text'
               placeholder='Enter discount code'
@@ -180,57 +181,71 @@ export const OrderDetails: React.FC = () => {
             </button>
           </div>
         )}
-        <p>
-          Total price <span>${price}</span>
-        </p>
-      </div>
-      <form>
-        <div>
-          <h3>Shipping information</h3>
-          <input
-            type='text'
-            name='adress'
-            placeholder='Street name and number'
-            required
-            onChange={handleAdress}
-          />
-          <input
-            type='text'
-            name='city'
-            placeholder='City'
-            required
-            onChange={handleCity}
-          />
-          <input
-            type='text'
-            name='postal'
-            placeholder='Postal code'
-            required
-            onChange={handlePostal}
-          />
-          <input
-            type='text'
-            name='country'
-            placeholder='Country'
-            required
-            onChange={handleCountry}
-          />
-          <h3>Payment details</h3>
-          <select name='paymet' required onChange={handlePayment}>
-            <option value='COD'>Cash on delivery</option>
-            <option value='CC'>Credit card</option>
-          </select>
-          {payment === 'CC' ? (
-            <input type='text' name='CC number' onChange={handleCC} />
-          ) : (
-            ''
-          )}
+        <div className='info-price'>
+          <p>Total price</p>
+          <p>${price}</p>
         </div>
+      </div>
+      <form className='order-form'>
+        <p>Shipping information</p>
+        <input
+          type='text'
+          name='adress'
+          placeholder='Street name and number'
+          required
+          onChange={handleAdress}
+          className='adress'
+        />
+        <input
+          type='text'
+          name='city'
+          placeholder='City'
+          required
+          onChange={handleCity}
+          className='city'
+        />
+        <input
+          type='text'
+          name='postal'
+          placeholder='Postal code'
+          required
+          onChange={handlePostal}
+          className='postal'
+        />
+        <input
+          type='text'
+          name='country'
+          placeholder='Country'
+          required
+          onChange={handleCountry}
+          className='country'
+        />
+        <p className='payment-label'>Payment details</p>
+        <select name='paymet' required onChange={handlePayment}>
+          <option value='COD'>Cash on delivery</option>
+          <option value='CC'>Credit card</option>
+        </select>
+        {payment === 'CC' ? (
+          <input
+            type='text'
+            name='CC number'
+            placeholder='Your Credit card number.'
+            onChange={handleCC}
+            className='cc-number'
+          />
+        ) : (
+          ''
+        )}
+        <button
+          type='button'
+          onClick={handleFinish}
+          value={payment}
+          className='finish-btn'
+        >
+          Finish Order
+        </button>
       </form>
-      <button type='button' onClick={handleFinish} value={payment}>
-        Finish Order
-      </button>
-      {error}
-    </>
+      <p className='error-order'>{error}</p>
+    </div>
   );
 };

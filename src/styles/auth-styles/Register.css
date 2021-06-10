@@ -1,19 +1,9 @@
-#root{
-  display: flex;
-  width: 100%;
-  flex-wrap: wrap;
-  margin: 0;
-  padding: 0;
-  justify-content: center;
-}
-
 .reg-div{
   display: flex;
-  width: 100%;
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
-  padding: 40px;
+  padding-top: 40px;
 }
 
 .reg-form{

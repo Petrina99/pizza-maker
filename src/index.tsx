@@ -9,6 +9,10 @@ import './styles/builder-styles/Header.css';
 import './styles/builder-styles/ToppingStyle.css';
 import './styles/builder-styles/SizeStyle.css';
 import './styles/builder-styles/DiscountStyle.css';
+import './styles/builder-styles/FinisherStyle.css';
+import './styles/order/OrderInfo.css';
+import './styles/order/ShippingInfo.css';
+import './styles/order/OrderSuccesStyle.css';
 
 import { App } from './App';
 import { Provider } from 'react-redux';

@@ -32,6 +32,7 @@ export const Finisher: React.FC = () => {
 
     if (qty === 0) {
       setError('Please select the number of pizzas you want to order');
+      dispatch(QuantityAction.add(0));
     }
 
     if (!toppings.length) {
@@ -40,9 +41,16 @@ export const Finisher: React.FC = () => {
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { valueAsNumber } = e.currentTarget;
+    const { value } = e.currentTarget;
 
-    dispatch(QuantityAction.add(valueAsNumber));
+    if (parseInt(value) === 0) {
+      setError('You have to order atleast 1 pizza.');
+    }
+
+    if (parseInt(value) !== 0) {
+      dispatch(QuantityAction.add(parseInt(value)));
+      setError('');
+    }
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -52,28 +60,38 @@ export const Finisher: React.FC = () => {
       setError('Please click on the check price before buying.');
     }
 
+    if (!toppings.length) {
+      setError('Please select atleast 1 topping.');
+    }
+
     if (price !== 0 && error === '') {
       history.push('/order');
     }
   };
 
   return (
-    <>
-      <div>
-        <img src={pizza} />
-        <br />
-        <form onSubmit={handleSubmit}>
-          <input type='number' onChange={handleChange} required />
+    <div className='finisher'>
+      <img src={pizza} />
+      <br />
+      <form onSubmit={handleSubmit} className='finisher-form'>
+        <div className='qty'>
+          <input type='number' value={qty} onChange={handleChange} required />
           <p>QTY</p>
+        </div>
+        <div className='price-check'>
           <button type='button' onClick={handlePrice}>
             Check price
           </button>
           <p>{error}</p>
+        </div>
+        <div className='price-total'>
           <p>${price}</p>
           <p>ORDER TOTAL</p>
-          <button type='submit'>Buy Pizza! Pizza!</button>
-        </form>
-      </div>
-    </>
+        </div>
+        <button type='submit' className='buy-btn'>
+          Buy Pizza! Pizza!
+        </button>
+      </form>
+    </div>
   );
 };

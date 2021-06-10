@@ -1,20 +1,27 @@
 .builder{
   display: flex;
-  flex-direction: row;
   flex-wrap: wrap;
-  padding-bottom: 0;
-  padding-top: 10px;
-  padding-left: 20px;
-  padding-right: 20px;
   background: #FAFAFA;
   justify-content: center;
 }
 
-.header{
+.header-struct{
+  flex-basis: 100%;
   display: flex;
-  flex-wrap: nowrap;
+  flex-direction: row;
+  justify-content: center;
+  height: 100px;
+}
+
+.pizza-tron{
+  cursor: pointer;
+}
+
+.header{
+  flex-basis: 66%;
+  display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
-  flex-basis: 60%;
 }
 
 .header p{
@@ -24,11 +31,14 @@
   font-weight: 800;
   font-style: normal;
   line-height: 24px;
+  color: #383838;
+  margin-top: 44px;
 }
 
 .header img{
   width: 40px;
   height: 48px;
+  margin-top: 32px;
 }
 
 .logout-btn{
@@ -43,4 +53,5 @@
   cursor: pointer;
   font-size: 16px;
   padding: 0px 24px;
+  margin-top: 36px;
 }

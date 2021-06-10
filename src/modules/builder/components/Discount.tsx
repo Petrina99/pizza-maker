@@ -58,7 +58,7 @@ export const Discount: React.FC = () => {
 
   return (
     <>
-      <h2>Get the discount</h2>
+      <p className='dsc-title'>Get the discount</p>
       <div className='discount-input'>
         <input
           type='text'

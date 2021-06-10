@@ -1,0 +1,112 @@
+.order-form{
+  flex-basis: 40%;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.order-form p:first-child{
+  font-family: Avenir;
+  font-style: normal;
+  font-weight: 800;
+  font-size: 20px;
+  flex-basis: 100%;
+}
+
+.adress{
+  flex-basis: 100%;
+  background: #ECECF3;
+  border-radius: 72px;
+  height: 12px;
+  font-family: 'Avenir';
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  color: #8C8C8C;
+  padding: 16px 0 16px 16px;
+  border: none;
+}
+
+.city{
+  flex-basis: 45%;
+  background: #ECECF3;
+  border-radius: 72px;
+  height: 12px;
+  margin-right: 12px;
+  font-family: 'Avenir';
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  color: #8C8C8C;
+  padding: 16px 0 16px 16px;
+  border: none;
+}
+
+.postal{
+  flex-basis: 45%;
+  background: #ECECF3;
+  border-radius: 72px;
+  height: 12px;
+  font-family: 'Avenir';
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  color: #8C8C8C;
+  padding: 16px 0 16px 16px;
+  border: none;
+}
+
+.country{
+  flex-basis: 100%;
+  background: #ECECF3;
+  border-radius: 72px;
+  height: 12px;
+  font-family: 'Avenir';
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  color: #8C8C8C;
+  padding: 16px 0 16px 16px;
+  border: none;
+}
+
+.payment-label{
+  font-family: 'Avenir';
+  font-style: normal;
+  font-weight: 800;
+  font-size: 20px;
+  flex-basis: 100%;
+}
+
+.order-form select{
+  flex-basis: 100%;
+  height: 20px;
+  border: none;
+  background: white;
+  cursor: pointer;
+}
+
+.cc-number{
+  flex-basis: 100%;
+  height: 20px;
+}
+
+.finish-btn{
+  background: linear-gradient(93.49deg, #B490DF 4.76%, #C697E9 98.36%);
+  border-radius: 36px;
+  font-family: 'Avenir';
+  font-style: normal;
+  font-weight: 800;
+  font-size: 20px;
+  color: white;
+  padding: 20px 98px 20px 98px;
+  border: none;
+}
+
+.error-order{
+  flex-basis: 100%;
+  text-align: center;
+  color: red;
+}

@@ -1,0 +1,48 @@
+.dsc-title{
+  flex-basis: 100%;
+  text-align: center;
+  font-weight: 800;
+  font-size: 40px;
+  line-height: 48px;
+  margin-top: 80px;
+  margin-bottom: 24px;
+  color: #383838;
+}
+
+.discount-input{
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+  flex-basis: 100%;
+  margin-bottom: 104px;
+}
+
+.discount-input input{
+  width: 438px;
+  height: 78px;
+  border-radius: 72px;
+  background: #ECECF3;
+  font-family: Avenir;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 20px;
+  line-height: 28px;
+  color: #8C8C8C;
+  padding-left: 40px;
+  border: none;
+}
+
+.discount-input button{
+  width: 147px;
+  height: 68px;
+  border-radius: 36px;
+  border: 1px solid #DBDBDB;
+  background: #ECECF3;
+  margin-left: -160px;
+  margin-top: 8px;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 24px;
+  cursor: pointer;
+}

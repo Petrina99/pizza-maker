@@ -6,7 +6,7 @@ interface State {
 }
 
 const INITIAL_STATE: State = {
-  qty: 0,
+  qty: 1,
 };
 
 export const QuantityReducer = (
