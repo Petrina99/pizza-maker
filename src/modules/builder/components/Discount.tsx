@@ -57,7 +57,7 @@ export const Discount: React.FC = () => {
   };
 
   return (
-    <>
+    <div className='dsc-div'>
       <p className='dsc-title'>Get the discount</p>
       <div className='discount-input'>
         <input
@@ -69,8 +69,8 @@ export const Discount: React.FC = () => {
         <button type='button' value={input} onClick={handleClick}>
           Apply
         </button>
-        <p>{discount.message}</p>
       </div>
-    </>
+      <p className='dsc-msg'>{discount.message}</p>
+    </div>
   );
 };

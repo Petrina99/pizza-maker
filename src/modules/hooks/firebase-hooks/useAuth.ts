@@ -84,7 +84,10 @@ export const useAuth = () => {
 
   /* not sure if i should put LOCAL or SESSION, for now its local and works fine */
   function rememberMe() {
-    firebase.app().auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL);
+    firebase
+      .app()
+      .auth()
+      .setPersistence(firebase.auth.Auth.Persistence.SESSION);
   }
 
   function googleSignIn() {

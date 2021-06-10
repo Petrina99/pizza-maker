@@ -12,7 +12,7 @@ import {
 
 export const ToppingSelector: React.FC = () => {
   return (
-    <>
+    <div className='topping-div'>
       <p className='title'>Toppings! Toppings!</p>
       <div className='topping-selector'>
         <Chilli />
@@ -24,6 +24,6 @@ export const ToppingSelector: React.FC = () => {
         <Bacon />
       </div>
       <p className='price-par'>Total price +$3.00</p>
-    </>
+    </div>
   );
 };
