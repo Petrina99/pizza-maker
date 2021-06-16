@@ -82,6 +82,7 @@ export const OrderDetails: React.FC = () => {
         country: country,
         price: price,
         size: size,
+        quantity: qty,
         discount: discount.valid,
         payment: payment,
         CC: payment === 'CC' ? ccNumber : 'Payed with cash',
