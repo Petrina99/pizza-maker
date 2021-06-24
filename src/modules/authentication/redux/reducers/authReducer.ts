@@ -3,7 +3,7 @@ import { AuthAction } from '../actions';
 import { AuthState } from '../models';
 
 const INITIAL_STATE: AuthState = {
-  user: undefined,
+  user: null,
   loading: true,
   error: '',
 };

@@ -1,7 +1,7 @@
 import firebase from 'firebase';
 
 export interface AuthState {
-  user: firebase.User | undefined;
+  user: firebase.User | firebase.auth.UserCredential | null;
   loading: boolean;
   error?: string;
 }

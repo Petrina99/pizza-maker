@@ -8,8 +8,9 @@ import { AuthAction } from 'modules/authentication/redux';
 import { useAuth } from '../../hooks';
 
 export const ResetPassword: React.FC = () => {
-  const { passwordReset } = useSelector((state: AppState) => state.authReducer);
-  const { error } = useSelector((state: AppState) => state.authReducer);
+  const { loading, error } = useSelector(
+    (state: AppState) => state.authReducer,
+  );
 
   const dispatch = useDispatch();
 
@@ -21,15 +22,12 @@ export const ResetPassword: React.FC = () => {
 
     setEmail(value);
     dispatch(AuthAction.error(''));
-    dispatch(AuthAction.passwordReset(''));
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (email && !error) {
-      resetPassword(email);
-    }
+    resetPassword(email);
 
     if (error) {
       setEmail('');
@@ -48,7 +46,11 @@ export const ResetPassword: React.FC = () => {
         </label>
         <input type='email' value={email} onChange={handleEmail} />
         <button type='submit'>Reset password</button>
-        <p className='reset-msg'>{passwordReset}</p>
+        <p className='reset-msg'>
+          {loading
+            ? ''
+            : 'Link for a password reset has been sent to your email.'}
+        </p>
         <p className='reset-err'>{error}</p>
       </form>
     </div>
