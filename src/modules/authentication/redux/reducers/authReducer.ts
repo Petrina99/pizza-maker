@@ -1,29 +1,15 @@
 import { ActionUnion } from 'modules/redux-store';
 import { AuthAction } from '../actions';
-import { AuthModel, GoogleSignInModel } from '../models';
+import { AuthState } from '../models';
 
-interface State {
-  user: AuthModel;
-  error: string | null;
-  googleSignIn: GoogleSignInModel;
-  googleError: string | null;
-  passwordReset: string | null;
-}
-
-const INITIAL_STATE: State = {
-  user: {
-    email: null,
-  },
-  error: null,
-  googleSignIn: {
-    message: null,
-  },
-  googleError: null,
-  passwordReset: null,
+const INITIAL_STATE: AuthState = {
+  user: null,
+  loading: true,
+  error: '',
 };
 
 export const AuthReducer = (
-  state: State = INITIAL_STATE,
+  state: AuthState = INITIAL_STATE,
   action: ActionUnion<typeof AuthAction>,
 ) => {
   switch (action.type) {
@@ -36,21 +22,6 @@ export const AuthReducer = (
       return {
         ...state,
         error: action.payload,
-      };
-    case 'user/googleSignIn':
-      return {
-        ...state,
-        googleSignIn: action.payload,
-      };
-    case 'user/googleError':
-      return {
-        ...state,
-        googleError: action.payload,
-      };
-    case 'user/passwordReset':
-      return {
-        ...state,
-        passwordReset: action.payload,
       };
     default:
       return state;
