@@ -8,8 +8,8 @@ import { ErrorAction, MessageAction } from '../../redux';
 import { useAuth } from '../../hooks';
 
 export const ResetPassword: React.FC = () => {
-  const { message } = useSelector((state: AppState) => state.messageReducer);
-  const { error } = useSelector((state: AppState) => state.errorReducer);
+  const { passwordReset } = useSelector((state: AppState) => state.authReducer);
+  const { error } = useSelector((state: AppState) => state.authReducer);
 
   const dispatch = useDispatch();
 
@@ -48,7 +48,7 @@ export const ResetPassword: React.FC = () => {
         </label>
         <input type='email' value={email} onChange={handleEmail} />
         <button type='submit'>Reset password</button>
-        <p className='reset-msg'>{message}</p>
+        <p className='reset-msg'>{passwordReset}</p>
         <p className='reset-err'>{error}</p>
       </form>
     </div>

@@ -1,17 +1,17 @@
 import React from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { AppState } from '../../redux-store';
-import { SizeAction } from '../../redux';
+import { AppState } from 'modules/redux-store';
+import { OrderAction } from 'modules/builder/redux';
 
 export const PizzaSize: React.FC = () => {
   const dispatch = useDispatch();
-  const { size } = useSelector((state: AppState) => state.sizeReducer);
+  const { orders } = useSelector((state: AppState) => state.orderReducer);
 
   const handleButton = (e: React.MouseEvent<HTMLButtonElement>) => {
     const { value } = e.currentTarget;
 
-    dispatch(SizeAction.add(value));
+    dispatch(OrderAction.size(value));
   };
 
   return (
@@ -22,21 +22,21 @@ export const PizzaSize: React.FC = () => {
           <button
             value='S'
             onClick={handleButton}
-            className={size === 'S' ? 'active-size' : 'inactive-size'}
+            className={orders.size === 'S' ? 'active-size' : 'inactive-size'}
           >
             S
           </button>
           <button
             value='M'
             onClick={handleButton}
-            className={size === 'M' ? 'active-size' : 'inactive-size'}
+            className={orders.size === 'M' ? 'active-size' : 'inactive-size'}
           >
             M
           </button>
           <button
             value='L'
             onClick={handleButton}
-            className={size === 'L' ? 'active-size' : 'inactive-size'}
+            className={orders.size === 'L' ? 'active-size' : 'inactive-size'}
           >
             L
           </button>

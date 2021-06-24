@@ -1,21 +1,17 @@
 import React, { useState } from 'react';
 
 import { useSelector, useDispatch } from 'react-redux';
-import { DiscountAction } from '../../redux';
-import { AppState } from '../../redux-store';
+import { OrderAction } from 'modules';
+import { AppState } from '../../../redux-store';
 
-import { useFirebaseHooks } from '../../hooks';
+import { useFirebaseHooks } from '../../../hooks';
 
 import { useHistory } from 'react-router-dom';
-
 export const OrderDetails: React.FC = () => {
   // need qty, toppings, size, price and if discount is on
-  const { discount } = useSelector((state: AppState) => state.discountReducer);
-  const { size } = useSelector((state: AppState) => state.sizeReducer);
-  const { toppings } = useSelector((state: AppState) => state.reducer);
-  const { qty } = useSelector((state: AppState) => state.quantityReducer);
-  const { price } = useSelector((state: AppState) => state.priceReducer);
-  const { user } = useSelector((state: AppState) => state.userReducer);
+  const { orders } = useSelector((state: AppState) => state.orderReducer);
+  const { toppings } = useSelector((state: AppState) => state.toppingReducer);
+  const { user } = useSelector((state: AppState) => state.authReducer);
 
   const { pushOrder } = useFirebaseHooks('orders');
 
@@ -23,97 +19,102 @@ export const OrderDetails: React.FC = () => {
 
   const history = useHistory();
 
-  const [adress, setAdress] = useState('');
-  const [city, setCity] = useState('');
-  const [postalCode, setPostalCode] = useState(0);
-  const [country, setCountry] = useState('');
-  const [payment, setPayment] = useState('COD');
-  const [error, setError] = useState('');
-  const [ccNumber, setCCNumber] = useState(0);
   const [input, setInput] = useState('');
+  const [discountMessage, setMessage] = useState('');
 
   const handleAdress = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.currentTarget;
 
-    setAdress(value);
-    setError('');
+    dispatch(OrderAction.address(value));
+    dispatch(OrderAction.error(''));
   };
 
   const handleCity = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.currentTarget;
 
-    setCity(value);
-    setError('');
+    dispatch(OrderAction.city(value));
   };
 
   const handlePostal = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.currentTarget;
 
-    if (value.length !== 5) {
-      setError('Invalid postal code.');
+    if (value.length !== 5 && isNaN(parseInt(value))) {
+      dispatch(OrderAction.error('Invalid postal code!'));
     }
 
     if (value.length === 5) {
-      setError('');
-      setPostalCode(parseInt(value));
+      dispatch(OrderAction.error(''));
+      dispatch(OrderAction.postalCode(parseInt(value)));
     }
   };
 
   const handleCountry = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.currentTarget;
 
-    setCountry(value);
-    setError('');
+    dispatch(OrderAction.country(value));
+    dispatch(OrderAction.error(''));
   };
 
   const handlePayment = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const { value } = e.currentTarget;
 
-    setPayment(value);
+    dispatch(OrderAction.payment(value));
+    dispatch(OrderAction.error(''));
   };
 
   const handleFinish = () => {
-    if (!error && adress && city && postalCode && country) {
+    if (
+      !orders.error &&
+      orders.address &&
+      orders.city &&
+      orders.postalCode &&
+      orders.country
+    ) {
       pushOrder({
         user: user.email,
-        adress: adress,
-        city: city,
-        postalCode: postalCode,
-        country: country,
-        price: price,
-        size: size,
-        quantity: qty,
-        discount: discount.valid,
-        payment: payment,
-        CC: payment === 'CC' ? ccNumber : 'Payed with cash',
+        address: orders.address,
+        city: orders.city,
+        postalCode: orders.postalCode,
+        country: orders.country,
+        price: orders.price,
+        size: orders.size,
+        quantity: orders.quantity,
+        discount: orders.discount,
+        payment: orders.payment,
+        CC: orders.payment === 'CC' ? orders.ccNumber : 'Payed with cash',
         toppings: toppings.sort((a, b) => a.id - b.id).map((item) => item.name),
       });
       history.push('/success');
     }
 
-    if (payment === 'CC' && isNaN(ccNumber)) {
-      setError('Please enter a valid credit card number.');
+    if (orders.payment === 'CC' && !orders.ccNumber) {
+      dispatch(OrderAction.error('Enter a valid credit card number.'));
     }
 
-    if (isNaN(postalCode)) {
-      setError('Postal code has to be a number');
+    if (!orders.postalCode) {
+      dispatch(OrderAction.error('Postal code has to be a number.'));
     }
 
-    if (!adress || !city || !postalCode || !country) {
-      setError('Please fill out all the required fields.');
+    if (
+      !orders.address ||
+      !orders.city ||
+      !orders.postalCode ||
+      !orders.country
+    ) {
+      dispatch(OrderAction.error('Please fill out all the required fields.'));
     }
   };
 
   const handleCC = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.currentTarget;
 
-    if (value.length !== 16) {
-      setError('Credit card number not valid.');
+    if (value.length !== 16 && isNaN(parseInt(value))) {
+      dispatch(OrderAction.error('Credit card number not valid.'));
     }
 
     if (value.length === 16) {
-      setError('');
-      setCCNumber(parseInt(value));
+      dispatch(OrderAction.error(''));
+      dispatch(OrderAction.ccNumber(parseInt(value)));
     }
   };
 
@@ -121,34 +122,17 @@ export const OrderDetails: React.FC = () => {
     const { value } = e.currentTarget;
 
     setInput(value);
-    dispatch(
-      DiscountAction.add({
-        code: discount.code,
-        valid: false,
-        message: '',
-      }),
-    );
   };
 
   const handleClick = () => {
-    if (input === discount.code) {
-      dispatch(
-        DiscountAction.add({
-          code: discount.code,
-          valid: true,
-          message: 'Success.',
-        }),
-      );
+    if (input === 'pizza2021') {
+      dispatch(OrderAction.discount(true));
+      setMessage('Success. 20% discount applied.');
     }
 
-    if (input !== discount.code) {
-      dispatch(
-        DiscountAction.add({
-          code: discount.code,
-          valid: false,
-          message: 'Error. Wrong code.',
-        }),
-      );
+    if (input !== 'pizza2021') {
+      dispatch(OrderAction.discount(false));
+      setMessage('You have entered an invalid code.');
     }
   };
 
@@ -160,14 +144,14 @@ export const OrderDetails: React.FC = () => {
         <p>TOPPINGS</p>
         <p>
           {toppings.sort((a, b) => a.id - b.id).map((item) => item.name + ', ')}
-          Size: {size}
+          Size: {orders.size}
         </p>
-        <p className='qty-numb'>QTY: {qty}</p>
+        <p className='qty-numb'>QTY: {orders.quantity}</p>
         <div className='delivery'>
           <p>Delivery</p>
           <p>Free delivery within 1 hour or you don't have to pay.</p>
         </div>
-        {discount.valid ? (
+        {orders.discount ? (
           <p className='discount-valid'>Discount applied.</p>
         ) : (
           <div className='discount-apply'>
@@ -180,11 +164,12 @@ export const OrderDetails: React.FC = () => {
             <button type='button' onClick={handleClick}>
               Apply
             </button>
+            <p>{discountMessage}</p>
           </div>
         )}
         <div className='info-price'>
           <p>Total price</p>
-          <p>${price}</p>
+          <p>${orders.price}</p>
         </div>
       </div>
       <form className='order-form'>
@@ -226,7 +211,7 @@ export const OrderDetails: React.FC = () => {
           <option value='COD'>Cash on delivery</option>
           <option value='CC'>Credit card</option>
         </select>
-        {payment === 'CC' ? (
+        {orders.payment === 'CC' ? (
           <input
             type='text'
             name='CC number'
@@ -240,13 +225,13 @@ export const OrderDetails: React.FC = () => {
         <button
           type='button'
           onClick={handleFinish}
-          value={payment}
+          value={orders.payment}
           className='finish-btn'
         >
           Finish Order
         </button>
       </form>
-      <p className='error-order'>{error}</p>
+      <p className='error-order'>{orders.error}</p>
     </div>
   );
 };

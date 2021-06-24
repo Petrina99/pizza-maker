@@ -1,11 +1,11 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { PriceAction } from '../../redux';
+import { OrderAction } from 'modules/builder/redux';
 
 import { AppState } from '../../redux-store';
 
-export const usePrice = (quantity: number, size: string) => {
-  const { discount } = useSelector((state: AppState) => state.discountReducer);
-  const { toppings } = useSelector((state: AppState) => state.reducer);
+export const usePrice = (quantity: number, size: string | null) => {
+  const { orders } = useSelector((state: AppState) => state.orderReducer);
+  const { toppings } = useSelector((state: AppState) => state.toppingReducer);
 
   const dispatch = useDispatch();
 
@@ -27,10 +27,10 @@ export const usePrice = (quantity: number, size: string) => {
 
     const quantityMultiply = priceWithoutDiscount * quantity;
 
-    const discountNumber = discount.valid ? quantityMultiply * 0.1 : 0;
+    const discountNumber = orders.discount ? quantityMultiply * 0.2 : 0;
 
     const finalPrice = quantityMultiply - discountNumber;
-    dispatch(PriceAction.add(finalPrice));
+    dispatch(OrderAction.price(finalPrice));
   };
 
   return {

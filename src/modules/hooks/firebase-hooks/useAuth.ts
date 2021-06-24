@@ -1,7 +1,7 @@
 import firebase from 'firebase/app';
 
 import { useDispatch } from 'react-redux';
-import { ErrorAction, UserAction, MessageAction } from '../../redux';
+import { AuthAction } from 'modules/authentication/redux';
 
 export const useAuth = () => {
   const dispatch = useDispatch();
@@ -18,10 +18,10 @@ export const useAuth = () => {
       .catch((err: firebase.FirebaseError) => {
         switch (err.code) {
           case 'auth/email-already-in-use':
-            return dispatch(ErrorAction.add('Email already in use.'));
+            return dispatch(AuthAction.error('Email already in use.'));
           case 'auth/invalid-email':
             return dispatch(
-              ErrorAction.add('Email that you have entered is not valid.'),
+              AuthAction.error('Email that you have entered is not valid.'),
             );
           default:
             return;
@@ -37,14 +37,14 @@ export const useAuth = () => {
       .catch((err: firebase.FirebaseError) => {
         switch (err.code) {
           case 'auth/wrong-password':
-            return dispatch(ErrorAction.add('Wrong password. Try again.'));
+            return dispatch(AuthAction.error('Wrong password. Try again.'));
           case 'auth/invalid-email':
             return dispatch(
-              ErrorAction.add('Email that you have entered is invalid.'),
+              AuthAction.error('Email that you have entered is invalid.'),
             );
           case 'auth/user-not-found':
             return dispatch(
-              ErrorAction.add('User with this email does not exist.'),
+              AuthAction.error('User with this email does not exist.'),
             );
           default:
             return;
@@ -63,18 +63,7 @@ export const useAuth = () => {
       .app()
       .auth()
       .onAuthStateChanged(async (user) => {
-        if (!user) {
-          dispatch(
-            UserAction.add({ email: null, message: 'User logged out.' }),
-          );
-        }
-
-        if (user) {
-          dispatch(
-            UserAction.add({ email: user.email, message: 'User exists.' }),
-          );
-          console.log(user.email);
-        }
+        dispatch(AuthAction.add({ email: user?.email }));
       });
 
     return () => {
@@ -97,21 +86,25 @@ export const useAuth = () => {
       .signInWithPopup(provider)
       .then(() => {
         dispatch(
-          MessageAction.add(
-            'User succesfully authenticated. Click on the button to continue.',
-          ),
+          AuthAction.googleSignIn({
+            message:
+              'User succesfully authenticated. Click on the button to continue.',
+          }),
         );
+        dispatch(AuthAction.googleError(''));
       })
       .catch((err: firebase.FirebaseError) => {
         switch (err.code) {
           case 'auth/account-exists-with-different-credential':
             return dispatch(
-              ErrorAction.add(
+              AuthAction.googleError(
                 'Account already exists with different credentials',
               ),
             );
           case 'auth/popup-blocked':
-            return dispatch(ErrorAction.add('Popup blocked by the browser'));
+            return dispatch(
+              AuthAction.googleError('Popup blocked by the browser'),
+            );
           default:
             return;
         }
@@ -126,7 +119,7 @@ export const useAuth = () => {
       .sendPasswordResetEmail(email)
       .then(() => {
         dispatch(
-          MessageAction.add(
+          AuthAction.passwordReset(
             `A link for your password reset has been sent to your email.`,
           ),
         );
@@ -135,13 +128,13 @@ export const useAuth = () => {
         switch (err.code) {
           case 'auth/invalid-email':
             return dispatch(
-              ErrorAction.add(
+              AuthAction.error(
                 'Email address that you have entered is not valid.',
               ),
             );
           case 'auth/user-not-found':
             return dispatch(
-              ErrorAction.add(
+              AuthAction.error(
                 'There is no user corresponding to the email adress',
               ),
             );
