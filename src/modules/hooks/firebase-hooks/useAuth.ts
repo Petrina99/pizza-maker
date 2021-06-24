@@ -63,7 +63,7 @@ export const useAuth = () => {
       .app()
       .auth()
       .onAuthStateChanged(async (user) => {
-        dispatch(AuthAction.add({ email: user?.email }));
+        dispatch(AuthAction.add({ user: user, loading: true, error: '' }));
       });
 
     return () => {
@@ -84,27 +84,19 @@ export const useAuth = () => {
       .app()
       .auth()
       .signInWithPopup(provider)
-      .then(() => {
-        dispatch(
-          AuthAction.googleSignIn({
-            message:
-              'User succesfully authenticated. Click on the button to continue.',
-          }),
-        );
-        dispatch(AuthAction.googleError(''));
+      .then((user) => {
+        dispatch(AuthAction.add({ user: user, loading: false, error: '' }));
       })
       .catch((err: firebase.FirebaseError) => {
         switch (err.code) {
           case 'auth/account-exists-with-different-credential':
             return dispatch(
-              AuthAction.googleError(
+              AuthAction.error(
                 'Account already exists with different credentials',
               ),
             );
           case 'auth/popup-blocked':
-            return dispatch(
-              AuthAction.googleError('Popup blocked by the browser'),
-            );
+            return dispatch(AuthAction.error('Popup blocked by the browser'));
           default:
             return;
         }
@@ -118,11 +110,7 @@ export const useAuth = () => {
       .auth()
       .sendPasswordResetEmail(email)
       .then(() => {
-        dispatch(
-          AuthAction.passwordReset(
-            `A link for your password reset has been sent to your email.`,
-          ),
-        );
+        dispatch(AuthAction.add({ user: null, loading: false, error: '' }));
       })
       .catch((err: firebase.FirebaseError) => {
         switch (err.code) {
