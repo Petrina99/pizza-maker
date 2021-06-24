@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { AuthAction } from 'modules/authentication/redux';
 
-import { useAuth, useFirebaseHooks } from 'modules/authentication/hooks';
+import { useAuth, useFirestoreHooks } from 'modules/authentication/hooks';
 
 import eye from '../../../images/visibility-button.svg';
 import hide from '../../../images/hide.svg';
@@ -16,7 +16,7 @@ export const Register: React.FC = () => {
 
   const { register, googleSignIn } = useAuth();
 
-  const { pushUser } = useFirebaseHooks('users');
+  const { pushUser } = useFirestoreHooks('users');
 
   const dispatch = useDispatch();
 
