@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { OrderAction } from 'modules';
-import { AppState } from '../../../redux-store';
+import { AppState } from 'modules/redux-store';
 
-import { useFirebaseHooks } from '../../../hooks';
+import { usePushOrder } from 'modules/order/hooks';
 
 import { useHistory } from 'react-router-dom';
 export const OrderDetails: React.FC = () => {
@@ -13,7 +13,7 @@ export const OrderDetails: React.FC = () => {
   const { toppings } = useSelector((state: AppState) => state.toppingReducer);
   const { user } = useSelector((state: AppState) => state.authReducer);
 
-  const { pushOrder } = useFirebaseHooks('orders');
+  const { pushOrder } = usePushOrder('orders');
 
   const dispatch = useDispatch();
 
