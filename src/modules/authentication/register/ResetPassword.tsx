@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import { AuthAction } from 'modules/authentication/redux';
 
-import { useAuth } from '../../hooks';
+import { useAuth } from 'modules/authentication/hooks';
 
 export const ResetPassword: React.FC = () => {
   const { loading, error } = useSelector(

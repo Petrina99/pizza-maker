@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { AuthAction } from 'modules/authentication/redux';
 
-import { useAuth, useFirebaseHooks } from '../../hooks';
+import { useAuth, useFirebaseHooks } from 'modules/authentication/hooks';
 
 import eye from '../../../images/visibility-button.svg';
 import hide from '../../../images/hide.svg';

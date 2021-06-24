@@ -63,7 +63,9 @@ export const useAuth = () => {
       .app()
       .auth()
       .onAuthStateChanged(async (user) => {
-        dispatch(AuthAction.add({ user: user, loading: false }));
+        dispatch(
+          AuthAction.add({ user: user, loading: false, error: undefined }),
+        );
       });
 
     return () => {
@@ -85,7 +87,9 @@ export const useAuth = () => {
       .auth()
       .signInWithPopup(provider)
       .then((user) => {
-        dispatch(AuthAction.add({ user: user, loading: false }));
+        dispatch(
+          AuthAction.add({ user: user, loading: false, error: undefined }),
+        );
         dispatch(AuthAction.error(''));
       })
       .catch((err: firebase.FirebaseError) => {
@@ -111,7 +115,9 @@ export const useAuth = () => {
       .auth()
       .sendPasswordResetEmail(email)
       .then(() => {
-        dispatch(AuthAction.add({ user: null, loading: false }));
+        dispatch(
+          AuthAction.add({ user: null, loading: false, error: undefined }),
+        );
       })
       .catch((err: firebase.FirebaseError) => {
         switch (err.code) {
