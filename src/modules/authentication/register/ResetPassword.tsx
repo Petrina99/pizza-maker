@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { AppState } from '../../redux-store';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { ErrorAction, MessageAction } from '../../redux';
+import { AuthAction } from 'modules/authentication/redux';
 
 import { useAuth } from '../../hooks';
 
@@ -20,8 +20,8 @@ export const ResetPassword: React.FC = () => {
     const { value } = e.currentTarget;
 
     setEmail(value);
-    dispatch(ErrorAction.add(''));
-    dispatch(MessageAction.add(''));
+    dispatch(AuthAction.error(''));
+    dispatch(AuthAction.passwordReset(''));
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {

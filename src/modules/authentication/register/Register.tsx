@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { AppState } from '../../redux-store';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { ErrorAction } from '../../redux';
+import { AuthAction } from 'modules/authentication/redux';
 
 import { useAuth, useFirebaseHooks } from '../../hooks';
 
@@ -28,13 +28,13 @@ export const Register: React.FC = () => {
     const { value } = e.currentTarget;
 
     setEmail(value);
-    dispatch(ErrorAction.add(''));
+    dispatch(AuthAction.error(''));
   }
 
   function handlePasswordChange(e: React.ChangeEvent<HTMLInputElement>) {
     const { value } = e.currentTarget;
     setPassword(value);
-    dispatch(ErrorAction.add(''));
+    dispatch(AuthAction.error(''));
   }
 
   function handleSignUp(e: React.FormEvent<HTMLFormElement>) {
@@ -47,7 +47,7 @@ export const Register: React.FC = () => {
 
     if (!isValid) {
       dispatch(
-        ErrorAction.add(
+        AuthAction.error(
           'Your password should be 8+ characters long, contain a number and a special character',
         ),
       );
