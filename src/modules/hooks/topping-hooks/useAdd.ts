@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { useDispatch } from 'react-redux';
-import { Actions } from '../../redux';
+import { ToppingAction } from 'modules/builder/redux';
 
 export const useAdd = (
   id: number,
@@ -14,12 +14,12 @@ export const useAdd = (
     const { name } = e.currentTarget;
 
     if (value === 'off') {
-      dispatch(Actions.add({ name, id }));
+      dispatch(ToppingAction.add({ name, id }));
       set('on');
     }
 
     if (value === 'on') {
-      dispatch(Actions.remove(id));
+      dispatch(ToppingAction.remove(id));
       set('off');
     }
   };
