@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { AppState } from '../../redux-store';
 
-import { ErrorAction } from '../../redux';
+import { AuthAction } from 'modules/authentication/redux';
 
 import { useAuth } from '../../hooks';
 
@@ -13,7 +13,7 @@ import hide from '../../../images/hide.svg';
 //import { useHistory } from 'react-router-dom';
 
 export const Login: React.FC = () => {
-  const { error } = useSelector((state: AppState) => state.errorReducer);
+  const { error } = useSelector((state: AppState) => state.authReducer);
 
   const { login, rememberMe, googleSignIn } = useAuth();
 
@@ -29,14 +29,14 @@ export const Login: React.FC = () => {
     const { value } = e.currentTarget;
 
     setEmail(value);
-    dispatch(ErrorAction.add(''));
+    dispatch(AuthAction.error(''));
   };
 
   const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.currentTarget;
 
     setPassword(value);
-    dispatch(ErrorAction.add(''));
+    dispatch(AuthAction.error(''));
   };
 
   const handleLogin = () => {

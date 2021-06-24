@@ -17,19 +17,18 @@ import { AppState } from '../redux-store';
 import { useHistory } from 'react-router-dom';
 
 export const Routing: React.FC = () => {
-  const { user } = useSelector((state: AppState) => state.userReducer);
+  const { user } = useSelector((state: AppState) => state.authReducer);
 
   const history = useHistory();
 
   console.log(user.email);
-  console.log(user.message);
 
   useEffect(() => {
-    if (user.message === 'User exists.') {
+    if (user.email) {
       history.push('/builder');
     }
 
-    if (user.message !== 'User exists.') {
+    if (!user.email) {
       history.push('/register');
     }
   });

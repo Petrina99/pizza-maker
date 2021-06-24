@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 
-import { useAdd } from '../../hooks';
+import { useAdd } from 'modules/hooks';
 
-import egg from '../../../images/egg.svg';
+import egg from 'images/egg.svg';
 
 export const Egg: React.FC = () => {
   const [isActive, setIsActive] = useState('off');

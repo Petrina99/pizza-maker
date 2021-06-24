@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 
-import { useAdd } from '../../hooks';
+import { useAdd } from 'modules/hooks';
 
-import bacon from '../../../images/bacon.svg';
+import bacon from 'images/bacon.svg';
 
 export const Bacon: React.FC = () => {
   const [isActive, setIsActive] = useState('off');

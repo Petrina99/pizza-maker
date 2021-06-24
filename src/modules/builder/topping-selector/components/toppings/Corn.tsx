@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 
-import { useAdd } from '../../hooks';
+import { useAdd } from 'modules/hooks';
 
-import corn from '../../../images/corn.svg';
+import corn from 'images/corn.svg';
 
 export const Corn: React.FC = () => {
   const [isActive, setIsActive] = useState('off');

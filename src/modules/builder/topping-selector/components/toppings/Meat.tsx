@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 
-import { useAdd } from '../../hooks';
+import { useAdd } from 'modules/hooks';
 
-import meat from '../../../images/meat.svg';
+import meat from 'images/meat.svg';
 
 export const Meat: React.FC = () => {
   const [isActive, setIsActive] = useState('off');

@@ -11,7 +11,7 @@ import eye from '../../../images/visibility-button.svg';
 import hide from '../../../images/hide.svg';
 
 export const Register: React.FC = () => {
-  const { error } = useSelector((state: AppState) => state.errorReducer);
+  const { error } = useSelector((state: AppState) => state.authReducer);
   //const { message } = useSelector((state: AppState) => state.messageReducer);
 
   const { register, googleSignIn } = useAuth();

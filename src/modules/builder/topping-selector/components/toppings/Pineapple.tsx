@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 
-import { useAdd } from '../../hooks';
+import { useAdd } from 'modules/hooks';
 
-import pineapple from '../../../images/pineapple.svg';
+import pineapple from 'images/pineapple.svg';
 
 export const Pineapple: React.FC = () => {
   const [isActive, setIsActive] = useState('off');

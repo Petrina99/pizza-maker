@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 
-import { useAdd } from '../../hooks';
+import { useAdd } from 'modules/hooks';
 
-import chilli from '../../../images/chilli.svg';
+import chilli from 'images/chilli.svg';
 
 export const Chilli: React.FC = () => {
   const [isActive, setIsActive] = useState('off');
