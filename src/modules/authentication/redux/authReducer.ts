@@ -23,13 +23,20 @@ export const AuthReducer = (
     case 'user/error':
       return {
         ...state,
+        loading: false,
         error: action.payload,
       };
     case 'user/add':
       return {
         ...state,
-        user: action.payload,
         loading: false,
+        user: action.payload,
+      };
+    case 'user/loading':
+      return {
+        ...state,
+        loading: true,
+        error: undefined,
       };
     default:
       return state;
