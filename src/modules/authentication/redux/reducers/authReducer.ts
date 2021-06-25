@@ -1,15 +1,15 @@
 import { ActionUnion } from 'modules/redux-store';
 import { AuthAction } from '../actions';
-import { AuthState } from '../models';
+import { AuthModel } from '../models';
 
-const INITIAL_STATE: AuthState = {
+const INITIAL_STATE: AuthModel = {
   user: null,
   loading: true,
   error: '',
 };
 
 export const AuthReducer = (
-  state: AuthState = INITIAL_STATE,
+  state: AuthModel = INITIAL_STATE,
   action: ActionUnion<typeof AuthAction>,
 ) => {
   switch (action.type) {
@@ -17,6 +17,7 @@ export const AuthReducer = (
       return {
         ...state,
         user: action.payload,
+        loading: false,
       };
     case 'user/error':
       return {
