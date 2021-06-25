@@ -8,14 +8,13 @@ import { AuthAction } from 'modules/authentication/redux';
 import { useAuth } from '../../hooks';
 
 export const ResetPassword: React.FC = () => {
-  const { error, loading } = useSelector(
-    (state: AppState) => state.authReducer,
-  );
+  const { error } = useSelector((state: AppState) => state.authReducer);
 
   const dispatch = useDispatch();
 
   const { resetPassword } = useAuth();
   const [email, setEmail] = useState('');
+  const [loading, setLoading] = useState(true);
 
   const handleEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.currentTarget;
@@ -29,10 +28,12 @@ export const ResetPassword: React.FC = () => {
 
     if (email && !error) {
       resetPassword(email);
+      setLoading(false);
     }
 
     if (error) {
       setEmail('');
+      setLoading(true);
     }
 
     console.log(email);

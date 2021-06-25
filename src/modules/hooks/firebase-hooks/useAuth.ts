@@ -84,9 +84,6 @@ export const useAuth = () => {
       .app()
       .auth()
       .signInWithPopup(provider)
-      .then((user) => {
-        dispatch(AuthAction.add({ user: user, loading: false, error: '' }));
-      })
       .catch((err: firebase.FirebaseError) => {
         switch (err.code) {
           case 'auth/account-exists-with-different-credential':
@@ -103,15 +100,12 @@ export const useAuth = () => {
       });
   }
 
-  /* sends a reset password link to an email + added a reducer just for this message */
+  /* sends a reset password link to an email */
   function resetPassword(email: string) {
     firebase
       .app()
       .auth()
       .sendPasswordResetEmail(email)
-      .then(() => {
-        dispatch(AuthAction.add({ user: null, loading: false, error: '' }));
-      })
       .catch((err: firebase.FirebaseError) => {
         switch (err.code) {
           case 'auth/invalid-email':
