@@ -5,20 +5,19 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { AuthAction } from 'modules/authentication/redux';
 
-import { useAuth, useFirebaseHooks } from '../../hooks';
+import { useAuth, usePushUser } from '../hooks';
 
 import eye from '../../../images/visibility-button.svg';
 import hide from '../../../images/hide.svg';
 
 export const Register: React.FC = () => {
-  const { error } = useSelector((state: AppState) => state.authReducer);
-  //const { message } = useSelector((state: AppState) => state.messageReducer);
+  const { error, user } = useSelector((state: AppState) => state.authReducer);
 
   const { register, googleSignIn } = useAuth();
 
-  const { pushUser } = useFirebaseHooks('users');
-
   const dispatch = useDispatch();
+
+  const { pushUser } = usePushUser();
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -56,7 +55,7 @@ export const Register: React.FC = () => {
     /* registers a user on firebase auth and adds them in the DB */
     if (isValid && email && password && !error) {
       register(email, password);
-      pushUser(email, { email: email });
+      pushUser(email, { user: user });
     }
   }
 

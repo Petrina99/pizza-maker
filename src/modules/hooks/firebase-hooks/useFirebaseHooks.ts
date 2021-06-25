@@ -5,11 +5,11 @@ export const useFirebaseHooks = (collectionId: string) => {
     return firebase.app().firestore().collection(collectionId);
   }
 
-  function pushUser(name: string, data: any) {
+  function pushUser(name: string, data: firebase.firestore.DocumentData) {
     getCollectionReference().doc(name).set(data);
   }
 
-  function pushOrder(data: any) {
+  function pushOrder(data: firebase.firestore.DocumentData) {
     getCollectionReference().doc().set(data);
   }
 
