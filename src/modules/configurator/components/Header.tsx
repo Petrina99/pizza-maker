@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { SignOut } from 'modules/authentication';
+import { SignOutButton } from 'modules/authentication';
 import smallPizza from 'images/small-pizza.svg';
 
 import { useDispatch } from 'react-redux';
@@ -25,7 +25,7 @@ export const Header: React.FC = () => {
           Pizz-á-tron
         </p>
         <img src={smallPizza} alt='Small pizza' />
-        <SignOut />
+        <SignOutButton />
       </div>
     </div>
   );

@@ -12,7 +12,7 @@ import hide from '../../../images/hide.svg';
 
 //import { useHistory } from 'react-router-dom';
 
-export const Login: React.FC = () => {
+export const LoginForm: React.FC = () => {
   const { error } = useSelector((state: AppState) => state.authReducer);
 
   const { login, rememberMe, googleSignIn } = useAuth();

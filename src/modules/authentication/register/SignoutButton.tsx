@@ -1,8 +1,8 @@
 import React from 'react';
 
-import { useAuth } from '../../hooks';
+import { useAuth } from 'modules/authentication/hooks';
 
-export const SignOut: React.FC = () => {
+export const SignOutButton: React.FC = () => {
   const { signOut } = useAuth();
   const logout = () => {
     signOut();

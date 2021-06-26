@@ -10,7 +10,7 @@ import { useAuth, usePushUser } from '../hooks';
 import eye from '../../../images/visibility-button.svg';
 import hide from '../../../images/hide.svg';
 
-export const Register: React.FC = () => {
+export const RegisterForm: React.FC = () => {
   const { error, user } = useSelector((state: AppState) => state.authReducer);
 
   const { register, googleSignIn } = useAuth();

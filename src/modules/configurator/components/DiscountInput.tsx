@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { OrderAction } from 'modules/order/redux';
 
-export const Discount: React.FC = () => {
+export const DiscountInput: React.FC = () => {
   const [input, setInput] = useState('');
   const [discountMessage, setDiscountMessage] = useState('');
 

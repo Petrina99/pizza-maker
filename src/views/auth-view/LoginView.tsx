@@ -1,13 +1,13 @@
 import React from 'react';
 
-import { Login } from '../../modules';
+import { LoginForm } from 'modules/authentication/register';
 
 import { Link } from 'react-router-dom';
 
 export const LoginView: React.FC = () => {
   return (
     <>
-      <Login />
+      <LoginForm />
       <p className='reset-p'>
         Forgot your password?
         <Link to='/reset-pass' className='reset-link'>
