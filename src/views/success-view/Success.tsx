@@ -1,17 +1,18 @@
 import React from 'react';
 
 import { useDispatch } from 'react-redux';
-import { OrderAction, ToppingAction } from 'modules';
+import { OrderAction } from 'modules/order/redux';
 
-import { Header, SuccessPage } from '../../modules';
+import { SuccessPage } from 'modules/success';
+import { Header } from 'modules/configurator/components';
 
 import { useHistory } from 'react-router-dom';
 export const Success: React.FC = () => {
   const history = useHistory();
 
   const dispatch = useDispatch();
+
   const handleAnother = () => {
-    dispatch(ToppingAction.reset());
     dispatch(OrderAction.reset());
     history.push('/builder');
   };

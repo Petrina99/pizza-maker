@@ -9,7 +9,7 @@ import {
   PizzaMaker,
   Order,
   Success,
-} from '../../views';
+} from 'views';
 
 import { useSelector } from 'react-redux';
 import { AppState } from '../redux-store';
@@ -21,17 +21,17 @@ export const Routing: React.FC = () => {
 
   const history = useHistory();
 
-  console.log(user.email);
+  console.log(user);
 
   useEffect(() => {
-    if (user.email) {
+    if (user) {
       history.push('/builder');
     }
 
-    if (!user.email) {
+    if (!user) {
       history.push('/register');
     }
-  });
+  }, [user]);
 
   return (
     <Switch>

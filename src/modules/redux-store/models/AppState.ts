@@ -1,7 +1,7 @@
-import { AuthReducer, OrderReducer, ToppingReducer } from 'modules';
+import { AuthReducer } from 'modules/authentication';
+import { OrderReducer } from 'modules/order';
 
 export interface AppState {
-  authReducer: ReturnType<typeof AuthReducer>;
   orderReducer: ReturnType<typeof OrderReducer>;
-  toppingReducer: ReturnType<typeof ToppingReducer>;
+  authReducer: ReturnType<typeof AuthReducer>;
 }

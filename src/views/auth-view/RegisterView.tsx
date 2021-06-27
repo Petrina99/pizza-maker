@@ -1,12 +1,12 @@
 import React from 'react';
 
-import { Register } from '../../modules';
+import { RegisterForm } from 'modules/authentication/auth-components';
 import { Link } from 'react-router-dom';
 
 export const RegisterView: React.FC = () => {
   return (
     <>
-      <Register />
+      <RegisterForm />
       <p className='login-p'>
         Already have an account?
         <Link to='/login' className='login-link'>

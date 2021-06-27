@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { ResetPassword } from '../../modules';
+import { ResetPasswordForm } from 'modules/authentication/auth-components';
 
 import { useHistory } from 'react-router-dom';
 export const ResetPasswordView: React.FC = () => {
@@ -12,7 +12,7 @@ export const ResetPasswordView: React.FC = () => {
 
   return (
     <>
-      <ResetPassword />
+      <ResetPasswordForm />
       <div className='sign-div'>
         <button className='sign-button' type='button' onClick={handleClick}>
           Back to Sign in
