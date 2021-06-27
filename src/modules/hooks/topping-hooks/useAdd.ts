@@ -1,7 +1,7 @@
+import { OrderAction } from 'modules/order';
 import React from 'react';
 
 import { useDispatch } from 'react-redux';
-import { ToppingAction } from 'modules/builder/redux';
 
 export const useAdd = (
   id: number,
@@ -14,12 +14,12 @@ export const useAdd = (
     const { name } = e.currentTarget;
 
     if (value === 'off') {
-      dispatch(ToppingAction.add({ name, id }));
+      dispatch(OrderAction.toppingsAdd({ name, id }));
       set('on');
     }
 
     if (value === 'on') {
-      dispatch(ToppingAction.remove(id));
+      dispatch(OrderAction.toppingsRemove(id));
       set('off');
     }
   };
