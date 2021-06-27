@@ -5,7 +5,7 @@ export const usePushUser = () => {
     return firebase.app().firestore().collection('users');
   }
 
-  function pushUser(name: string, data: firebase.firestore.DocumentData) {
+  function pushUser<D>(name: string, data: D) {
     getCollection().doc(name).set(data);
   }
 

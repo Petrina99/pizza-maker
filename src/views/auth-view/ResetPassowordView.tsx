@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { ResetPasswordForm } from 'modules/authentication/register';
+import { ResetPasswordForm } from 'modules/authentication/auth-components';
 
 import { useHistory } from 'react-router-dom';
 export const ResetPasswordView: React.FC = () => {

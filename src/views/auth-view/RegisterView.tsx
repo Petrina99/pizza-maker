@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { RegisterForm } from 'modules/authentication/register';
+import { RegisterForm } from 'modules/authentication/auth-components';
 import { Link } from 'react-router-dom';
 
 export const RegisterView: React.FC = () => {
