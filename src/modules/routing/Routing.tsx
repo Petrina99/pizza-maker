@@ -31,7 +31,7 @@ export const Routing: React.FC = () => {
     if (!user) {
       history.push('/register');
     }
-  });
+  }, [user]);
 
   return (
     <Switch>
