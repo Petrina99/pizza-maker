@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { useAuth } from 'modules/authentication/hooks';
+import { useAuth } from 'modules/firebase/hooks';
 
 export const SignOutButton: React.FC = () => {
   const { signOut } = useAuth();

@@ -1,7 +1,7 @@
 import firebase from 'firebase/app';
 
 import { useDispatch } from 'react-redux';
-import { AuthAction } from '../redux';
+import { AuthAction } from 'modules/authentication/redux';
 
 export const useAuth = () => {
   const dispatch = useDispatch();

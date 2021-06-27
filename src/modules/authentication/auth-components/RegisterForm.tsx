@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { AuthAction } from 'modules/authentication/redux';
 
-import { useAuth, usePushUser } from '../hooks';
+import { useAuth, useFirebaseHooks } from 'modules/firebase/hooks';
 
 import eye from '../../../images/visibility-button.svg';
 import hide from '../../../images/hide.svg';
@@ -17,7 +17,7 @@ export const RegisterForm: React.FC = () => {
 
   const dispatch = useDispatch();
 
-  const { pushUser } = usePushUser();
+  const { pushUser } = useFirebaseHooks('users');
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
