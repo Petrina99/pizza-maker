@@ -8,7 +8,7 @@ import {
   Meat,
   Shrooms,
   Bacon,
-} from '../toppings';
+} from '../const';
 
 export const ToppingSelector: React.FC = () => {
   return (
