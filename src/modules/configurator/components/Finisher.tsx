@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 import pizza from 'images/pizza.svg';
 
@@ -8,10 +8,8 @@ import { OrderAction } from 'modules/order/redux';
 
 import { useHistory } from 'react-router-dom';
 
-import { usePrice } from 'modules/hooks';
-
 export const Finisher: React.FC = () => {
-  const { quantity, toppings, size, error } = useSelector(
+  const { quantity, toppings, size, discount, error } = useSelector(
     (state: AppState) => state.orderReducer,
   );
 
@@ -19,11 +17,55 @@ export const Finisher: React.FC = () => {
 
   const history = useHistory();
 
-  const { setPrice } = usePrice(quantity, size);
+  const [price, setPrice] = useState(0);
+  const [sizePrice, setSizePrice] = useState(0);
+  const [toppingPrice, setToppingPrice] = useState(0);
+  const [discountPrice, setDiscountPrice] = useState(0);
+
+  const handleSizeChange = () => {
+    if (size === 'S') {
+      setSizePrice(2);
+    }
+
+    if (size === 'M') {
+      setSizePrice(4);
+    }
+
+    if (size === 'L') {
+      setSizePrice(6);
+    }
+  };
+
+  const handleToppingChange = () => {
+    setToppingPrice(toppings.length * 3);
+  };
+
+  const handleDiscount = () => {
+    setDiscountPrice(discount ? 3 : 0);
+  };
+
+  const currentPrice = () => {
+    setPrice((toppingPrice + sizePrice + discountPrice) * quantity);
+  };
+
+  useEffect(() => {
+    handleDiscount();
+  }, [discount]);
+
+  useEffect(() => {
+    handleSizeChange();
+  }, [size]);
+
+  useEffect(() => {
+    handleToppingChange();
+  }, [toppings]);
+
+  useEffect(() => {
+    currentPrice();
+  }, [quantity]);
 
   const handlePrice = () => {
     if (quantity !== 0 && toppings.length) {
-      setPrice();
       dispatch(OrderAction.error(''));
     }
 
@@ -42,16 +84,9 @@ export const Finisher: React.FC = () => {
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { value } = e.currentTarget;
+    const { valueAsNumber } = e.currentTarget;
 
-    if (value === 0) {
-      dispatch(OrderAction.error('You have to order atleast 1 pizza.'));
-    }
-
-    if (parseInt(value) !== 0) {
-      dispatch(OrderAction.quantity(parseInt(value)));
-      dispatch(OrderAction.error(''));
-    }
+    dispatch(OrderAction.quantity(valueAsNumber));
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -83,6 +118,7 @@ export const Finisher: React.FC = () => {
             value={quantity}
             onChange={handleChange}
             required
+            min={1}
           />
           <p>QTY</p>
         </div>
