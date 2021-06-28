@@ -33,7 +33,7 @@ export const Finisher: React.FC = () => {
           'Please select the number of pizzas you want to order',
         ),
       );
-      dispatch(OrderAction.quantity(0));
+      dispatch(OrderAction.quantity(1));
     }
 
     if (!toppings.length) {
@@ -44,7 +44,7 @@ export const Finisher: React.FC = () => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.currentTarget;
 
-    if (parseInt(value) === 0) {
+    if (value === 0) {
       dispatch(OrderAction.error('You have to order atleast 1 pizza.'));
     }
 
