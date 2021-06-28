@@ -17,8 +17,8 @@ import './styles/order/OrderSuccesStyle.css';
 import { App } from './App';
 import { Provider } from 'react-redux';
 
-import { FirebaseProvider } from './modules';
-import { configureStore } from './modules';
+import { FirebaseProvider } from 'modules/firebase/components';
+import { configureStore } from 'modules/redux-store/factories';
 
 ReactDOM.render(
   <React.StrictMode>

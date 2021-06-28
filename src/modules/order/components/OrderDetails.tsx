@@ -81,7 +81,7 @@ export const OrderDetails: React.FC = () => {
         city: city,
         postalCode: postalCode,
         country: country,
-        price: price,
+        price: 2,
         size: size,
         quantity: quantity,
         discount: discount,
@@ -173,7 +173,7 @@ export const OrderDetails: React.FC = () => {
         )}
         <div className='info-price'>
           <p>Total price</p>
-          <p>${price}</p>
+          <p>$2</p>
         </div>
       </div>
       <form className='order-form'>
