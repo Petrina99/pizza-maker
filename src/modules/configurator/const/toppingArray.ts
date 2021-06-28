@@ -1,6 +1,6 @@
 import { ToppingModel } from '../models';
 
-export const toppings: ToppingModel[] = [
+export const toppingArray: ToppingModel[] = [
   {
     title: 'Chilli',
     id: 1,
