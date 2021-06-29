@@ -17,7 +17,7 @@ export const Finisher: React.FC = () => {
 
   const history = useHistory();
 
-  const [price, setPrice] = useState(0);
+  const [price, setPrice] = useState(1);
   const [sizePrice, setSizePrice] = useState(0);
   const [toppingPrice, setToppingPrice] = useState(0);
   const [discountPrice, setDiscountPrice] = useState(0);
@@ -37,7 +37,13 @@ export const Finisher: React.FC = () => {
   };
 
   const handleToppingChange = () => {
-    setToppingPrice(toppings.length * 3);
+    if (!toppings.length) {
+      setToppingPrice(0);
+    }
+    if (toppings) {
+      setToppingPrice(toppings.length * 3);
+      console.log(toppings.length);
+    }
   };
 
   const handleDiscount = () => {
@@ -45,7 +51,7 @@ export const Finisher: React.FC = () => {
   };
 
   const currentPrice = () => {
-    setPrice((toppingPrice + sizePrice + discountPrice) * quantity);
+    setPrice((toppingPrice + sizePrice - discountPrice) * quantity);
   };
 
   useEffect(() => {
@@ -58,11 +64,11 @@ export const Finisher: React.FC = () => {
 
   useEffect(() => {
     handleToppingChange();
-  }, [toppings]);
+  }, [toppings.length]);
 
   useEffect(() => {
     currentPrice();
-  }, [quantity]);
+  }, [quantity, discount, toppings.length, size]);
 
   const handlePrice = () => {
     if (quantity !== 0 && toppings.length) {
@@ -86,7 +92,13 @@ export const Finisher: React.FC = () => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { valueAsNumber } = e.currentTarget;
 
-    dispatch(OrderAction.quantity(valueAsNumber));
+    if (valueAsNumber === 0) {
+      dispatch(OrderAction.quantity(1));
+    }
+
+    if (valueAsNumber !== 0) {
+      dispatch(OrderAction.quantity(valueAsNumber));
+    }
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
