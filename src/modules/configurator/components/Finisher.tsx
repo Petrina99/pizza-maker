@@ -17,77 +17,59 @@ export const Finisher: React.FC = () => {
 
   const history = useHistory();
 
-  const [price, setPrice] = useState(1);
-  const [sizePrice, setSizePrice] = useState(0);
-  const [toppingPrice, setToppingPrice] = useState(0);
-  const [discountPrice, setDiscountPrice] = useState(0);
+  const [price, setPrice] = useState(0);
 
-  const handleSizeChange = () => {
+  const currentPrice = () => {
+    //topping price logic, this way works, with state it doesnt
+    let toppingPrice = 0;
+    if (toppings.length === 1) {
+      toppingPrice = 3;
+    }
+
+    if (toppings.length !== 0 && toppings.length !== 1) {
+      toppingPrice = toppings.length * 3;
+    }
+
+    let sizePrice = 0;
     if (size === 'S') {
-      setSizePrice(2);
+      sizePrice = 2;
     }
 
     if (size === 'M') {
-      setSizePrice(4);
+      sizePrice = 4;
     }
 
     if (size === 'L') {
-      setSizePrice(6);
+      sizePrice = 6;
     }
-  };
 
-  const handleToppingChange = () => {
-    if (!toppings.length) {
-      setToppingPrice(0);
-    }
-    if (toppings) {
-      setToppingPrice(toppings.length * 3);
-      console.log(toppings.length);
-    }
-  };
-
-  const handleDiscount = () => {
-    setDiscountPrice(discount ? 3 : 0);
-  };
-
-  const currentPrice = () => {
+    let discountPrice = 0;
+    discountPrice = discount ? 3 : 0;
     setPrice((toppingPrice + sizePrice - discountPrice) * quantity);
+
+    if (toppings.length === 0) {
+      setPrice(0);
+    }
+
+    console.log(
+      'toppingPrice: ' +
+        toppingPrice +
+        ' toppingLength: ' +
+        toppings.length +
+        ' size: ' +
+        sizePrice +
+        ' discountPrice: ' +
+        discountPrice +
+        ' price: ' +
+        price +
+        ' quantity: ' +
+        quantity,
+    );
   };
-
-  useEffect(() => {
-    handleDiscount();
-  }, [discount]);
-
-  useEffect(() => {
-    handleSizeChange();
-  }, [size]);
-
-  useEffect(() => {
-    handleToppingChange();
-  }, [toppings.length]);
 
   useEffect(() => {
     currentPrice();
   }, [quantity, discount, toppings.length, size]);
-
-  const handlePrice = () => {
-    if (quantity !== 0 && toppings.length) {
-      dispatch(OrderAction.error(''));
-    }
-
-    if (quantity === 0) {
-      dispatch(
-        OrderAction.error(
-          'Please select the number of pizzas you want to order',
-        ),
-      );
-      dispatch(OrderAction.quantity(1));
-    }
-
-    if (!toppings.length) {
-      dispatch(OrderAction.error('Please select atleast one topping.'));
-    }
-  };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { valueAsNumber } = e.currentTarget;
@@ -133,12 +115,6 @@ export const Finisher: React.FC = () => {
             min={1}
           />
           <p>QTY</p>
-        </div>
-        <div className='price-check'>
-          <button type='button' onClick={handlePrice}>
-            Check price
-          </button>
-          <p>{error}</p>
         </div>
         <div className='price-total'>
           <p>${price}</p>
