@@ -88,6 +88,7 @@ export const Finisher: React.FC = () => {
 
     if (toppings.length > 0) {
       history.push('/order');
+      dispatch(OrderAction.error(''));
     }
   };
 
