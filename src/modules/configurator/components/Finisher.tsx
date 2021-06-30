@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 
 import pizza from 'images/pizza.svg';
 
@@ -17,18 +17,12 @@ export const Finisher: React.FC = () => {
 
   const history = useHistory();
 
-  const [price, setPrice] = useState(0);
-
-  const currentPrice = () => {
+  const getCurrentPrice = () => {
     //topping price logic, this way works, with state it doesnt
-    let toppingPrice = 0;
-    if (toppings.length === 1) {
-      toppingPrice = 3;
-    }
-
-    if (toppings.length !== 0 && toppings.length !== 1) {
-      toppingPrice = toppings.length * 3;
-    }
+    let totalPrice = 0;
+    const price = 3;
+    const discountPrice = discount ? 3 : 0;
+    const toppingPrice = toppings.length * price;
 
     let sizePrice = 0;
     if (size === 'S') {
@@ -43,12 +37,12 @@ export const Finisher: React.FC = () => {
       sizePrice = 6;
     }
 
-    let discountPrice = 0;
-    discountPrice = discount ? 3 : 0;
-    setPrice((toppingPrice + sizePrice - discountPrice) * quantity);
-
     if (toppings.length === 0) {
-      setPrice(0);
+      totalPrice = 0;
+    }
+
+    if (toppings.length > 0) {
+      totalPrice = (toppingPrice + sizePrice - discountPrice) * quantity;
     }
 
     console.log(
@@ -65,10 +59,12 @@ export const Finisher: React.FC = () => {
         ' quantity: ' +
         quantity,
     );
+
+    return totalPrice;
   };
 
   useEffect(() => {
-    currentPrice();
+    getCurrentPrice();
   }, [quantity, discount, toppings.length, size]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -86,17 +82,11 @@ export const Finisher: React.FC = () => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (price) {
-      dispatch(
-        OrderAction.error('Please click on the check price before buying.'),
-      );
-    }
-
-    if (!toppings.length) {
+    if (toppings.length === 0) {
       dispatch(OrderAction.error('Please select atleast 1 topping.'));
     }
 
-    if (price !== 0 && !error) {
+    if (toppings.length > 0) {
       history.push('/order');
     }
   };
@@ -117,12 +107,13 @@ export const Finisher: React.FC = () => {
           <p>QTY</p>
         </div>
         <div className='price-total'>
-          <p>${price}</p>
+          <p>${getCurrentPrice()}</p>
           <p>ORDER TOTAL</p>
         </div>
         <button type='submit' className='buy-btn'>
           Buy Pizza! Pizza!
         </button>
+        <p>{error}</p>
       </form>
     </div>
   );
