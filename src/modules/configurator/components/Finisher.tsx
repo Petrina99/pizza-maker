@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 
 import pizza from 'images/pizza.svg';
 
@@ -7,9 +7,10 @@ import { AppState } from 'modules/redux-store';
 import { OrderAction } from 'modules/order/redux';
 
 import { useHistory } from 'react-router-dom';
+import { useOrder } from 'modules/order/hooks';
 
 export const Finisher: React.FC = () => {
-  const { quantity, toppings, size, discount, error } = useSelector(
+  const { quantity, toppings, error } = useSelector(
     (state: AppState) => state.orderReducer,
   );
 
@@ -17,76 +18,22 @@ export const Finisher: React.FC = () => {
 
   const history = useHistory();
 
-  const getCurrentPrice = () => {
-    //topping price logic, this way works, with state it doesnt
-    let totalPrice = 0;
-    const price = 3;
-    const discountPrice = discount ? 3 : 0;
-    const toppingPrice = toppings.length * price;
-
-    let sizePrice = 0;
-    if (size === 'S') {
-      sizePrice = 2;
-    }
-
-    if (size === 'M') {
-      sizePrice = 4;
-    }
-
-    if (size === 'L') {
-      sizePrice = 6;
-    }
-
-    if (toppings.length === 0) {
-      totalPrice = 0;
-    }
-
-    if (toppings.length > 0) {
-      totalPrice = (toppingPrice + sizePrice - discountPrice) * quantity;
-    }
-
-    console.log(
-      'toppingPrice: ' +
-        toppingPrice +
-        ' toppingLength: ' +
-        toppings.length +
-        ' size: ' +
-        sizePrice +
-        ' discountPrice: ' +
-        discountPrice +
-        ' price: ' +
-        price +
-        ' quantity: ' +
-        quantity,
-    );
-
-    return totalPrice;
-  };
-
-  useEffect(() => {
-    getCurrentPrice();
-  }, [quantity, discount, toppings.length, size]);
+  const { getCurrentPrice } = useOrder();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { valueAsNumber } = e.currentTarget;
 
-    if (valueAsNumber === 0) {
-      dispatch(OrderAction.quantity(1));
-    }
-
-    if (valueAsNumber !== 0) {
-      dispatch(OrderAction.quantity(valueAsNumber));
-    }
+    dispatch(OrderAction.quantity(valueAsNumber > 0 ? valueAsNumber : 1));
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (toppings.length === 0) {
+    if (!toppings.length) {
       dispatch(OrderAction.error('Please select atleast 1 topping.'));
     }
 
-    if (toppings.length > 0) {
+    if (toppings.length) {
       history.push('/order');
       dispatch(OrderAction.error(''));
     }
