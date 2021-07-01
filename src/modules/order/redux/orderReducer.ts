@@ -4,8 +4,10 @@ import { OrderModel } from './models';
 
 const INITIAL_STATE: OrderModel = {
   toppings: [],
+  toppingPrice: 0,
   quantity: 1,
   size: 'S',
+  sizePrice: 2,
   discount: false,
   address: null,
   city: null,
@@ -35,6 +37,14 @@ export const OrderReducer = (
       return {
         ...state,
         size: action.payload,
+        sizePrice:
+          state.size === 'S'
+            ? 2
+            : 0 || state.size === 'M'
+            ? 4
+            : 0 || state.size === 'L'
+            ? 4
+            : 0,
       };
     case 'order/discount':
       return {
@@ -75,6 +85,7 @@ export const OrderReducer = (
       return {
         ...state,
         toppings: [...state.toppings, action.payload],
+        toppingPrice: state.toppings.length * 3,
       };
     case 'order/toppingsRemove':
       return {
@@ -82,6 +93,7 @@ export const OrderReducer = (
         toppings: state.toppings.filter(
           (topping) => topping.id !== action.payload.id,
         ),
+        toppingPrice: state.toppings.length * 3,
       };
     case 'order/reset':
       return INITIAL_STATE;
