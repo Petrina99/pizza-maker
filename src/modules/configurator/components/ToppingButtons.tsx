@@ -28,10 +28,12 @@ export const ToppingButtons: React.FC = () => {
       const currentId = toppings.find((item) => item.id === parseInt(id));
       if (!currentId) {
         dispatch(OrderAction.toppingsAdd({ title: value, id: parseInt(id) }));
+        dispatch(OrderAction.toppingPrice());
       }
 
       if (currentId) {
         dispatch(OrderAction.toppingsRemove(parseInt(id)));
+        dispatch(OrderAction.toppingPrice());
       }
     }
   };

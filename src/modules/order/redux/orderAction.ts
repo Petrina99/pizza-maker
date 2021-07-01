@@ -6,6 +6,7 @@ export const OrderAction = {
   quantity: (item: number) => createAction('order/quantity', item),
   discount: (item: boolean) => createAction('order/discount', item),
   size: (item: string) => createAction('order/size', item),
+  sizePrice: () => createAction('order/sizePrice'),
   address: (item: string | null) => createAction('order/address', item),
   city: (item: string | null) => createAction('order/city', item),
   country: (item: string | null) => createAction('order/country', item),
@@ -14,5 +15,6 @@ export const OrderAction = {
   ccNumber: (item: number) => createAction('order/ccNumber', item),
   toppingsAdd: (item: Topping) => createAction('order/toppings', item),
   toppingsRemove: (id: number) => createAction('order/toppingsRemove', { id }),
+  toppingPrice: () => createAction('order/toppingPrice'),
   reset: () => createAction('order/reset'),
 };

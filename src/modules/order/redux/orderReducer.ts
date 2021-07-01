@@ -18,6 +18,7 @@ const INITIAL_STATE: OrderModel = {
   error: '',
 };
 
+const price = 3;
 export const OrderReducer = (
   state: OrderModel = INITIAL_STATE,
   action: ActionUnion<typeof OrderAction>,
@@ -37,13 +38,17 @@ export const OrderReducer = (
       return {
         ...state,
         size: action.payload,
+      };
+    case 'order/sizePrice':
+      return {
+        ...state,
         sizePrice:
           state.size === 'S'
             ? 2
             : 0 || state.size === 'M'
             ? 4
             : 0 || state.size === 'L'
-            ? 4
+            ? 6
             : 0,
       };
     case 'order/discount':
@@ -85,7 +90,6 @@ export const OrderReducer = (
       return {
         ...state,
         toppings: [...state.toppings, action.payload],
-        toppingPrice: state.toppings.length * 3,
       };
     case 'order/toppingsRemove':
       return {
@@ -93,7 +97,11 @@ export const OrderReducer = (
         toppings: state.toppings.filter(
           (topping) => topping.id !== action.payload.id,
         ),
-        toppingPrice: state.toppings.length * 3,
+      };
+    case 'order/toppingPrice':
+      return {
+        ...state,
+        toppingPrice: state.toppings.length * price,
       };
     case 'order/reset':
       return INITIAL_STATE;
