@@ -12,7 +12,6 @@ export const PizzaSize: React.FC = () => {
     const { value } = e.currentTarget;
 
     dispatch(OrderAction.size(value));
-    dispatch(OrderAction.sizePrice());
   };
 
   return (
