@@ -15,6 +15,5 @@ export const OrderAction = {
   ccNumber: (item: number) => createAction('order/ccNumber', item),
   toppingsAdd: (item: Topping) => createAction('order/toppings', item),
   toppingsRemove: (id: number) => createAction('order/toppingsRemove', { id }),
-  toppingPrice: () => createAction('order/toppingPrice'),
   reset: () => createAction('order/reset'),
 };
