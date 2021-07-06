@@ -147,7 +147,8 @@ export const OrderDetails: React.FC = () => {
         <p>
           {toppings
             .sort((a, b) => a.id - b.id)
-            .map((item) => item.title + ', ')}
+            .map((item) => item.title)
+            .join(', ')}
           Size: {size}
         </p>
         <p className='qty-numb'>QTY: {quantity}</p>
