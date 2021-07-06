@@ -1,21 +1,32 @@
 import React, { useState } from 'react';
 
 import { useSelector, useDispatch } from 'react-redux';
-import { OrderAction } from 'modules';
+import { OrderAction } from 'modules/order/redux';
 import { AppState } from 'modules/redux-store';
 
-import { useOrderPush } from 'modules/order/hooks';
+import { useFirebaseHooks } from 'modules/firebase/hooks';
 
 import { useHistory } from 'react-router-dom';
 export const OrderDetails: React.FC = () => {
   // need qty, toppings, size, price and if discount is on
-  const { orders } = useSelector((state: AppState) => state.orderReducer);
-  const { toppings } = useSelector((state: AppState) => state.toppingReducer);
+  const {
+    toppings,
+    size,
+    error,
+    discount,
+    address,
+    city,
+    postalCode,
+    country,
+    quantity,
+    payment,
+    ccNumber,
+  } = useSelector((state: AppState) => state.orderReducer);
   const { user } = useSelector((state: AppState) => state.authReducer);
 
   const dispatch = useDispatch();
 
-  const { pushOrder } = useOrderPush();
+  const { pushOrder } = useFirebaseHooks('orders');
 
   const history = useHistory();
 
@@ -63,44 +74,35 @@ export const OrderDetails: React.FC = () => {
   };
 
   const handleFinish = () => {
-    if (
-      !orders.error &&
-      orders.address &&
-      orders.city &&
-      orders.postalCode &&
-      orders.country
-    ) {
+    if (!error && address && city && postalCode && country) {
       pushOrder({
         user: user,
-        address: orders.address,
-        city: orders.city,
-        postalCode: orders.postalCode,
-        country: orders.country,
-        price: orders.price,
-        size: orders.size,
-        quantity: orders.quantity,
-        discount: orders.discount,
-        payment: orders.payment,
-        CC: orders.payment === 'CC' ? orders.ccNumber : 'Payed with cash',
-        toppings: toppings.sort((a, b) => a.id - b.id).map((item) => item.name),
+        address: address,
+        city: city,
+        postalCode: postalCode,
+        country: country,
+        price: 2,
+        size: size,
+        quantity: quantity,
+        discount: discount,
+        payment: payment,
+        CC: payment === 'CC' ? ccNumber : 'Payed with cash',
+        toppings: toppings
+          .sort((a, b) => a.id - b.id)
+          .map((item) => item.title),
       });
       history.push('/success');
     }
 
-    if (orders.payment === 'CC' && !orders.ccNumber) {
+    if (payment === 'CC' && !ccNumber) {
       dispatch(OrderAction.error('Enter a valid credit card number.'));
     }
 
-    if (!orders.postalCode) {
+    if (!postalCode) {
       dispatch(OrderAction.error('Postal code has to be a number.'));
     }
 
-    if (
-      !orders.address ||
-      !orders.city ||
-      !orders.postalCode ||
-      !orders.country
-    ) {
+    if (!address || !city || !postalCode || !country) {
       dispatch(OrderAction.error('Please fill out all the required fields.'));
     }
   };
@@ -143,15 +145,18 @@ export const OrderDetails: React.FC = () => {
         <p>Order details</p>
         <p>TOPPINGS</p>
         <p>
-          {toppings.sort((a, b) => a.id - b.id).map((item) => item.name + ', ')}
-          Size: {orders.size}
+          {toppings
+            .sort((a, b) => a.id - b.id)
+            .map((item) => item.title)
+            .join(', ')}
+          Size: {size}
         </p>
-        <p className='qty-numb'>QTY: {orders.quantity}</p>
+        <p className='qty-numb'>QTY: {quantity}</p>
         <div className='delivery'>
           <p>Delivery</p>
           <p>Free delivery within 1 hour or you don't have to pay.</p>
         </div>
-        {orders.discount ? (
+        {discount ? (
           <p className='discount-valid'>Discount applied.</p>
         ) : (
           <div className='discount-apply'>
@@ -169,7 +174,7 @@ export const OrderDetails: React.FC = () => {
         )}
         <div className='info-price'>
           <p>Total price</p>
-          <p>${orders.price}</p>
+          <p>$2</p>
         </div>
       </div>
       <form className='order-form'>
@@ -211,7 +216,7 @@ export const OrderDetails: React.FC = () => {
           <option value='COD'>Cash on delivery</option>
           <option value='CC'>Credit card</option>
         </select>
-        {orders.payment === 'CC' ? (
+        {payment === 'CC' ? (
           <input
             type='text'
             name='CC number'
@@ -225,13 +230,13 @@ export const OrderDetails: React.FC = () => {
         <button
           type='button'
           onClick={handleFinish}
-          value={orders.payment}
+          value={payment}
           className='finish-btn'
         >
           Finish Order
         </button>
       </form>
-      <p className='error-order'>{orders.error}</p>
+      <p className='error-order'>{error}</p>
     </div>
   );
 };

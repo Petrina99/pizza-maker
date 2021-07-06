@@ -7,11 +7,10 @@ import { AppState } from 'modules/redux-store';
 import { OrderAction } from 'modules/order/redux';
 
 import { useHistory } from 'react-router-dom';
-
-import { usePrice } from 'modules/hooks';
+import { useOrder } from 'modules/order/hooks';
 
 export const Finisher: React.FC = () => {
-  const { quantity, toppings, size, error } = useSelector(
+  const { quantity, toppings, error } = useSelector(
     (state: AppState) => state.orderReducer,
   );
 
@@ -19,56 +18,24 @@ export const Finisher: React.FC = () => {
 
   const history = useHistory();
 
-  const { setPrice } = usePrice(quantity, size);
-
-  const handlePrice = () => {
-    if (quantity !== 0 && toppings.length) {
-      setPrice();
-      dispatch(OrderAction.error(''));
-    }
-
-    if (quantity === 0) {
-      dispatch(
-        OrderAction.error(
-          'Please select the number of pizzas you want to order',
-        ),
-      );
-      dispatch(OrderAction.quantity(0));
-    }
-
-    if (!toppings.length) {
-      dispatch(OrderAction.error('Please select atleast one topping.'));
-    }
-  };
+  const { getCurrentPrice } = useOrder();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { value } = e.currentTarget;
+    const { valueAsNumber } = e.currentTarget;
 
-    if (parseInt(value) === 0) {
-      dispatch(OrderAction.error('You have to order atleast 1 pizza.'));
-    }
-
-    if (parseInt(value) !== 0) {
-      dispatch(OrderAction.quantity(parseInt(value)));
-      dispatch(OrderAction.error(''));
-    }
+    dispatch(OrderAction.quantity(valueAsNumber > 0 ? valueAsNumber : 1));
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (price) {
-      dispatch(
-        OrderAction.error('Please click on the check price before buying.'),
-      );
-    }
-
     if (!toppings.length) {
       dispatch(OrderAction.error('Please select atleast 1 topping.'));
     }
 
-    if (price !== 0 && !error) {
+    if (toppings.length) {
       history.push('/order');
+      dispatch(OrderAction.error(''));
     }
   };
 
@@ -83,22 +50,18 @@ export const Finisher: React.FC = () => {
             value={quantity}
             onChange={handleChange}
             required
+            min={1}
           />
           <p>QTY</p>
         </div>
-        <div className='price-check'>
-          <button type='button' onClick={handlePrice}>
-            Check price
-          </button>
-          <p>{error}</p>
-        </div>
         <div className='price-total'>
-          <p>${price}</p>
+          <p>${getCurrentPrice()}</p>
           <p>ORDER TOTAL</p>
         </div>
         <button type='submit' className='buy-btn'>
           Buy Pizza! Pizza!
         </button>
+        <p>{error}</p>
       </form>
     </div>
   );

@@ -1,4 +1,4 @@
 export interface Topping {
-  name: string;
+  title: string;
   id: number;
 }
