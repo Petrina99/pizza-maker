@@ -7,14 +7,6 @@ import { OrderAction } from 'modules/order/redux';
 
 import { AppState } from 'modules/redux-store/models';
 
-import chilli from 'images/chilli.svg';
-import corn from 'images/corn.svg';
-import meat from 'images/meat.svg';
-import pineapple from 'images/pineapple.svg';
-import bacon from 'images/bacon.svg';
-import egg from 'images/egg.svg';
-import shrooms from 'images/shrooms.svg';
-
 export const ToppingButtons: React.FC = () => {
   const dispatch = useDispatch();
 
@@ -45,7 +37,7 @@ export const ToppingButtons: React.FC = () => {
         name='chilli'
         type='button'
       >
-        <img src={chilli} />
+        <img src={toppingArray[0].image} />
         {toppingArray[0].title}
       </button>
       <button
@@ -55,7 +47,7 @@ export const ToppingButtons: React.FC = () => {
         name='corn'
         type='button'
       >
-        <img src={corn} />
+        <img src={toppingArray[1].image} />
         {toppingArray[1].title}
       </button>
       <button
@@ -65,7 +57,7 @@ export const ToppingButtons: React.FC = () => {
         name='egg'
         type='button'
       >
-        <img src={egg} />
+        <img src={toppingArray[2].image} />
         {toppingArray[2].title}
       </button>
       <button
@@ -75,7 +67,7 @@ export const ToppingButtons: React.FC = () => {
         name='pineapple'
         type='button'
       >
-        <img src={pineapple} />
+        <img src={toppingArray[4].image} />
         {toppingArray[3].title}
       </button>
       <button
@@ -85,7 +77,7 @@ export const ToppingButtons: React.FC = () => {
         name='meat'
         type='button'
       >
-        <img src={meat} />
+        <img src={toppingArray[5].image} />
         {toppingArray[4].title}
       </button>
       <button
@@ -95,7 +87,7 @@ export const ToppingButtons: React.FC = () => {
         name='shrooms'
         type='button'
       >
-        <img src={shrooms} />
+        <img src={toppingArray[6].image} />
         {toppingArray[5].title}
       </button>
       <button
@@ -105,7 +97,7 @@ export const ToppingButtons: React.FC = () => {
         name='bacon'
         type='button'
       >
-        <img src={bacon} />
+        <img src={toppingArray[6].image} />
         {toppingArray[6].title}
       </button>
     </div>
