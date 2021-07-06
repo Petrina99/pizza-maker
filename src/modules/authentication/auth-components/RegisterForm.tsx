@@ -5,10 +5,11 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { AuthAction } from 'modules/authentication/redux';
 
-import { useAuth, useFirebaseHooks } from 'modules/firebase/hooks';
+import { useFirebaseHooks } from 'modules/firebase/hooks';
+import { useAuth } from 'modules/authentication/hooks';
 
-import eye from '../../../images/visibility-button.svg';
-import hide from '../../../images/hide.svg';
+import eye from 'images/visibility-button.svg';
+import hide from 'images/hide.svg';
 
 export const RegisterForm: React.FC = () => {
   const { error, user } = useSelector((state: AppState) => state.authReducer);

@@ -1,7 +1,7 @@
 import firebase from 'firebase/app';
 import React, { useEffect, useState } from 'react';
 
-import { useAuth } from 'modules/firebase/hooks';
+import { useAuth } from 'modules/authentication/hooks';
 
 import 'firebase/auth';
 import 'firebase/firestore';

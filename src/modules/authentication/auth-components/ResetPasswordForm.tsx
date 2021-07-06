@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import { AuthAction } from 'modules/authentication/redux';
 
-import { useAuth } from 'modules/firebase/hooks';
+import { useAuth } from 'modules/authentication/hooks';
 
 export const ResetPasswordForm: React.FC = () => {
   const { error } = useSelector((state: AppState) => state.authReducer);

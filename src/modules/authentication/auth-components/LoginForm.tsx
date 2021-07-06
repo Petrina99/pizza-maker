@@ -5,7 +5,7 @@ import { AppState } from '../../redux-store';
 
 import { AuthAction } from 'modules/authentication/redux';
 
-import { useAuth } from 'modules/firebase/hooks';
+import { useAuth } from 'modules/authentication/hooks';
 
 import eye from '../../../images/visibility-button.svg';
 import hide from '../../../images/hide.svg';
