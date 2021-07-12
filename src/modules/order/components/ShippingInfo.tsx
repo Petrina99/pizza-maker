@@ -1,5 +1,11 @@
 import React from 'react';
-import { FieldError, useForm, DeepMap } from 'react-hook-form';
+import {
+  FieldError,
+  useForm,
+  DeepMap,
+  SubmitHandler,
+  SubmitErrorHandler,
+} from 'react-hook-form';
 
 import { OrderAction } from 'modules/order/redux';
 import { useDispatch } from 'react-redux';
@@ -22,7 +28,7 @@ export const ShippingInfo: React.FC = () => {
     handleSubmit,
   } = useForm<FormValues>();
 
-  const onSubmit = (
+  const onSubmit: SubmitHandler<FormValues> = (
     data: FormValues,
     e: React.BaseSyntheticEvent<unknown> | undefined,
   ) => {
@@ -36,7 +42,7 @@ export const ShippingInfo: React.FC = () => {
     history.push('/success');
   };
 
-  const onError = (
+  const onError: SubmitErrorHandler<FormValues> = (
     errors: DeepMap<FormValues, FieldError>,
     e: React.BaseSyntheticEvent<unknown> | undefined,
   ) => {
