@@ -1,5 +1,5 @@
 import React from 'react';
-import { useForm } from 'react-hook-form';
+import { FieldError, useForm, DeepMap } from 'react-hook-form';
 
 import { OrderAction } from 'modules/order/redux';
 import { useDispatch } from 'react-redux';
@@ -33,7 +33,7 @@ export const ShippingInfo: React.FC = () => {
   };
 
   const onError = (
-    errors: unknown,
+    errors: DeepMap<FormValues, FieldError>,
     e: React.BaseSyntheticEvent<unknown> | undefined,
   ) => {
     e?.preventDefault();
