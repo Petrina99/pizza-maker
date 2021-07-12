@@ -26,9 +26,7 @@ export const Finisher: React.FC = () => {
     dispatch(OrderAction.quantity(valueAsNumber > 0 ? valueAsNumber : 1));
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
+  const handleSubmit = () => {
     if (!toppings.length) {
       dispatch(OrderAction.error('Please select atleast 1 topping.'));
     }
@@ -43,7 +41,7 @@ export const Finisher: React.FC = () => {
     <div className='finisher'>
       <img src={pizza} />
       <br />
-      <form onSubmit={handleSubmit} className='finisher-form'>
+      <div className='finisher-form'>
         <div className='qty'>
           <input
             type='number'
@@ -58,11 +56,11 @@ export const Finisher: React.FC = () => {
           <p>${getCurrentPrice()}</p>
           <p>ORDER TOTAL</p>
         </div>
-        <button type='submit' className='buy-btn'>
+        <button type='button' className='buy-btn' onClick={handleSubmit}>
           Buy Pizza! Pizza!
         </button>
         <p>{error}</p>
-      </form>
+      </div>
     </div>
   );
 };

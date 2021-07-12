@@ -4,12 +4,14 @@ import { useSelector, useDispatch } from 'react-redux';
 import { OrderAction } from 'modules/order/redux';
 import { AppState } from 'modules/redux-store';
 
+import { useOrder } from 'modules/order/hooks';
 export const OrderDetails: React.FC = () => {
   // need qty, toppings, size, price and if discount is on
   const { toppings, size, error, discount, quantity } = useSelector(
     (state: AppState) => state.orderReducer,
   );
 
+  const { getCurrentPrice } = useOrder();
   const dispatch = useDispatch();
 
   const [input, setInput] = useState('');
@@ -69,7 +71,7 @@ export const OrderDetails: React.FC = () => {
         )}
         <div className='info-price'>
           <p>Total price</p>
-          <p>$2</p>
+          <p>${getCurrentPrice()}</p>
         </div>
       </div>
       <p className='error-order'>{error}</p>

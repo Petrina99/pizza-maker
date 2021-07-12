@@ -16,6 +16,8 @@ import { OrderAction } from 'modules/order/redux';
 import { useDispatch } from 'react-redux';
 
 import { useHistory } from 'react-router';
+
+import { useOrder } from 'modules/order/hooks';
 export const ShippingInfo: React.FC = () => {
   const { pushOrder } = useFirebaseHooks('orders');
 
@@ -33,7 +35,7 @@ export const ShippingInfo: React.FC = () => {
 
   const dispatch = useDispatch();
   const history = useHistory();
-
+  const { getCurrentPrice } = useOrder();
   const {
     register,
     formState: { errors },
@@ -52,7 +54,7 @@ export const ShippingInfo: React.FC = () => {
       city: data.city,
       postalCode: data.postalCode,
       country: data.country,
-      price: 2,
+      price: getCurrentPrice(),
       size: size,
       quantity: quantity,
       discount: discount,
