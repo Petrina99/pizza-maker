@@ -19,18 +19,9 @@ import { useHistory } from 'react-router';
 export const ShippingInfo: React.FC = () => {
   const { pushOrder } = useFirebaseHooks('orders');
 
-  const {
-    toppings,
-    size,
-    discount,
-    address,
-    city,
-    postalCode,
-    country,
-    quantity,
-    payment,
-    ccNumber,
-  } = useSelector((state: AppState) => state.orderReducer);
+  const { toppings, size, discount, quantity } = useSelector(
+    (state: AppState) => state.orderReducer,
+  );
   const { user } = useSelector((state: AppState) => state.authReducer);
 
   type FormValues = {
@@ -61,17 +52,17 @@ export const ShippingInfo: React.FC = () => {
     dispatch(OrderAction.city(data.city));
     dispatch(OrderAction.country(data.country));
     pushOrder({
-      user: user,
-      address: address,
-      city: city,
-      postalCode: postalCode,
-      country: country,
+      user: user?.email,
+      address: data.address,
+      city: data.city,
+      postalCode: data.postalCode,
+      country: data.country,
       price: 2,
       size: size,
       quantity: quantity,
       discount: discount,
-      payment: payment,
-      CC: payment === 'CC' ? ccNumber : 'Payed with cash',
+      payment: 'Cash on delivery.',
+      CC: 'Cash on delivery.',
       toppings: toppings.sort((a, b) => a.id - b.id).map((item) => item.title),
     });
     history.push('/success');
@@ -105,13 +96,12 @@ export const ShippingInfo: React.FC = () => {
       <input
         type='number'
         {...register('postalCode', {
-          required: 'Postal code field is required.',
+          required: { value: true, message: 'Postal code field is required.' },
           minLength: { value: 5, message: 'Please enter a valid postal code.' },
           maxLength: { value: 5, message: 'Please enter a valid postal code.' },
           valueAsNumber: true,
         })}
-        id='postal-code'
-        placeholder='Postal Code'
+        placeholder='Postal code'
       />
       {errors.postalCode && <p>{errors.postalCode.message}</p>}
       <input
