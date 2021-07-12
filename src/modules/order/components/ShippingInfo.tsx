@@ -3,6 +3,8 @@ import { FieldError, useForm, DeepMap } from 'react-hook-form';
 
 import { OrderAction } from 'modules/order/redux';
 import { useDispatch } from 'react-redux';
+
+import { useHistory } from 'react-router';
 export const ShippingInfo: React.FC = () => {
   type FormValues = {
     address: string;
@@ -12,6 +14,7 @@ export const ShippingInfo: React.FC = () => {
   };
 
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const {
     register,
@@ -30,6 +33,7 @@ export const ShippingInfo: React.FC = () => {
     dispatch(OrderAction.postalCode(data.postalCode));
     dispatch(OrderAction.city(data.city));
     dispatch(OrderAction.country(data.country));
+    history.push('/success');
   };
 
   const onError = (
