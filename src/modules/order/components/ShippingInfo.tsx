@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useForm } from 'react-hook-form';
 
+import { OrderAction } from 'modules/order/redux';
+import { useDispatch } from 'react-redux';
 export const ShippingInfo: React.FC = () => {
   type FormValues = {
     address: string;
@@ -9,10 +11,7 @@ export const ShippingInfo: React.FC = () => {
     country: string;
   };
 
-  const [address, setAddress] = useState('');
-  const [city, setCity] = useState('');
-  const [postalCode, setPostalCode] = useState(11111);
-  const [country, setCountry] = useState('');
+  const dispatch = useDispatch();
 
   const {
     register,
@@ -27,10 +26,10 @@ export const ShippingInfo: React.FC = () => {
     e?.preventDefault();
 
     console.log('data', data);
-    setAddress(data.address);
-    setCity(data.city);
-    setPostalCode(data.postalCode);
-    setCountry(data.country);
+    dispatch(OrderAction.address(data.address));
+    dispatch(OrderAction.postalCode(data.postalCode));
+    dispatch(OrderAction.city(data.city));
+    dispatch(OrderAction.country(data.country));
   };
 
   const onError = (
