@@ -92,9 +92,11 @@ export const ShippingInfo: React.FC = () => {
         type='number'
         {...register('postalCode', {
           required: 'Postal code field is required.',
-          minLength: { value: 5, message: 'Please enter a valid postal code' },
-          valueAsNumber: true,
+          minLength: { value: 5, message: 'Please enter a valid postal code.' },
+          maxLength: { value: 5, message: 'Please enter a valid postal code.' },
         })}
+        id='postal-code'
+        placeholder='Postal Code'
       />
       {errors.postalCode && <p>{errors.postalCode.message}</p>}
       <input
