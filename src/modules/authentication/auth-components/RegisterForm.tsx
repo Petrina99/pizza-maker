@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
+import { useForm } from 'react-hook-form';
 
 import { AppState } from '../../redux-store';
-import { useDispatch, useSelector } from 'react-redux';
-
-import { AuthAction } from 'modules/authentication/redux';
+import { useSelector } from 'react-redux';
 
 import { useFirebaseHooks } from 'modules/firebase/hooks';
 import { useAuth } from 'modules/authentication/hooks';
@@ -14,50 +13,26 @@ import hide from 'images/hide.svg';
 export const RegisterForm: React.FC = () => {
   const { error, user } = useSelector((state: AppState) => state.authReducer);
 
-  const { register, googleSignIn } = useAuth();
+  type FormValues = {
+    email: string;
+    password: string;
+  };
 
-  const dispatch = useDispatch();
+  const { handleRegister, googleSignIn } = useAuth();
 
   const { pushUser } = useFirebaseHooks('users');
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormValues>();
 
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
   const [inputType, setInputType] = useState('password');
 
-  function handleEmailChange(e: React.ChangeEvent<HTMLInputElement>) {
-    const { value } = e.currentTarget;
-
-    setEmail(value);
-    dispatch(AuthAction.error(''));
-  }
-
-  function handlePasswordChange(e: React.ChangeEvent<HTMLInputElement>) {
-    const { value } = e.currentTarget;
-    setPassword(value);
-    dispatch(AuthAction.error(''));
-  }
-
-  function handleSignUp(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    /* regex for pass validation */
-    const regex =
-      /^(?=.*[0-9])(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?])[a-zA-Z0-9!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]{8,}$/g;
-
-    const isValid = regex.test(password);
-
-    if (!isValid) {
-      dispatch(
-        AuthAction.error(
-          'Your password should be 8+ characters long, contain a number and a special character',
-        ),
-      );
-    }
-
-    /* registers a user on firebase auth and adds them in the DB */
-    if (isValid && email && password && !error) {
-      register(email, password);
-      pushUser(email, { user: user });
-    }
+  function onSubmit(data: FormValues) {
+    handleRegister(data.email, data.password);
+    pushUser(data.email, { user: user });
+    console.log(data);
   }
 
   function showPassword() {
@@ -74,38 +49,39 @@ export const RegisterForm: React.FC = () => {
 
   return (
     <div className='reg-div'>
-      <form onSubmit={handleSignUp} className='reg-form'>
+      <form onSubmit={handleSubmit(onSubmit)} className='reg-form'>
         <h1>Create an account</h1>
         <div className='input-div'>
           <label htmlFor='email'>Email</label>
           <input
             type='email'
-            name='email'
+            {...register('email', { required: 'Email field is required.' })}
             placeholder='name@gmail.com'
-            onChange={handleEmailChange}
-            value={email}
-            required
+            id='email'
           />
+          {errors.email && <p>{errors.email.message}</p>}
           <label htmlFor='password'>Password</label>
           <input
             type={inputType}
-            name='password'
+            {...register('password', {
+              required: 'Password filed is required',
+              pattern: {
+                value:
+                  /^(?=.*[0-9])(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?])[a-zA-Z0-9!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]{8,}$/g,
+                message:
+                  'Please enter a password that contains atleast 8 characters, 1 number and 1 special character.',
+              },
+            })}
             placeholder='Choose your password'
-            onChange={handlePasswordChange}
-            required
+            id='password'
           />
+          {errors.password && <p>{errors.password.message}</p>}
           <img
             src={inputType === 'password' ? eye : hide}
             onClick={showPassword}
           />
         </div>
-        {error ? (
-          <div className='error'>
-            <p>{error}</p>
-          </div>
-        ) : (
-          ''
-        )}
+        {error && <p>{error}</p>}
         <div className='submit-div'>
           <button type='submit' className='reg-btn'>
             Register

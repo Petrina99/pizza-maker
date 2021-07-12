@@ -10,7 +10,7 @@ export const useAuth = () => {
     new firebase.auth.GoogleAuthProvider();
 
   /* catching errors and pushing them to errorReducer in all components */
-  function register(email: string, pass: string) {
+  function handleRegister(email: string, pass: string) {
     firebase
       .app()
       .auth()
@@ -127,7 +127,7 @@ export const useAuth = () => {
   }
 
   return {
-    register,
+    handleRegister,
     login,
     signOut,
     googleSignIn,
