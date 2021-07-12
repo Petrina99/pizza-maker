@@ -7,11 +7,32 @@ import {
   SubmitErrorHandler,
 } from 'react-hook-form';
 
+import { useSelector } from 'react-redux';
+import { AppState } from 'modules/redux-store/models';
+
+import { useFirebaseHooks } from 'modules/firebase/hooks';
+
 import { OrderAction } from 'modules/order/redux';
 import { useDispatch } from 'react-redux';
 
 import { useHistory } from 'react-router';
 export const ShippingInfo: React.FC = () => {
+  const { pushOrder } = useFirebaseHooks('orders');
+
+  const {
+    toppings,
+    size,
+    discount,
+    address,
+    city,
+    postalCode,
+    country,
+    quantity,
+    payment,
+    ccNumber,
+  } = useSelector((state: AppState) => state.orderReducer);
+  const { user } = useSelector((state: AppState) => state.authReducer);
+
   type FormValues = {
     address: string;
     city: string;
@@ -39,6 +60,20 @@ export const ShippingInfo: React.FC = () => {
     dispatch(OrderAction.postalCode(data.postalCode));
     dispatch(OrderAction.city(data.city));
     dispatch(OrderAction.country(data.country));
+    pushOrder({
+      user: user,
+      address: address,
+      city: city,
+      postalCode: postalCode,
+      country: country,
+      price: 2,
+      size: size,
+      quantity: quantity,
+      discount: discount,
+      payment: payment,
+      CC: payment === 'CC' ? ccNumber : 'Payed with cash',
+      toppings: toppings.sort((a, b) => a.id - b.id).map((item) => item.title),
+    });
     history.push('/success');
   };
 
