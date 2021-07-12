@@ -1,10 +1,10 @@
 import React from 'react';
 import {
-  FieldError,
   useForm,
-  DeepMap,
   SubmitHandler,
   SubmitErrorHandler,
+  DeepMap,
+  FieldError,
 } from 'react-hook-form';
 
 import { useSelector } from 'react-redux';
@@ -40,12 +40,7 @@ export const ShippingInfo: React.FC = () => {
     handleSubmit,
   } = useForm<FormValues>();
 
-  const onSubmit: SubmitHandler<FormValues> = (
-    data: FormValues,
-    e: React.BaseSyntheticEvent<unknown> | undefined,
-  ) => {
-    e?.preventDefault();
-
+  const onSubmit: SubmitHandler<FormValues> = (data: FormValues) => {
     console.log('data', data);
     dispatch(OrderAction.address(data.address));
     dispatch(OrderAction.postalCode(data.postalCode));
@@ -70,10 +65,8 @@ export const ShippingInfo: React.FC = () => {
 
   const onError: SubmitErrorHandler<FormValues> = (
     errors: DeepMap<FormValues, FieldError>,
-    e: React.BaseSyntheticEvent<unknown> | undefined,
   ) => {
-    e?.preventDefault();
-    console.log('errors', errors);
+    console.log(errors);
   };
 
   return (
@@ -88,7 +81,9 @@ export const ShippingInfo: React.FC = () => {
       />
       {errors.address && <p>{errors.address.message}</p>}
       <input
-        {...register('city', { required: 'City field is required.' })}
+        {...register('city', {
+          required: 'City field is required.',
+        })}
         id='city'
         placeholder='City'
       />
@@ -96,12 +91,10 @@ export const ShippingInfo: React.FC = () => {
       <input
         type='number'
         {...register('postalCode', {
-          required: { value: true, message: 'Postal code field is required.' },
-          minLength: { value: 5, message: 'Please enter a valid postal code.' },
-          maxLength: { value: 5, message: 'Please enter a valid postal code.' },
+          required: 'Postal code field is required.',
+          minLength: { value: 5, message: 'Please enter a valid postal code' },
           valueAsNumber: true,
         })}
-        placeholder='Postal code'
       />
       {errors.postalCode && <p>{errors.postalCode.message}</p>}
       <input
