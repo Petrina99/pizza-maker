@@ -31,7 +31,9 @@ export const RegisterForm: React.FC = () => {
 
   function onSubmit(data: FormValues) {
     handleRegister(data.email, data.password);
-    pushUser(data.email, { user: user });
+    if (user) {
+      pushUser(data.email, { user: user });
+    }
     console.log(data);
   }
 

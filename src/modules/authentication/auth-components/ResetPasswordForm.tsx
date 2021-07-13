@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useForm } from 'react-hook-form';
 
 import { AppState } from '../../redux-store';
 import { useSelector, useDispatch } from 'react-redux';
@@ -10,52 +11,56 @@ import { useAuth } from 'modules/authentication/hooks';
 export const ResetPasswordForm: React.FC = () => {
   const { error } = useSelector((state: AppState) => state.authReducer);
 
-  const dispatch = useDispatch();
-
-  const { resetPassword } = useAuth();
-  const [email, setEmail] = useState('');
-  const [loading, setLoading] = useState(true);
-
-  const handleEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { value } = e.currentTarget;
-
-    setEmail(value);
-    dispatch(AuthAction.error(''));
+  type FormValues = {
+    email: string;
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const dispatch = useDispatch();
 
-    if (email && !error) {
-      resetPassword(email);
-      setLoading(false);
-    }
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormValues>();
 
-    if (error) {
-      setEmail('');
+  const { resetPassword } = useAuth();
+  const [loading, setLoading] = useState(true);
+
+  const onSubmit = (data: FormValues) => {
+    if (errors) {
       setLoading(true);
+      resetPassword(data.email);
     }
 
-    console.log(email);
+    if (!errors) {
+      console.log(data);
+      resetPassword(data.email);
+      setLoading(false);
+      dispatch(AuthAction.error(''));
+    }
+
+    console.log(data.email);
     console.log(error);
   };
 
   return (
     <div className='reset-div'>
-      <form onSubmit={handleSubmit} className='reset-form'>
+      <form onSubmit={handleSubmit(onSubmit)} className='reset-form'>
         <label htmlFor='email'>
           Enter the email adress of an account that you want to reset your
           password for:
         </label>
-        <input type='email' value={email} onChange={handleEmail} />
+        <input type='email' {...register('email', { required: true })} />
         <button type='submit'>Reset password</button>
-        <p className='reset-msg'>
-          {loading
-            ? ''
-            : 'A link for a password reset has been sent to your email adress.'}
-        </p>
-        <p className='reset-err'>{error}</p>
       </form>
+      {loading ? (
+        ''
+      ) : (
+        <p className='reset-msg'>
+          A link for your password reset has been sent to your email.
+        </p>
+      )}
+      <p className='reset-err'>{error}</p>
     </div>
   );
 };
