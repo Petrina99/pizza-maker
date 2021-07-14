@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
-import { AppState } from '../../redux-store';
+import { AppState } from 'modules/redux-store';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { AuthAction } from 'modules/authentication/redux';
@@ -10,6 +10,7 @@ import { useAuth } from 'modules/authentication/hooks';
 
 export const ResetPasswordForm: React.FC = () => {
   const { error } = useSelector((state: AppState) => state.authReducer);
+  const [email, setEmail] = useState('');
 
   type FormValues = {
     email: string;
@@ -17,30 +18,20 @@ export const ResetPasswordForm: React.FC = () => {
 
   const dispatch = useDispatch();
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<FormValues>();
+  const { register, handleSubmit } = useForm<FormValues>();
 
   const { resetPassword } = useAuth();
-  const [loading, setLoading] = useState(true);
 
   const onSubmit = (data: FormValues) => {
-    if (errors) {
-      setLoading(true);
-      resetPassword(data.email);
-    }
-
-    if (!errors) {
-      console.log(data);
-      resetPassword(data.email);
-      setLoading(false);
-      dispatch(AuthAction.error(''));
-    }
-
+    resetPassword(data.email);
+    setEmail(data.email);
     console.log(data.email);
     console.log(error);
+  };
+
+  const handleEmailChange = () => {
+    dispatch(AuthAction.error(''));
+    setEmail('');
   };
 
   return (
@@ -50,17 +41,20 @@ export const ResetPasswordForm: React.FC = () => {
           Enter the email adress of an account that you want to reset your
           password for:
         </label>
-        <input type='email' {...register('email', { required: true })} />
+        <input
+          type='email'
+          {...register('email', { required: true })}
+          onChange={handleEmailChange}
+          id='email'
+        />
         <button type='submit'>Reset password</button>
       </form>
-      {loading ? (
-        ''
+      {!error && email ? (
+        <p>A link for password reset has been sent to your email.</p>
       ) : (
-        <p className='reset-msg'>
-          A link for your password reset has been sent to your email.
-        </p>
+        ''
       )}
-      <p className='reset-err'>{error}</p>
+      {error && email ? <p className='reset-err'>{error}</p> : ''}
     </div>
   );
 };
