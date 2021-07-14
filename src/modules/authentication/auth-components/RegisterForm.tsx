@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
+import { AuthAction } from 'modules/authentication/redux';
 import { AppState } from '../../redux-store';
 import { useSelector } from 'react-redux';
+
+import { useDispatch } from 'react-redux';
 
 import { useFirebaseHooks } from 'modules/firebase/hooks';
 import { useAuth } from 'modules/authentication/hooks';
@@ -17,6 +20,8 @@ export const RegisterForm: React.FC = () => {
     email: string;
     password: string;
   };
+
+  const dispatch = useDispatch();
 
   const { handleRegister, googleSignIn } = useAuth();
 
@@ -35,6 +40,10 @@ export const RegisterForm: React.FC = () => {
       pushUser(data.email, { user: user });
     }
     console.log(data);
+  }
+
+  function handleInputChange() {
+    dispatch(AuthAction.error(''));
   }
 
   function showPassword() {
@@ -58,8 +67,9 @@ export const RegisterForm: React.FC = () => {
           <input
             type='email'
             {...register('email', { required: 'Email field is required.' })}
+            onChange={handleInputChange}
             placeholder='name@gmail.com'
-            id='email'
+            id='email-register'
           />
           {errors.email && <p>{errors.email.message}</p>}
           <label htmlFor='password'>Password</label>
@@ -74,8 +84,9 @@ export const RegisterForm: React.FC = () => {
                   'Please enter a password that contains atleast 8 characters, 1 number and 1 special character.',
               },
             })}
+            onChange={handleInputChange}
             placeholder='Choose your password'
-            id='password'
+            id='password-register'
           />
           {errors.password && <p>{errors.password.message}</p>}
           <img

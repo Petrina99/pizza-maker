@@ -45,7 +45,7 @@ export const ResetPasswordForm: React.FC = () => {
           type='email'
           {...register('email', { required: true })}
           onChange={handleEmailChange}
-          id='email'
+          id='email-reset'
         />
         <button type='submit'>Reset password</button>
       </form>

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useForm } from 'react-hook-form';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { AppState } from '../../redux-store';
@@ -15,34 +16,24 @@ import hide from '../../../images/hide.svg';
 export const LoginForm: React.FC = () => {
   const { error } = useSelector((state: AppState) => state.authReducer);
 
+  type FormValues = {
+    email: string;
+    password: string;
+  };
+
+  const { register, handleSubmit } = useForm<FormValues>();
   const { login, rememberMe, googleSignIn } = useAuth();
 
   const dispatch = useDispatch();
 
-  //const history = useHistory();
-
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
   const [inputType, setInputType] = useState('password');
 
-  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { value } = e.currentTarget;
-
-    setEmail(value);
+  const handleInputChange = () => {
     dispatch(AuthAction.error(''));
   };
 
-  const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { value } = e.currentTarget;
-
-    setPassword(value);
-    dispatch(AuthAction.error(''));
-  };
-
-  const handleLogin = () => {
-    if (email && password && !error) {
-      login(email, password);
-    }
+  const onSubmit = (data: FormValues) => {
+    login(data.email, data.password);
   };
 
   function setPersistence() {
@@ -63,26 +54,27 @@ export const LoginForm: React.FC = () => {
 
   return (
     <div className='login-div'>
-      <form className='login-form'>
+      <form className='login-form' onSubmit={handleSubmit(onSubmit)}>
         <h1>Sign in</h1>
         <div className='input-login'>
           <label htmlFor='email'>Email</label>
           <input
             type='email'
-            name='email'
+            id='email-login'
             placeholder='Enter your email.'
-            onChange={handleEmailChange}
-            value={email}
-            required
+            {...register('email', { required: 'Email field is required.' })}
+            onChange={handleInputChange}
           />
           <label htmlFor='password'>Password</label>
           <input
             type={inputType}
+            id='password-login'
+            {...register('password', {
+              required: 'Password field is required.',
+            })}
             name='password'
             placeholder='Enter your password'
-            onChange={handlePasswordChange}
-            value={password}
-            required
+            onChange={handleInputChange}
           />
           <img
             src={inputType === 'password' ? eye : hide}
@@ -97,7 +89,7 @@ export const LoginForm: React.FC = () => {
           ''
         )}
         <div className='submit-login'>
-          <button type='button' onClick={handleLogin} className='log-btn'>
+          <button type='submit' className='log-btn'>
             Login
           </button>
           <button
