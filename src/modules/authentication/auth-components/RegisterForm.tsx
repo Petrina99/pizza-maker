@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
-import { AuthAction } from 'modules/authentication/redux';
 import { AppState } from '../../redux-store';
 import { useSelector } from 'react-redux';
 
-import { useDispatch } from 'react-redux';
+import { validation } from 'modules/authentication/auth-components';
 
 import { useFirebaseHooks } from 'modules/firebase/hooks';
 import { useAuth } from 'modules/authentication/hooks';
@@ -13,15 +12,13 @@ import { useAuth } from 'modules/authentication/hooks';
 import eye from 'images/visibility-button.svg';
 import hide from 'images/hide.svg';
 
+type FormValues = {
+  email: string;
+  password: string;
+};
+
 export const RegisterForm: React.FC = () => {
   const { error, user } = useSelector((state: AppState) => state.authReducer);
-
-  type FormValues = {
-    email: string;
-    password: string;
-  };
-
-  const dispatch = useDispatch();
 
   const { handleRegister, googleSignIn } = useAuth();
 
@@ -40,10 +37,6 @@ export const RegisterForm: React.FC = () => {
       pushUser(data.email, { user: user });
     }
     console.log(data);
-  }
-
-  function handleInputChange() {
-    dispatch(AuthAction.error(''));
   }
 
   function showPassword() {
@@ -66,8 +59,13 @@ export const RegisterForm: React.FC = () => {
           <label htmlFor='email'>Email</label>
           <input
             type='email'
-            {...register('email', { required: 'Email field is required.' })}
-            onChange={handleInputChange}
+            {...register('email', {
+              required: 'Email field is required.',
+              pattern: {
+                value: validation.email,
+                message: 'Please enter a valid email.',
+              },
+            })}
             placeholder='name@gmail.com'
             id='email-register'
           />
@@ -78,13 +76,11 @@ export const RegisterForm: React.FC = () => {
             {...register('password', {
               required: 'Password filed is required',
               pattern: {
-                value:
-                  /^(?=.*[0-9])(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?])[a-zA-Z0-9!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]{8,}$/g,
+                value: validation.password,
                 message:
                   'Please enter a password that contains atleast 8 characters, 1 number and 1 special character.',
               },
             })}
-            onChange={handleInputChange}
             placeholder='Choose your password'
             id='password-register'
           />

@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { AppState } from '../../redux-store';
-
-import { AuthAction } from 'modules/authentication/redux';
 
 import { useAuth } from 'modules/authentication/hooks';
 
@@ -13,24 +11,18 @@ import hide from '../../../images/hide.svg';
 
 //import { useHistory } from 'react-router-dom';
 
+type FormValues = {
+  email: string;
+  password: string;
+};
+
 export const LoginForm: React.FC = () => {
   const { error } = useSelector((state: AppState) => state.authReducer);
-
-  type FormValues = {
-    email: string;
-    password: string;
-  };
 
   const { register, handleSubmit } = useForm<FormValues>();
   const { login, rememberMe, googleSignIn } = useAuth();
 
-  const dispatch = useDispatch();
-
   const [inputType, setInputType] = useState('password');
-
-  const handleInputChange = () => {
-    dispatch(AuthAction.error(''));
-  };
 
   const onSubmit = (data: FormValues) => {
     login(data.email, data.password);
@@ -63,7 +55,6 @@ export const LoginForm: React.FC = () => {
             id='email-login'
             placeholder='Enter your email.'
             {...register('email', { required: 'Email field is required.' })}
-            onChange={handleInputChange}
           />
           <label htmlFor='password'>Password</label>
           <input
@@ -74,7 +65,6 @@ export const LoginForm: React.FC = () => {
             })}
             name='password'
             placeholder='Enter your password'
-            onChange={handleInputChange}
           />
           <img
             src={inputType === 'password' ? eye : hide}
