@@ -49,15 +49,12 @@ export const ShippingInfo: React.FC = () => {
     dispatch(OrderAction.city(data.city));
     dispatch(OrderAction.country(data.country));
     pushOrder({
+      ...data,
       user: user?.email,
-      address: data.address,
-      city: data.city,
-      postalCode: data.postalCode,
-      country: data.country,
       price: getCurrentPrice(),
-      size: size,
-      quantity: quantity,
-      discount: discount,
+      size,
+      quantity,
+      discount,
       payment: 'Cash on delivery.',
       CC: 'Cash on delivery.',
       toppings: toppings.sort((a, b) => a.id - b.id).map((item) => item.title),
