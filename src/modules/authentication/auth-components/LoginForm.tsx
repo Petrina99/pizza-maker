@@ -16,6 +16,8 @@ type FormValues = {
   password: string;
 };
 
+import { validation } from 'modules/authentication/auth-components';
+
 export const LoginForm: React.FC = () => {
   const { error } = useSelector((state: AppState) => state.authReducer);
 
@@ -54,7 +56,13 @@ export const LoginForm: React.FC = () => {
             type='email'
             id='email-login'
             placeholder='Enter your email.'
-            {...register('email', { required: 'Email field is required.' })}
+            {...register('email', {
+              required: 'Email field is required.',
+              pattern: {
+                value: validation.email,
+                message: 'Please enter a valid email.',
+              },
+            })}
           />
           <label htmlFor='password'>Password</label>
           <input
