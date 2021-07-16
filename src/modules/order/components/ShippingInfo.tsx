@@ -18,6 +18,13 @@ import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
 
 import { useOrder } from 'modules/order/hooks';
+
+type FormValues = {
+  address: string;
+  city: string;
+  postalCode: number;
+  country: string;
+};
 export const ShippingInfo: React.FC = () => {
   const { pushOrder } = useFirebaseHooks('orders');
 
@@ -25,13 +32,6 @@ export const ShippingInfo: React.FC = () => {
     (state: AppState) => state.orderReducer,
   );
   const { user } = useSelector((state: AppState) => state.authReducer);
-
-  type FormValues = {
-    address: string;
-    city: string;
-    postalCode: number;
-    country: string;
-  };
 
   const dispatch = useDispatch();
   const history = useHistory();
