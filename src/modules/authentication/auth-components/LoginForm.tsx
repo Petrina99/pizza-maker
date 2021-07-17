@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { AppState } from '../../redux-store';
+import { AuthAction } from 'modules/authentication/redux';
 
 import { useAuth } from 'modules/authentication/hooks';
 
@@ -23,11 +24,13 @@ export const LoginForm: React.FC = () => {
 
   const { register, handleSubmit } = useForm<FormValues>();
   const { login, rememberMe, googleSignIn } = useAuth();
+  const dispatch = useDispatch();
 
   const [inputType, setInputType] = useState('password');
 
   const onSubmit = (data: FormValues) => {
     login(data.email, data.password);
+    dispatch(AuthAction.error(''));
   };
 
   function setPersistence() {

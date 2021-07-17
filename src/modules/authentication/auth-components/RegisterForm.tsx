@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
-import { AppState } from '../../redux-store';
-import { useSelector } from 'react-redux';
+import { AppState } from 'modules/redux-store';
+import { useSelector, useDispatch } from 'react-redux';
+import { AuthAction } from 'modules/authentication/redux';
 
 import { validation } from 'modules/authentication/auth-components';
 
@@ -21,8 +22,9 @@ export const RegisterForm: React.FC = () => {
   const { error, user } = useSelector((state: AppState) => state.authReducer);
 
   const { handleRegister, googleSignIn } = useAuth();
-
   const { pushUser } = useFirebaseHooks('users');
+  const dispatch = useDispatch();
+
   const {
     register,
     handleSubmit,
@@ -35,6 +37,7 @@ export const RegisterForm: React.FC = () => {
     handleRegister(data.email, data.password);
     if (user) {
       pushUser(data.email, { user: user });
+      dispatch(AuthAction.error(''));
     }
     console.log(data);
   }
