@@ -1,4 +1,4 @@
-import { Topping } from './Topping';
+import { Topping } from 'modules/order/redux/models';
 export interface OrderModel {
   toppings: Topping[];
   error?: string;
@@ -6,5 +6,5 @@ export interface OrderModel {
   size: string;
   discount: boolean;
   payment: string;
-  ccNumber?: number;
+  ccNumber: number;
 }
