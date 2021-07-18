@@ -7,7 +7,7 @@ import { AppState } from 'modules/redux-store';
 import { useOrder } from 'modules/order/hooks';
 export const OrderDetails: React.FC = () => {
   // need qty, toppings, size, price and if discount is on
-  const { toppings, size, error, discount, quantity } = useSelector(
+  const { toppings, pizzaData, error } = useSelector(
     (state: AppState) => state.orderReducer,
   );
 
@@ -46,14 +46,14 @@ export const OrderDetails: React.FC = () => {
             .sort((a, b) => a.id - b.id)
             .map((item) => item.title)
             .join(', ')}{' '}
-          Size: {size}
+          Size: {pizzaData.size}
         </p>
-        <p className='qty-numb'>QTY: {quantity}</p>
+        <p className='qty-numb'>QTY: {pizzaData.quantity}</p>
         <div className='delivery'>
           <p>Delivery</p>
           <p>Free delivery within 1 hour or you don't have to pay.</p>
         </div>
-        {discount ? (
+        {pizzaData.discount ? (
           <p className='discount-valid'>Discount applied.</p>
         ) : (
           <div className='discount-apply'>

@@ -10,7 +10,7 @@ import { useHistory } from 'react-router-dom';
 import { useOrder } from 'modules/order/hooks';
 
 export const Finisher: React.FC = () => {
-  const { quantity, toppings, error } = useSelector(
+  const { pizzaData, toppings, error } = useSelector(
     (state: AppState) => state.orderReducer,
   );
 
@@ -45,7 +45,7 @@ export const Finisher: React.FC = () => {
         <div className='qty'>
           <input
             type='number'
-            value={quantity}
+            value={pizzaData.quantity}
             onChange={handleChange}
             required
             min={1}

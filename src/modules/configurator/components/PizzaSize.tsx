@@ -6,7 +6,7 @@ import { OrderAction } from 'modules/order/redux';
 
 export const PizzaSize: React.FC = () => {
   const dispatch = useDispatch();
-  const { size } = useSelector((state: AppState) => state.orderReducer);
+  const { pizzaData } = useSelector((state: AppState) => state.orderReducer);
 
   const handleButton = (e: React.MouseEvent<HTMLButtonElement>) => {
     const { value } = e.currentTarget;
@@ -22,21 +22,21 @@ export const PizzaSize: React.FC = () => {
           <button
             value='S'
             onClick={handleButton}
-            className={size === 'S' ? 'active-size' : 'inactive-size'}
+            className={pizzaData.size === 'S' ? 'active-size' : 'inactive-size'}
           >
             S
           </button>
           <button
             value='M'
             onClick={handleButton}
-            className={size === 'M' ? 'active-size' : 'inactive-size'}
+            className={pizzaData.size === 'M' ? 'active-size' : 'inactive-size'}
           >
             M
           </button>
           <button
             value='L'
             onClick={handleButton}
-            className={size === 'L' ? 'active-size' : 'inactive-size'}
+            className={pizzaData.size === 'L' ? 'active-size' : 'inactive-size'}
           >
             L
           </button>

@@ -4,11 +4,9 @@ import { OrderModel } from './models';
 
 const INITIAL_STATE: OrderModel = {
   toppings: [],
-  quantity: 1,
-  size: 'S',
-  discount: false,
-  payment: 'COD',
-  ccNumber: 0,
+  pizzaData: {
+    quantity: 1,
+  },
   error: '',
 };
 
@@ -21,6 +19,11 @@ export const OrderReducer = (
       return {
         ...state,
         error: action.payload,
+      };
+    case 'order/update':
+      return {
+        ...state,
+        pizzaData: { ...state.pizzaData, ...action.payload },
       };
     case 'order/quantity':
       return {

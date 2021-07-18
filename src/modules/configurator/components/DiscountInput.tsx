@@ -17,7 +17,7 @@ export const DiscountInput: React.FC = () => {
 
   const handleClick = () => {
     if (input === 'pizza2021') {
-      dispatch(OrderAction.discount(true));
+      dispatch(OrderAction.update({ discount: true }));
       setDiscountMessage('Success. 20 % discount applied.');
     }
 

@@ -25,7 +25,7 @@ type FormValues = {
 export const ShippingInfo: React.FC = () => {
   const { pushOrder } = useFirebaseHooks('orders');
 
-  const { toppings, size, discount, quantity } = useSelector(
+  const { toppings, pizzaData } = useSelector(
     (state: AppState) => state.orderReducer,
   );
   const { user } = useSelector((state: AppState) => state.authReducer);
@@ -44,9 +44,9 @@ export const ShippingInfo: React.FC = () => {
       ...data,
       user: user?.email,
       price: getCurrentPrice(),
-      size,
-      quantity,
-      discount,
+      size: pizzaData.size,
+      quantity: pizzaData.quantity,
+      dicount: pizzaData.discount,
       payment: 'Cash on delivery.',
       CC: 'Cash on delivery.',
       toppings: toppings.sort((a, b) => a.id - b.id).map((item) => item.title),
