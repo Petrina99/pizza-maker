@@ -33,7 +33,9 @@ export const useOrder = () => {
         ' sizePrice: ' +
         sizePrice,
     );
-    return (toppingPrice + sizePrice - discountPrice) * pizzaData.quantity;
+    const totalPrice = (toppingPrice + sizePrice) * pizzaData.quantity;
+
+    return totalPrice - discountPrice;
   };
 
   return {
