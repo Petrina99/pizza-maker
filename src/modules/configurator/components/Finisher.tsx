@@ -23,7 +23,9 @@ export const Finisher: React.FC = () => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { valueAsNumber } = e.currentTarget;
 
-    dispatch(OrderAction.quantity(valueAsNumber > 0 ? valueAsNumber : 1));
+    dispatch(
+      OrderAction.update({ quantity: valueAsNumber > 0 ? valueAsNumber : 1 }),
+    );
   };
 
   const handleSubmit = () => {

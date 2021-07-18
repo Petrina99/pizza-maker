@@ -22,7 +22,7 @@ export const DiscountInput: React.FC = () => {
     }
 
     if (input !== 'pizza2021') {
-      dispatch(OrderAction.discount(false));
+      dispatch(OrderAction.update({ discount: false }));
       setDiscountMessage('You have entered an invalid code.');
     }
   };

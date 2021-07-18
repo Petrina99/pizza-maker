@@ -25,12 +25,12 @@ export const OrderDetails: React.FC = () => {
 
   const handleClick = () => {
     if (input === 'pizza2021') {
-      dispatch(OrderAction.discount(true));
+      dispatch(OrderAction.update({ discount: true }));
       setMessage('Success. 20% discount applied.');
     }
 
     if (input !== 'pizza2021') {
-      dispatch(OrderAction.discount(false));
+      dispatch(OrderAction.update({ discount: true }));
       setMessage('You have entered an invalid code.');
     }
   };

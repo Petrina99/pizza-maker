@@ -11,7 +11,7 @@ export const PizzaSize: React.FC = () => {
   const handleButton = (e: React.MouseEvent<HTMLButtonElement>) => {
     const { value } = e.currentTarget;
 
-    dispatch(OrderAction.size(value));
+    dispatch(OrderAction.update({ size: value }));
   };
 
   return (

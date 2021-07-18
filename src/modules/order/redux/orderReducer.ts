@@ -6,6 +6,7 @@ const INITIAL_STATE: OrderModel = {
   toppings: [],
   pizzaData: {
     quantity: 1,
+    size: 'S',
   },
   error: '',
 };
@@ -24,31 +25,6 @@ export const OrderReducer = (
       return {
         ...state,
         pizzaData: { ...state.pizzaData, ...action.payload },
-      };
-    case 'order/quantity':
-      return {
-        ...state,
-        quantity: action.payload,
-      };
-    case 'order/size':
-      return {
-        ...state,
-        size: action.payload,
-      };
-    case 'order/discount':
-      return {
-        ...state,
-        discount: action.payload,
-      };
-    case 'order/payment':
-      return {
-        ...state,
-        payment: action.payload,
-      };
-    case 'order/ccNumber':
-      return {
-        ...state,
-        ccNumber: action.payload,
       };
     case 'order/toppings':
       return {
