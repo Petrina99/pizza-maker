@@ -7,10 +7,6 @@ const INITIAL_STATE: OrderModel = {
   quantity: 1,
   size: 'S',
   discount: false,
-  address: null,
-  city: null,
-  country: null,
-  postalCode: 0,
   payment: 'COD',
   ccNumber: 0,
   error: '',
@@ -40,26 +36,6 @@ export const OrderReducer = (
       return {
         ...state,
         discount: action.payload,
-      };
-    case 'order/address':
-      return {
-        ...state,
-        address: action.payload,
-      };
-    case 'order/city':
-      return {
-        ...state,
-        city: action.payload,
-      };
-    case 'order/country':
-      return {
-        ...state,
-        country: action.payload,
-      };
-    case 'order/postalCode':
-      return {
-        ...state,
-        postalCode: action.payload,
       };
     case 'order/payment':
       return {

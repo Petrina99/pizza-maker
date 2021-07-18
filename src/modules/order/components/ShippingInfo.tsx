@@ -12,9 +12,6 @@ import { AppState } from 'modules/redux-store/models';
 
 import { useFirebaseHooks } from 'modules/firebase/hooks';
 
-import { OrderAction } from 'modules/order/redux';
-import { useDispatch } from 'react-redux';
-
 import { useHistory } from 'react-router';
 
 import { useOrder } from 'modules/order/hooks';
@@ -33,7 +30,6 @@ export const ShippingInfo: React.FC = () => {
   );
   const { user } = useSelector((state: AppState) => state.authReducer);
 
-  const dispatch = useDispatch();
   const history = useHistory();
   const { getCurrentPrice } = useOrder();
   const {
@@ -44,10 +40,6 @@ export const ShippingInfo: React.FC = () => {
 
   const onSubmit: SubmitHandler<FormValues> = (data: FormValues) => {
     console.log('data', data);
-    dispatch(OrderAction.address(data.address));
-    dispatch(OrderAction.postalCode(data.postalCode));
-    dispatch(OrderAction.city(data.city));
-    dispatch(OrderAction.country(data.country));
     pushOrder({
       ...data,
       user: user?.email,
