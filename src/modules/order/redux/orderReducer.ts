@@ -7,6 +7,8 @@ const INITIAL_STATE: OrderModel = {
   pizzaData: {
     quantity: 1,
     size: 'S',
+    discount: false,
+    payment: 'Cash',
   },
   error: '',
 };
