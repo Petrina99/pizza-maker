@@ -10,6 +10,8 @@ import { validation } from 'modules/authentication/auth-components';
 import { useFirebaseHooks } from 'modules/firebase/hooks';
 import { useAuth } from 'modules/authentication/hooks';
 
+import style from '../styles/register.module.css';
+
 import eye from 'images/visibility-button.svg';
 import hide from 'images/hide.svg';
 
@@ -55,9 +57,10 @@ export const RegisterForm: React.FC = () => {
   }
 
   return (
-    <div className='reg-div'>
+    <div className={style.register}>
+      <p className={style.pizzaTron}>Pizza-á-tron</p>
+      <h1>Create an account</h1>
       <form onSubmit={handleSubmit(onSubmit)} className='reg-form'>
-        <h1>Create an account</h1>
         <div className='input-div'>
           <label htmlFor='email'>Email</label>
           <input

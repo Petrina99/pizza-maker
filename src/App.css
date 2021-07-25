@@ -1,8 +1,13 @@
-body{
+.app{
   background: #FAFAFA;
   font-family: 'Montserrat';
   margin: 0;
   padding: 0;
+  color: #383838;
+}
+
+#root{
+  width: 100%;
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;

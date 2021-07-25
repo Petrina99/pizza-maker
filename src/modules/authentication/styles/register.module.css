@@ -1,0 +1,27 @@
+.register{
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.pizzaTron{
+  flex-basis: 100%;
+  text-align: center;
+  font-size: 36px;
+  margin-top: 25px;
+  margin-bottom: 10px;
+}
+
+h1{
+  font-size: 54px;
+  text-align: center;
+  flex-basis: 100%;
+  margin-top: 10px;
+  margin-bottom: 25px;
+}
+.form{
+
+}
