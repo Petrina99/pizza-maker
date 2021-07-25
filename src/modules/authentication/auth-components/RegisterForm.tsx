@@ -60,54 +60,58 @@ export const RegisterForm: React.FC = () => {
     <div className={style.register}>
       <p className={style.pizzaTron}>Pizza-á-tron</p>
       <h1>Create an account</h1>
-      <form onSubmit={handleSubmit(onSubmit)} className='reg-form'>
-        <div className='input-div'>
-          <label htmlFor='email'>Email</label>
-          <input
-            type='email'
-            {...register('email', {
-              required: 'Email field is required.',
-              pattern: {
-                value: validation.email,
-                message: 'Please enter a valid email.',
-              },
-            })}
-            placeholder='name@gmail.com'
-            id='email-register'
-          />
-          {errors.email && <p>{errors.email.message}</p>}
-          <label htmlFor='password'>Password</label>
-          <input
-            type={inputType}
-            {...register('password', {
-              required: 'Password filed is required',
-              pattern: {
-                value: validation.password,
-                message:
-                  'Please enter a password that contains atleast 8 characters, 1 number and 1 special character.',
-              },
-            })}
-            placeholder='Choose your password'
-            id='password-register'
-          />
-          {errors.password && <p>{errors.password.message}</p>}
+      <form onSubmit={handleSubmit(onSubmit)} className={style.form}>
+        <article className={style.inputArticle}>
+          <div className={style.emailDiv}>
+            <input
+              type='email'
+              {...register('email', {
+                required: 'Email field is required.',
+                pattern: {
+                  value: validation.email,
+                  message: 'Please enter a valid email.',
+                },
+              })}
+              placeholder='Email'
+              id='email-register'
+            />
+            {errors.email && <p>{errors.email.message}</p>}
+          </div>
+          <div className={style.passDiv}>
+            <input
+              type={inputType}
+              {...register('password', {
+                required: 'Password filed is required',
+                pattern: {
+                  value: validation.password,
+                  message:
+                    'Please enter a password that contains atleast 8 characters, 1 number and 1 special character.',
+                },
+              })}
+              placeholder='Password'
+              id='password-register'
+            />
+            {errors.password && <p>{errors.password.message}</p>}
+          </div>
           <img
             src={inputType === 'password' ? eye : hide}
             onClick={showPassword}
           />
-        </div>
+        </article>
         {error && <p>{error}</p>}
-        <div className='submit-div'>
-          <button type='submit' className='reg-btn'>
-            Register
-          </button>
-          <div className='reg-google'>
-            <p>Or</p>
+        <article className={style.submitArticle}>
+          <div className={style.submitDiv}>
+            <button type='submit' className='reg-btn'>
+              Register
+            </button>
+          </div>
+          <p>Or</p>
+          <div className={style.googleDiv}>
             <button type='button' onClick={handleGoogle}>
               Sign in with google
             </button>
           </div>
-        </div>
+        </article>
       </form>
     </div>
   );
