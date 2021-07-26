@@ -10,3 +10,7 @@
   color: #B490DF;
   font-weight: bold;
 }
+
+.signInLink:hover{
+  color: #CEA5FF;
+}
