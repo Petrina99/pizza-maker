@@ -59,8 +59,9 @@ export const RegisterForm: React.FC = () => {
   return (
     <div className={style.register}>
       <p className={style.pizzaTron}>Pizza-á-tron</p>
-      <h1>Create an account</h1>
+      <h1 className={style.welcomeMessage}>Welcome to Pizza-á-tron</h1>
       <form onSubmit={handleSubmit(onSubmit)} className={style.form}>
+        <h1>Create an account</h1>
         <article className={style.inputArticle}>
           <div className={style.emailDiv}>
             <input
