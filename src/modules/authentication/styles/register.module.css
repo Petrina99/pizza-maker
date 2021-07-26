@@ -41,17 +41,17 @@ h1{
 }
 
 .inputArticle{
-  flex-basis: 66%;
+  flex-basis: 100%;
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
-  justify-content: left;
+  justify-content: center;
   align-items: center;
   margin-bottom: 20px;
 }
 
 .emailDiv{
-  flex-basis: 100%;
+  flex-basis: 66%;
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
@@ -61,7 +61,7 @@ h1{
 }
 
 .passDiv{
-  flex-basis: 100%;
+  flex-basis: 66%;
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
@@ -69,14 +69,14 @@ h1{
   align-items: center;
 }
 
-.form input{
-  flex-basis: 100%;
+.emailDiv input{
+  flex-basis: 80%;
   text-align: center;
   font-family: 'Montserrat';
   background: #ECECF3;
   border-radius: 10px;
   border: none;
-  padding: 15px;
+  padding: 10px;
   margin: 10px 0 10px 0;
   font-size: 24px;
 }
@@ -85,12 +85,35 @@ h1{
   outline: none;
 }
 
-.form img{
+.passDiv input{
+  flex-basis: 80%;
+  text-align: center;
+  font-family: 'Montserrat';
+  background: #ECECF3;
+  border-radius: 10px;
+  border: none;
+  padding: 10px;
+  margin: 10px 0 10px 0;
+  font-size: 24px;
+}
+
+.passDiv button{
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  background-color: none;
+  border: none;
+  outline: none;
+  position: relative;
+  margin-left: -42px;
+}
+
+.passDiv img{
   width: 30px;
   height: 30px;
-  cursor: pointer;
-  margin-left: -50px;
-  position: relative;
+  flex-basis: 100%;
 }
 
 .submitArticle{
@@ -138,4 +161,10 @@ h1{
   font-weight: bold;
   font-size: 24px;
   text-align: center;
+}
+
+.errorMessage{
+  flex-basis: 100%;
+  text-align: center;
+  color: red;
 }
