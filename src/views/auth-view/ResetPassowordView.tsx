@@ -6,6 +6,9 @@ import { AuthAction } from 'modules/authentication/redux';
 
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+
+import style from './styles/resetView.module.css';
+
 export const ResetPasswordView: React.FC = () => {
   const history = useHistory();
 
@@ -19,8 +22,8 @@ export const ResetPasswordView: React.FC = () => {
   return (
     <>
       <ResetPasswordForm />
-      <div className='sign-div'>
-        <button className='sign-button' type='button' onClick={handleClick}>
+      <div className={style.backToDiv}>
+        <button type='button' onClick={handleClick}>
           Back to Sign in
         </button>
       </div>

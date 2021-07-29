@@ -1,0 +1,25 @@
+.backToDiv{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-basis: 100%;
+}
+
+.backToDiv button{
+  flex-basis: 20%;
+  text-align: center;
+  border: none;
+  background: #B490DF;
+  border-radius: 5px;
+  font-size: 16px;
+  padding: 0.7em;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition-property: background;
+  transition-duration: 0.2s;
+}
+
+.backToDiv button:hover{
+  background: #CEA5FF;
+}

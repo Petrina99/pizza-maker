@@ -7,6 +7,8 @@ import { AuthAction } from 'modules/authentication/redux';
 
 import { useAuth } from 'modules/authentication/hooks';
 
+import style from '../styles/resetPassword.module.css';
+
 type FormValues = {
   email: string;
 };
@@ -31,30 +33,44 @@ export const ResetPasswordForm: React.FC = () => {
   };
 
   return (
-    <div className='reset-div'>
-      <form onSubmit={handleSubmit(onSubmit)} className='reset-form'>
-        <label htmlFor='email'>
+    <div className={style.resetPassword}>
+      <p className={style.pizzaTron}>Pizza-á-tron</p>
+      <h1 className={style.resetMessage}>
+        Reset password for your Pizza-á-tron account
+      </h1>
+      <form onSubmit={handleSubmit(onSubmit)} className={style.form}>
+        <label htmlFor='email' className={style.label}>
           Enter the email adress of an account that you want to reset your
           password for:
         </label>
-        <input
-          type='email'
-          {...register('email', {
-            required: true,
-            pattern: {
-              value: validation.email,
-              message: 'Please enter a valid email address.',
-            },
-          })}
-          id='email-reset'
-        />
-        <button type='submit'>Reset password</button>
+        <div className={style.inputDiv}>
+          <input
+            type='email'
+            {...register('email', {
+              required: true,
+              pattern: {
+                value: validation.email,
+                message: 'Please enter a valid email address.',
+              },
+            })}
+            id='email-reset'
+            placeholder='Email'
+            className={style.resetInput}
+          />
+        </div>
+        <div className={style.resetBtnDiv}>
+          <button type='submit' className={style.resetBtn}>
+            Reset password
+          </button>
+        </div>
       </form>
       {email &&
         (error ? (
-          <p className='reset-err'>{error}</p>
+          <p className={style.errorMessage}>{error}</p>
         ) : (
-          <p>A link for password reset has been sent to your email.</p>
+          <p className={style.successMessage}>
+            A link for password reset has been sent to your email.
+          </p>
         ))}
     </div>
   );
