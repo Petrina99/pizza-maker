@@ -8,6 +8,8 @@ import { OrderAction } from 'modules/order/redux';
 
 import { useHistory } from 'react-router-dom';
 
+import style from '../styles/header.module.css';
+
 export const Header: React.FC = () => {
   const history = useHistory();
 
@@ -19,14 +21,14 @@ export const Header: React.FC = () => {
   };
 
   return (
-    <div className='header-struct'>
-      <div className='header'>
+    <div className={style.header}>
+      <nav className={style.nav}>
         <p onClick={handleClick} className='pizza-tron'>
           Pizz-á-tron
         </p>
         <img src={smallPizza} alt='Small pizza' />
         <SignOutButton />
-      </div>
+      </nav>
     </div>
   );
 };
