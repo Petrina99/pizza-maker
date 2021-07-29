@@ -1,0 +1,74 @@
+.login{
+  margin: 0;
+  padding: 0;
+  flex-basis: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.pizzaTron{
+  composes: pizzaTron from './register.module.css';
+}
+
+.welcomeMessage{
+  composes: welcomeMessage from './register.module.css';
+}
+
+.form{
+  composes: form from './register.module.css';
+}
+
+.inputArticle{
+  composes: inputArticle from './register.module.css';
+}
+
+.emailDiv{
+  composes: emailDiv from './register.module.css';
+}
+
+.passDiv{
+  composes: passDiv from './register.module.css';
+}
+
+.errorMessage{
+  composes: errorMessage from './register.module.css';
+}
+
+.submitSection{
+  composes: submitArticle from './register.module.css';
+  flex-basis: 100%;
+}
+
+.loginDiv{
+  composes: submitDiv from './register.module.css';
+}
+
+.googleDiv{
+  composes: googleDiv from './register.module.css';
+}
+
+.rememberDiv{
+  composes: loginDiv;
+}
+
+.rememberDiv button{
+  flex-basis: 20%;
+  text-align: center;
+  border: none;
+  background: #B490DF;
+  border-radius: 5px;
+  font-size: 16px;
+  padding: 0.7em;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition-property: background;
+  transition-duration: 0.2s;
+}
+
+.rememberDiv button:hover{
+  background: #CEA5FF;
+}

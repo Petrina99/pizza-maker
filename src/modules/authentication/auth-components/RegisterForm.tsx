@@ -94,11 +94,8 @@ export const RegisterForm: React.FC = () => {
               placeholder='Password'
               id='password-register'
             />
-            <button>
-              <img
-                src={inputType === 'password' ? eye : hide}
-                onClick={showPassword}
-              />
+            <button type='button' onClick={showPassword}>
+              <img src={inputType === 'password' ? eye : hide} />
             </button>
             {errors.password && (
               <p className={style.errorMessage}>{errors.password.message}</p>
@@ -106,11 +103,9 @@ export const RegisterForm: React.FC = () => {
           </div>
         </article>
         {error && <p className={style.errorMessage}>{error}</p>}
-        <article className={style.submitArticle}>
+        <section className={style.submitArticle}>
           <div className={style.submitDiv}>
-            <button type='submit' className='reg-btn'>
-              Register
-            </button>
+            <button type='submit'>Register</button>
           </div>
           <p>Or</p>
           <div className={style.googleDiv}>
@@ -118,7 +113,7 @@ export const RegisterForm: React.FC = () => {
               Sign in with google
             </button>
           </div>
-        </article>
+        </section>
       </form>
     </div>
   );
