@@ -23,11 +23,15 @@ export const Header: React.FC = () => {
   return (
     <div className={style.header}>
       <nav className={style.nav}>
-        <p onClick={handleClick} className='pizza-tron'>
+        <p onClick={handleClick} className={style.p}>
           Pizz-á-tron
         </p>
-        <img src={smallPizza} alt='Small pizza' />
-        <SignOutButton />
+        <div className={style.imgDiv}>
+          <img src={smallPizza} alt='Small pizza' className={style.pizzaImg} />
+        </div>
+        <div className={style.btnDiv}>
+          <SignOutButton />
+        </div>
       </nav>
     </div>
   );
