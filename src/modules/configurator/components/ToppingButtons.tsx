@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { toppingArray } from '../const';
 
@@ -14,6 +14,9 @@ export const ToppingButtons: React.FC = () => {
 
   const { toppings } = useSelector((state: AppState) => state.orderReducer);
 
+  const [isActive, setIsActive] = useState(false);
+  const btnStyle = isActive ? style.btnOn : style.btnOff;
+
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     const { value } = e.currentTarget;
     const { id } = e.currentTarget.dataset;
@@ -27,10 +30,12 @@ export const ToppingButtons: React.FC = () => {
             id: parseInt(id),
           }),
         );
+        setIsActive(true);
       }
 
       if (currentId) {
         dispatch(OrderAction.toppingsRemove(parseInt(id)));
+        setIsActive(false);
       }
     }
   };
@@ -45,7 +50,7 @@ export const ToppingButtons: React.FC = () => {
           onClick={handleClick}
           name={topping.title}
           type='button'
-          className={style.btnOff}
+          className={btnStyle}
         >
           <div className={style.btnImgDivOff}>
             <img src={topping.image} className={style.btnImg} />
