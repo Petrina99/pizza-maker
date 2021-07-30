@@ -21,7 +21,7 @@ export const Header: React.FC = () => {
   };
 
   return (
-    <div className={style.header}>
+    <header className={style.header}>
       <nav className={style.nav}>
         <p onClick={handleClick} className={style.p}>
           Pizz-á-tron
@@ -33,6 +33,6 @@ export const Header: React.FC = () => {
           <SignOutButton />
         </div>
       </nav>
-    </div>
+    </header>
   );
 };
