@@ -3,6 +3,8 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { OrderAction } from 'modules/order/redux';
 
+import style from '../styles/discount.module.css';
+
 export const DiscountInput: React.FC = () => {
   const [input, setInput] = useState('');
   const [discountMessage, setDiscountMessage] = useState('');
@@ -28,20 +30,28 @@ export const DiscountInput: React.FC = () => {
   };
 
   return (
-    <div className='dsc-div'>
-      <p className='dsc-title'>Get the discount</p>
-      <div className='discount-input'>
-        <input
-          type='text'
-          id='discount'
-          placeholder='Enter discount code'
-          onChange={handleInput}
-        />
-        <button type='button' value={input} onClick={handleClick}>
-          Apply
-        </button>
-      </div>
-      <p className='dsc-msg'>{discountMessage}</p>
-    </div>
+    <>
+      <p className={style.p}>Get the discount</p>
+      <section className={style.discountSection}>
+        <div className={style.inputDiv}>
+          <input
+            type='text'
+            id='discount'
+            placeholder='Enter discount code'
+            onChange={handleInput}
+            className={style.input}
+          />
+          <button
+            type='button'
+            value={input}
+            onClick={handleClick}
+            className={style.discountBtn}
+          >
+            Apply
+          </button>
+        </div>
+      </section>
+      <p className={style.message}>{discountMessage}</p>
+    </>
   );
 };
