@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { AppState } from 'modules/redux-store';
 import { OrderAction } from 'modules/order/redux';
 
+import style from '../styles/pizzaSize.module.css';
+
 export const PizzaSize: React.FC = () => {
   const dispatch = useDispatch();
   const { pizzaData } = useSelector((state: AppState) => state.orderReducer);
@@ -16,27 +18,27 @@ export const PizzaSize: React.FC = () => {
 
   return (
     <>
-      <p className='title'>Pizza! Pizza! size</p>
-      <div className='size-select'>
-        <div id='button-group'>
+      <p className={style.p}>Pizza! Pizza! size</p>
+      <div className={style.sizeSelect}>
+        <div className={style.btnGroup}>
           <button
             value='S'
             onClick={handleButton}
-            className={pizzaData.size === 'S' ? 'active-size' : 'inactive-size'}
+            className={pizzaData.size === 'S' ? style.btnOn : style.btnOff}
           >
             S
           </button>
           <button
             value='M'
             onClick={handleButton}
-            className={pizzaData.size === 'M' ? 'active-size' : 'inactive-size'}
+            className={pizzaData.size === 'M' ? style.btnOn : style.btnOff}
           >
             M
           </button>
           <button
             value='L'
             onClick={handleButton}
-            className={pizzaData.size === 'L' ? 'active-size' : 'inactive-size'}
+            className={pizzaData.size === 'L' ? style.btnOn : style.btnOff}
           >
             L
           </button>
