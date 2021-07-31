@@ -61,44 +61,55 @@ export const ShippingInfo: React.FC = () => {
   };
 
   return (
-    <form className='shipping-form' onSubmit={handleSubmit(onSubmit, onError)}>
-      <p>Shipping information</p>
-      <input
-        {...register('address', {
-          required: 'Street name and number field is required.',
-        })}
-        id='address'
-        placeholder='Street name and number'
-      />
-      {errors.address && <p>{errors.address.message}</p>}
-      <input
-        {...register('city', {
-          required: 'City field is required.',
-        })}
-        id='city'
-        placeholder='City'
-      />
-      {errors.city && <p>{errors.city.message}</p>}
-      <input
-        type='number'
-        {...register('postalCode', {
-          required: 'Postal code field is required.',
-          minLength: { value: 5, message: 'Please enter a valid postal code.' },
-          maxLength: { value: 5, message: 'Please enter a valid postal code.' },
-        })}
-        id='postal-code'
-        placeholder='Postal Code'
-      />
-      {errors.postalCode && <p>{errors.postalCode.message}</p>}
-      <input
-        {...register('country', { required: 'Country filed is required.' })}
-        id='country'
-        placeholder='Country'
-      />
-      {errors.country && <p>{errors.country.message}</p>}
-      <p>Payment details</p>
-      <p>Cash on delivery</p>
-      <button type='submit'>Finish order</button>
-    </form>
+    <div>
+      <form
+        className='shipping-form'
+        onSubmit={handleSubmit(onSubmit, onError)}
+      >
+        <p>Shipping information</p>
+        <input
+          {...register('address', {
+            required: 'Street name and number field is required.',
+          })}
+          id='address'
+          placeholder='Street name and number'
+        />
+        {errors.address && <p>{errors.address.message}</p>}
+        <input
+          {...register('city', {
+            required: 'City field is required.',
+          })}
+          id='city'
+          placeholder='City'
+        />
+        {errors.city && <p>{errors.city.message}</p>}
+        <input
+          type='number'
+          {...register('postalCode', {
+            required: 'Postal code field is required.',
+            minLength: {
+              value: 5,
+              message: 'Please enter a valid postal code.',
+            },
+            maxLength: {
+              value: 5,
+              message: 'Please enter a valid postal code.',
+            },
+          })}
+          id='postal-code'
+          placeholder='Postal Code'
+        />
+        {errors.postalCode && <p>{errors.postalCode.message}</p>}
+        <input
+          {...register('country', { required: 'Country filed is required.' })}
+          id='country'
+          placeholder='Country'
+        />
+        {errors.country && <p>{errors.country.message}</p>}
+        <p>Payment details</p>
+        <p>Cash on delivery</p>
+        <button type='submit'>Finish order</button>
+      </form>
+    </div>
   );
 };

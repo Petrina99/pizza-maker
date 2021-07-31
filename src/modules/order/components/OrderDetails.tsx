@@ -17,7 +17,6 @@ export const OrderDetails: React.FC = () => {
   const dispatch = useDispatch();
 
   const [input, setInput] = useState('');
-  const [discountMessage, setMessage] = useState('');
 
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.currentTarget;
@@ -28,50 +27,58 @@ export const OrderDetails: React.FC = () => {
   const handleClick = () => {
     if (input === 'pizza2021') {
       dispatch(OrderAction.update({ discount: true }));
-      setMessage('Success. 20% discount applied.');
     }
 
     if (input !== 'pizza2021') {
       dispatch(OrderAction.update({ discount: true }));
-      setMessage('You have entered an invalid code.');
     }
   };
 
   return (
     <div className={style.orderDetails}>
-      <p>Order details</p>
-      <p>TOPPINGS</p>
-      <p>
-        {toppings
-          .sort((a, b) => a.id - b.id)
-          .map((item) => item.title)
-          .join(', ')}{' '}
-        Size: {pizzaData.size}
-      </p>
-      <p className='qty-numb'>QTY: {pizzaData.quantity}</p>
-      <div className='delivery'>
-        <p>Delivery</p>
-        <p>Free delivery within 1 hour or you don't have to pay.</p>
+      <div className={style.detailsDiv}>
+        <p className={style.title}>Order details</p>
+        <p className={style.toppingP}>TOPPINGS</p>
+        <p className={style.toppingList}>
+          {toppings
+            .sort((a, b) => a.id - b.id)
+            .map((item) => item.title)
+            .join(', ')}{' '}
+          Size: {pizzaData.size}
+        </p>
+        <p className={style.qty}>QTY: {pizzaData.quantity}</p>
+      </div>
+      <div className={style.delivery}>
+        <p className={style.deliveryTitle}>Delivery</p>
+        <p className={style.deliveryP}>
+          Free delivery within 1 hour or you don't have to pay.
+        </p>
       </div>
       {pizzaData.discount ? (
-        <p className='discount-valid'>Discount applied.</p>
+        <div className={style.discountTrueDiv}>
+          <p className={style.discountTrueP}>Discount applied.</p>
+        </div>
       ) : (
-        <div className='discount-apply'>
+        <div className={style.discountInputDiv}>
           <input
             type='text'
-            placeholder='Enter discount code'
+            placeholder='Discount code'
             onChange={handleInput}
             value={input}
+            className={style.discountInput}
           />
-          <button type='button' onClick={handleClick}>
+          <button
+            type='button'
+            className={style.discountBtn}
+            onClick={handleClick}
+          >
             Apply
           </button>
-          <p>{discountMessage}</p>
         </div>
       )}
-      <div className='info-price'>
-        <p>Total price</p>
-        <p>${getCurrentPrice()}</p>
+      <div className={style.priceDiv}>
+        <p className={style.priceTitle}>Total price</p>
+        <p className={style.price}>${getCurrentPrice()}</p>
       </div>
     </div>
   );
