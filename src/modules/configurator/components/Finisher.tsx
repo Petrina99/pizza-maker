@@ -9,6 +9,8 @@ import { OrderAction } from 'modules/order/redux';
 import { useHistory } from 'react-router-dom';
 import { useOrder } from 'modules/order/hooks';
 
+import style from '../styles/finisher.module.css';
+
 export const Finisher: React.FC = () => {
   const { pizzaData, toppings, error } = useSelector(
     (state: AppState) => state.orderReducer,
@@ -40,29 +42,35 @@ export const Finisher: React.FC = () => {
   };
 
   return (
-    <div className='finisher'>
-      <img src={pizza} />
-      <br />
-      <div className='finisher-form'>
-        <div className='qty'>
-          <input
-            type='number'
-            value={pizzaData.quantity}
-            onChange={handleChange}
-            required
-            min={1}
-          />
-          <p>QTY</p>
+    <section className={style.finisherSection}>
+      <div className={style.finisherDiv}>
+        <div className={style.imgDiv}>
+          <img src={pizza} className={style.img} />
         </div>
-        <div className='price-total'>
-          <p>${getCurrentPrice()}</p>
-          <p>ORDER TOTAL</p>
+        <div className={style.qtyDiv}>
+          <div className={style.inputDiv}>
+            <input
+              type='number'
+              value={pizzaData.quantity}
+              onChange={handleChange}
+              required
+              min={1}
+              className={style.qtyInput}
+            />
+          </div>
+          <p className={style.qtyP}>QTY</p>
         </div>
-        <button type='button' className='buy-btn' onClick={handleSubmit}>
-          Buy Pizza! Pizza!
-        </button>
-        <p>{error}</p>
+        <div className={style.priceDiv}>
+          <p className={style.price}>${getCurrentPrice()}</p>
+          <p className={style.orderTotal}>ORDER TOTAL</p>
+        </div>
+        <div className={style.btnDiv}>
+          <button type='button' className={style.btnBuy} onClick={handleSubmit}>
+            Buy Pizza! Pizza!
+          </button>
+          <p>{error}</p>
+        </div>
       </div>
-    </div>
+    </section>
   );
 };
