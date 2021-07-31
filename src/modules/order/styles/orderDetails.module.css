@@ -21,22 +21,26 @@
   flex-basis: 100%;
   font-size: 20px;
   font-weight: bold;
+  margin-bottom: 12px;
 }
 
 .toppingP{
   flex-basis: 100%;
   font-size: 12px;
   color: #8C8C8C;
+  margin-bottom: 4px;
 }
 
 .toppingList{
   flex-basis: 100%;
   font-size: 16px;
+  margin-bottom: 6px;
 }
 
 .qty{
   flex-basis: 100%;
   font-size: 16px;
+  margin-bottom: 24px;
 }
 
 .delivery{
@@ -45,12 +49,14 @@
   display: flex;
   flex-wrap: wrap;
   padding: 12px;
+  margin-bottom: 24px;
 }
 
 .deliveryTitle{
   flex-basis: 100%;
   color: #979797;
   font-size: 16px;
+  margin-bottom: 2px;
 }
 
 .deliveryP{
@@ -78,6 +84,7 @@
   align-items: center;
   flex-wrap: wrap;
   padding: 12px;
+  margin-bottom: 24px;
 }
 
 .discountInput{
