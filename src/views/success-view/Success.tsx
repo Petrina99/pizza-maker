@@ -7,6 +7,9 @@ import { SuccessPage } from 'modules/success';
 import { Header } from 'modules/configurator/components';
 
 import { useHistory } from 'react-router-dom';
+
+import style from './styles/successView.module.css';
+
 export const Success: React.FC = () => {
   const history = useHistory();
 
@@ -18,7 +21,7 @@ export const Success: React.FC = () => {
   };
 
   return (
-    <div className='success-sect'>
+    <div className={style.successView}>
       <Header />
       <SuccessPage />
       <div className='buy-another'>
