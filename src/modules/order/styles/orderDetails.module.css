@@ -1,0 +1,12 @@
+.orderDetails{
+  flex-basis: 45%;
+  margin: 0;
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.orderDetailsTitle{
+  flex-basis: 100%;
+}

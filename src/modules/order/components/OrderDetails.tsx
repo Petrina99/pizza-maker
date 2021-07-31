@@ -4,10 +4,12 @@ import { useSelector, useDispatch } from 'react-redux';
 import { OrderAction } from 'modules/order/redux';
 import { AppState } from 'modules/redux-store';
 
+import style from '../styles/orderDetails.module.css';
+
 import { useOrder } from 'modules/order/hooks';
 export const OrderDetails: React.FC = () => {
   // need qty, toppings, size, price and if discount is on
-  const { toppings, pizzaData, error } = useSelector(
+  const { toppings, pizzaData } = useSelector(
     (state: AppState) => state.orderReducer,
   );
 
@@ -36,45 +38,41 @@ export const OrderDetails: React.FC = () => {
   };
 
   return (
-    <div className='order'>
-      <p className='order-title'>Almost done!</p>
-      <div className='info'>
-        <p>Order details</p>
-        <p>TOPPINGS</p>
-        <p>
-          {toppings
-            .sort((a, b) => a.id - b.id)
-            .map((item) => item.title)
-            .join(', ')}{' '}
-          Size: {pizzaData.size}
-        </p>
-        <p className='qty-numb'>QTY: {pizzaData.quantity}</p>
-        <div className='delivery'>
-          <p>Delivery</p>
-          <p>Free delivery within 1 hour or you don't have to pay.</p>
-        </div>
-        {pizzaData.discount ? (
-          <p className='discount-valid'>Discount applied.</p>
-        ) : (
-          <div className='discount-apply'>
-            <input
-              type='text'
-              placeholder='Enter discount code'
-              onChange={handleInput}
-              value={input}
-            />
-            <button type='button' onClick={handleClick}>
-              Apply
-            </button>
-            <p>{discountMessage}</p>
-          </div>
-        )}
-        <div className='info-price'>
-          <p>Total price</p>
-          <p>${getCurrentPrice()}</p>
-        </div>
+    <div className={style.orderDetails}>
+      <p>Order details</p>
+      <p>TOPPINGS</p>
+      <p>
+        {toppings
+          .sort((a, b) => a.id - b.id)
+          .map((item) => item.title)
+          .join(', ')}{' '}
+        Size: {pizzaData.size}
+      </p>
+      <p className='qty-numb'>QTY: {pizzaData.quantity}</p>
+      <div className='delivery'>
+        <p>Delivery</p>
+        <p>Free delivery within 1 hour or you don't have to pay.</p>
       </div>
-      <p className='error-order'>{error}</p>
+      {pizzaData.discount ? (
+        <p className='discount-valid'>Discount applied.</p>
+      ) : (
+        <div className='discount-apply'>
+          <input
+            type='text'
+            placeholder='Enter discount code'
+            onChange={handleInput}
+            value={input}
+          />
+          <button type='button' onClick={handleClick}>
+            Apply
+          </button>
+          <p>{discountMessage}</p>
+        </div>
+      )}
+      <div className='info-price'>
+        <p>Total price</p>
+        <p>${getCurrentPrice()}</p>
+      </div>
     </div>
   );
 };

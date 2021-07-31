@@ -5,4 +5,16 @@
   align-items: center;
   flex-wrap: wrap;
   margin-top: 158px;
+  background: #FFFFFF;
+  border: 1px solid #F7F7F7;
+  box-sizing: border-box;
+  box-shadow: 0px 20px 28px rgba(0, 0, 0, 0.03);
+  border-radius: 28px;
+}
+
+.title{
+  flex-basis: 100%;
+  font-size: 36px;
+  text-align: center;
+  font-weight: bold;
 }
