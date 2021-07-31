@@ -1,0 +1,8 @@
+.orderModal{
+  flex-basis: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 158px;
+}
