@@ -24,12 +24,8 @@ export const Success: React.FC = () => {
     <div className={style.successView}>
       <Header />
       <SuccessPage />
-      <div className='buy-another'>
-        <button
-          type='button'
-          onClick={handleAnother}
-          className='buy-another-btn'
-        >
+      <div className={style.btnDiv}>
+        <button type='button' onClick={handleAnother} className={style.btn}>
           Buy another
         </button>
       </div>
