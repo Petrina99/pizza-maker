@@ -2,6 +2,8 @@ import React from 'react';
 
 import { useAuth } from 'modules/authentication/hooks';
 
+import style from '../styles/signoutButton.module.css';
+
 export const SignOutButton: React.FC = () => {
   const { signOut } = useAuth();
   const logout = () => {
@@ -9,7 +11,7 @@ export const SignOutButton: React.FC = () => {
   };
 
   return (
-    <button type='button' onClick={logout} className='logout-btn'>
+    <button type='button' onClick={logout} className={style.signoutBtn}>
       Log out
     </button>
   );

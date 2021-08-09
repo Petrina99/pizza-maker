@@ -1,0 +1,186 @@
+.register{
+  margin: 0;
+  padding: 0;
+  flex-basis: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.pizzaTron{
+  flex-basis: 100%;
+  font-size: 36px;
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.form h1{
+  font-size: 44px;
+  text-align: center;
+  flex-basis: 100%;
+  margin-top: 10px;
+  margin-bottom: 25px;
+  font-weight: bold;
+}
+
+.welcomeMessage{
+  font-size: 54px;
+  text-align: center;
+  flex-basis: 100%;
+  margin-top: 10px;
+  margin-bottom: 25px;
+  font-weight: bold;
+}
+
+.form{
+  flex-basis: 60%;
+  padding: 40px 40px 40px 60px;
+  background-color: #FFFFFF;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 25px;
+  margin-bottom: 20px;
+}
+
+.inputArticle{
+  flex-basis: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.emailDiv{
+  flex-basis: 66%;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.passDiv{
+  flex-basis: 66%;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.emailDiv input{
+  flex-basis: 80%;
+  text-align: center;
+  font-family: 'Montserrat';
+  background: #ECECF3;
+  border-radius: 10px;
+  border: none;
+  padding: 10px;
+  margin: 10px 0 10px 0;
+  font-size: 24px;
+}
+
+.form input:focus{
+  outline: none;
+}
+
+.passDiv input{
+  flex-basis: 80%;
+  text-align: center;
+  font-family: 'Montserrat';
+  background: #ECECF3;
+  border-radius: 10px;
+  border: none;
+  padding: 10px;
+  margin: 10px 0 10px 0;
+  font-size: 24px;
+}
+
+.passDiv button{
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  background-color: none;
+  border: none;
+  outline: none;
+  position: relative;
+  margin-left: -42px;
+}
+
+.passDiv img{
+  width: 30px;
+  height: 30px;
+  flex-basis: 100%;
+}
+
+.submitArticle{
+  flex-basis: 66%;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-top: 40px;
+  margin-bottom: 50px;
+}
+
+.submitDiv{
+  flex-basis: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.submitArticle button{
+  flex-basis: 45%;
+  text-align: center;
+  border: none;
+  background: #B490DF;
+  border-radius: 5px;
+  font-size: 20px;
+  padding: 0.7em;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition-property: background;
+  transition-duration: 0.2s;
+}
+
+.submitArticle button:hover{
+  background: #CEA5FF;
+}
+
+.googleDiv{
+  flex-basis: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.submitArticle p{
+  font-weight: bold;
+  font-size: 24px;
+  text-align: center;
+}
+
+.errorMessage{
+  flex-basis: 100%;
+  text-align: center;
+  color: red;
+}

@@ -1,0 +1,30 @@
+.successView{
+  flex-basis: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.btnDiv{
+  flex-basis: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn{
+  background: #B95DE4;
+  border-radius: 48px;
+  padding: 22px 48px;
+  border: none;
+  outline: none;
+  font-size: 16px;
+  color: #FFFFFF;
+  cursor: pointer;
+  transition-duration: 0.2s;
+}
+
+.btn:hover{
+  background: #8831b1;
+}

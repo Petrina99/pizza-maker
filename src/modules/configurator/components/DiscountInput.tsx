@@ -3,6 +3,8 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { OrderAction } from 'modules/order/redux';
 
+import style from '../styles/discount.module.css';
+
 export const DiscountInput: React.FC = () => {
   const [input, setInput] = useState('');
   const [discountMessage, setDiscountMessage] = useState('');
@@ -17,31 +19,39 @@ export const DiscountInput: React.FC = () => {
 
   const handleClick = () => {
     if (input === 'pizza2021') {
-      dispatch(OrderAction.discount(true));
+      dispatch(OrderAction.update({ discount: true }));
       setDiscountMessage('Success. 20 % discount applied.');
     }
 
     if (input !== 'pizza2021') {
-      dispatch(OrderAction.discount(false));
+      dispatch(OrderAction.update({ discount: false }));
       setDiscountMessage('You have entered an invalid code.');
     }
   };
 
   return (
-    <div className='dsc-div'>
-      <p className='dsc-title'>Get the discount</p>
-      <div className='discount-input'>
-        <input
-          type='text'
-          id='discount'
-          placeholder='Enter discount code'
-          onChange={handleInput}
-        />
-        <button type='button' value={input} onClick={handleClick}>
-          Apply
-        </button>
-      </div>
-      <p className='dsc-msg'>{discountMessage}</p>
-    </div>
+    <>
+      <p className={style.p}>Get the discount</p>
+      <section className={style.discountSection}>
+        <div className={style.inputDiv}>
+          <input
+            type='text'
+            id='discount'
+            placeholder='Enter discount code'
+            onChange={handleInput}
+            className={style.input}
+          />
+          <button
+            type='button'
+            value={input}
+            onClick={handleClick}
+            className={style.discountBtn}
+          >
+            Apply
+          </button>
+        </div>
+      </section>
+      <p className={style.message}>{discountMessage}</p>
+    </>
   );
 };

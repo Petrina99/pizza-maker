@@ -2,14 +2,14 @@ import React from 'react';
 
 import { ToppingButtons } from './ToppingButtons';
 
+import style from '../styles/toppings.module.css';
+
 export const ToppingSelector: React.FC = () => {
   return (
-    <div className='topping-div'>
-      <p className='title'>Toppings! Toppings!</p>
-      <div className='topping-selector'>
-        <ToppingButtons />
-      </div>
-      <p className='price-par'>Total price +$3.00</p>
-    </div>
+    <section className={style.toppingSection}>
+      <p className={style.toppingTitle}>Toppings! Toppings!</p>
+      <ToppingButtons />
+      <p className={style.price}>Total price +$3.00</p>
+    </section>
   );
 };

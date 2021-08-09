@@ -4,39 +4,41 @@ import { useDispatch, useSelector } from 'react-redux';
 import { AppState } from 'modules/redux-store';
 import { OrderAction } from 'modules/order/redux';
 
+import style from '../styles/pizzaSize.module.css';
+
 export const PizzaSize: React.FC = () => {
   const dispatch = useDispatch();
-  const { size } = useSelector((state: AppState) => state.orderReducer);
+  const { pizzaData } = useSelector((state: AppState) => state.orderReducer);
 
   const handleButton = (e: React.MouseEvent<HTMLButtonElement>) => {
     const { value } = e.currentTarget;
 
-    dispatch(OrderAction.size(value));
+    dispatch(OrderAction.update({ size: value }));
   };
 
   return (
     <>
-      <p className='title'>Pizza! Pizza! size</p>
-      <div className='size-select'>
-        <div id='button-group'>
+      <p className={style.p}>Pizza! Pizza! size</p>
+      <div className={style.sizeSelect}>
+        <div className={style.btnGroup}>
           <button
             value='S'
             onClick={handleButton}
-            className={size === 'S' ? 'active-size' : 'inactive-size'}
+            className={pizzaData.size === 'S' ? style.btnOn : style.btnOff}
           >
             S
           </button>
           <button
             value='M'
             onClick={handleButton}
-            className={size === 'M' ? 'active-size' : 'inactive-size'}
+            className={pizzaData.size === 'M' ? style.btnOn : style.btnOff}
           >
             M
           </button>
           <button
             value='L'
             onClick={handleButton}
-            className={size === 'L' ? 'active-size' : 'inactive-size'}
+            className={pizzaData.size === 'L' ? style.btnOn : style.btnOff}
           >
             L
           </button>

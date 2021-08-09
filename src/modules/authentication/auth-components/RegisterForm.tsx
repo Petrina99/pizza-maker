@@ -1,63 +1,47 @@
 import React, { useState } from 'react';
+import { useForm } from 'react-hook-form';
 
-import { AppState } from '../../redux-store';
-import { useDispatch, useSelector } from 'react-redux';
-
+import { AppState } from 'modules/redux-store';
+import { useSelector, useDispatch } from 'react-redux';
 import { AuthAction } from 'modules/authentication/redux';
+
+import { validation } from 'modules/authentication/auth-components';
 
 import { useFirebaseHooks } from 'modules/firebase/hooks';
 import { useAuth } from 'modules/authentication/hooks';
 
+import style from '../styles/register.module.css';
+
 import eye from 'images/visibility-button.svg';
 import hide from 'images/hide.svg';
+
+type FormValues = {
+  email: string;
+  password: string;
+};
 
 export const RegisterForm: React.FC = () => {
   const { error, user } = useSelector((state: AppState) => state.authReducer);
 
-  const { register, googleSignIn } = useAuth();
-
+  const { handleRegister, googleSignIn } = useAuth();
+  const { pushUser } = useFirebaseHooks('users');
   const dispatch = useDispatch();
 
-  const { pushUser } = useFirebaseHooks('users');
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormValues>();
 
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
   const [inputType, setInputType] = useState('password');
 
-  function handleEmailChange(e: React.ChangeEvent<HTMLInputElement>) {
-    const { value } = e.currentTarget;
-
-    setEmail(value);
-    dispatch(AuthAction.error(''));
-  }
-
-  function handlePasswordChange(e: React.ChangeEvent<HTMLInputElement>) {
-    const { value } = e.currentTarget;
-    setPassword(value);
-    dispatch(AuthAction.error(''));
-  }
-
-  function handleSignUp(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    /* regex for pass validation */
-    const regex =
-      /^(?=.*[0-9])(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?])[a-zA-Z0-9!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]{8,}$/g;
-
-    const isValid = regex.test(password);
-
-    if (!isValid) {
-      dispatch(
-        AuthAction.error(
-          'Your password should be 8+ characters long, contain a number and a special character',
-        ),
-      );
+  function onSubmit(data: FormValues) {
+    handleRegister(data.email, data.password);
+    if (user) {
+      pushUser(data.email, { user: user });
+      dispatch(AuthAction.error(''));
     }
-
-    /* registers a user on firebase auth and adds them in the DB */
-    if (isValid && email && password && !error) {
-      register(email, password);
-      pushUser(email, { user: user });
-    }
+    console.log(data);
   }
 
   function showPassword() {
@@ -73,50 +57,63 @@ export const RegisterForm: React.FC = () => {
   }
 
   return (
-    <div className='reg-div'>
-      <form onSubmit={handleSignUp} className='reg-form'>
+    <div className={style.register}>
+      <p className={style.pizzaTron}>Pizza-á-tron</p>
+      <h1 className={style.welcomeMessage}>Welcome to Pizza-á-tron</h1>
+      <form onSubmit={handleSubmit(onSubmit)} className={style.form}>
         <h1>Create an account</h1>
-        <div className='input-div'>
-          <label htmlFor='email'>Email</label>
-          <input
-            type='email'
-            name='email'
-            placeholder='name@gmail.com'
-            onChange={handleEmailChange}
-            value={email}
-            required
-          />
-          <label htmlFor='password'>Password</label>
-          <input
-            type={inputType}
-            name='password'
-            placeholder='Choose your password'
-            onChange={handlePasswordChange}
-            required
-          />
-          <img
-            src={inputType === 'password' ? eye : hide}
-            onClick={showPassword}
-          />
-        </div>
-        {error ? (
-          <div className='error'>
-            <p>{error}</p>
+        <article className={style.inputArticle}>
+          <div className={style.emailDiv}>
+            <input
+              type='email'
+              {...register('email', {
+                required: 'Email field is required.',
+                pattern: {
+                  value: validation.email,
+                  message: 'Please enter a valid email.',
+                },
+              })}
+              placeholder='Email'
+              id='email-register'
+            />
+            {errors.email && (
+              <p className={style.errorMessage}>{errors.email.message}</p>
+            )}
           </div>
-        ) : (
-          ''
-        )}
-        <div className='submit-div'>
-          <button type='submit' className='reg-btn'>
-            Register
-          </button>
-          <div className='reg-google'>
-            <p>Or</p>
+          <div className={style.passDiv}>
+            <input
+              type={inputType}
+              {...register('password', {
+                required: 'Password filed is required',
+                pattern: {
+                  value: validation.password,
+                  message:
+                    'Please enter a password that contains atleast 8 characters, 1 number and 1 special character.',
+                },
+              })}
+              placeholder='Password'
+              id='password-register'
+            />
+            <button type='button' onClick={showPassword}>
+              <img src={inputType === 'password' ? eye : hide} />
+            </button>
+            {errors.password && (
+              <p className={style.errorMessage}>{errors.password.message}</p>
+            )}
+          </div>
+        </article>
+        {error && <p className={style.errorMessage}>{error}</p>}
+        <section className={style.submitArticle}>
+          <div className={style.submitDiv}>
+            <button type='submit'>Register</button>
+          </div>
+          <p>Or</p>
+          <div className={style.googleDiv}>
             <button type='button' onClick={handleGoogle}>
               Sign in with google
             </button>
           </div>
-        </div>
+        </section>
       </form>
     </div>
   );

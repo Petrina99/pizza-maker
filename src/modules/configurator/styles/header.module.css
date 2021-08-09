@@ -1,0 +1,37 @@
+.header{
+  flex-basis: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.nav{
+  flex-basis: 50%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  margin-top: 15px;
+}
+
+.p{
+  flex-basis: 33%;
+  text-align: left;
+  margin: 0;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.imgDiv{
+  flex-basis: 33%;
+  text-align: center;
+  margin: 0;
+}
+
+.btnDiv{
+  flex-basis: 33%;
+  display: flex;
+  justify-content: right;
+  margin: 0;
+}

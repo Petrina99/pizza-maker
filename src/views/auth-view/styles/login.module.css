@@ -1,0 +1,16 @@
+.p{
+  text-align: center;
+  flex-basis: 100%;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.linkElement{
+  text-decoration: none;
+  color: #B490DF;
+  font-weight: bold;
+}
+
+.linkElement:hover{
+  color: #CEA5FF;
+}

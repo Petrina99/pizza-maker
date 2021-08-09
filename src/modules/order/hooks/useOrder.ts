@@ -2,16 +2,16 @@ import { useSelector } from 'react-redux';
 import { AppState } from 'modules/redux-store/models';
 
 export const useOrder = () => {
-  const { quantity, toppings, discount, size } = useSelector(
+  const { pizzaData, toppings } = useSelector(
     (state: AppState) => state.orderReducer,
   );
 
   const getCurrentPrice = () => {
-    const discountPrice = discount ? 3 : 0;
+    const discountPrice = pizzaData.discount ? 3 : 0;
     const price = 3;
     const toppingPrice = toppings.length * price;
     let sizePrice = 0;
-    switch (size) {
+    switch (pizzaData.size) {
       case 'S':
         sizePrice = 2;
         break;
@@ -33,7 +33,9 @@ export const useOrder = () => {
         ' sizePrice: ' +
         sizePrice,
     );
-    return (toppingPrice + sizePrice - discountPrice) * quantity;
+    const totalPrice = (toppingPrice + sizePrice) * pizzaData.quantity;
+
+    return totalPrice - discountPrice;
   };
 
   return {

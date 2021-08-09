@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
+import { useForm } from 'react-hook-form';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { AppState } from '../../redux-store';
-
 import { AuthAction } from 'modules/authentication/redux';
 
 import { useAuth } from 'modules/authentication/hooks';
@@ -12,37 +12,31 @@ import hide from '../../../images/hide.svg';
 
 //import { useHistory } from 'react-router-dom';
 
+import style from '../styles/login.module.css';
+
+type FormValues = {
+  email: string;
+  password: string;
+};
+
+import { validation } from 'modules/authentication/auth-components';
+
 export const LoginForm: React.FC = () => {
   const { error } = useSelector((state: AppState) => state.authReducer);
 
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormValues>();
   const { login, rememberMe, googleSignIn } = useAuth();
-
   const dispatch = useDispatch();
 
-  //const history = useHistory();
-
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
   const [inputType, setInputType] = useState('password');
 
-  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { value } = e.currentTarget;
-
-    setEmail(value);
+  const onSubmit = (data: FormValues) => {
+    login(data.email, data.password);
     dispatch(AuthAction.error(''));
-  };
-
-  const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { value } = e.currentTarget;
-
-    setPassword(value);
-    dispatch(AuthAction.error(''));
-  };
-
-  const handleLogin = () => {
-    if (email && password && !error) {
-      login(email, password);
-    }
   };
 
   function setPersistence() {
@@ -62,33 +56,47 @@ export const LoginForm: React.FC = () => {
   }
 
   return (
-    <div className='login-div'>
-      <form className='login-form'>
-        <h1>Sign in</h1>
-        <div className='input-login'>
-          <label htmlFor='email'>Email</label>
-          <input
-            type='email'
-            name='email'
-            placeholder='Enter your email.'
-            onChange={handleEmailChange}
-            value={email}
-            required
-          />
-          <label htmlFor='password'>Password</label>
-          <input
-            type={inputType}
-            name='password'
-            placeholder='Enter your password'
-            onChange={handlePasswordChange}
-            value={password}
-            required
-          />
-          <img
-            src={inputType === 'password' ? eye : hide}
-            onClick={showPassword}
-          />
-        </div>
+    <div className={style.login}>
+      <p className={style.pizzaTron}>Pizza-á-tron</p>
+      <h1 className={style.welcomeMessage}>Welcome to Pizza-á-tron</h1>
+      <form className={style.form} onSubmit={handleSubmit(onSubmit)}>
+        <h1>Login to an existing account</h1>
+        <article className={style.inputArticle}>
+          <div className={style.emailDiv}>
+            <input
+              type='email'
+              id='email-login'
+              placeholder='Email'
+              {...register('email', {
+                required: 'Email field is required.',
+                pattern: {
+                  value: validation.email,
+                  message: 'Please enter a valid email.',
+                },
+              })}
+            />
+            {errors.email && (
+              <p className={style.errorMessage}>{errors.email.message}</p>
+            )}
+          </div>
+          <div className={style.passDiv}>
+            <input
+              type={inputType}
+              id='password-login'
+              {...register('password', {
+                required: 'Password field is required.',
+              })}
+              name='password'
+              placeholder='Password'
+            />
+            <button type='button' onClick={showPassword}>
+              <img src={inputType === 'password' ? eye : hide} />
+            </button>
+            {errors.password && (
+              <p className={style.errorMessage}>{errors.password.message}</p>
+            )}
+          </div>
+        </article>
         {error ? (
           <div className='error-login'>
             <p>{error}</p>
@@ -96,10 +104,18 @@ export const LoginForm: React.FC = () => {
         ) : (
           ''
         )}
-        <div className='submit-login'>
-          <button type='button' onClick={handleLogin} className='log-btn'>
-            Login
-          </button>
+        <section className={style.submitSection}>
+          <div className={style.loginDiv}>
+            <button type='submit'>Login</button>
+          </div>
+          <p>Or</p>
+          <div className={style.googleDiv}>
+            <button type='button' onClick={handleGoogle}>
+              Sign in with google
+            </button>
+          </div>
+        </section>
+        <div className={style.rememberDiv}>
           <button
             type='button'
             onClick={setPersistence}
@@ -107,12 +123,6 @@ export const LoginForm: React.FC = () => {
           >
             Remember me
           </button>
-          <div className='log-google'>
-            <p>Or</p>
-            <button type='button' onClick={handleGoogle}>
-              Sign in with google
-            </button>
-          </div>
         </div>
       </form>
     </div>
