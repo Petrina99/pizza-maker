@@ -2,11 +2,21 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+Simple pizza maker app.
+
+Has user authentication with email and password and with google sign up. 
+
+Allows user to choose toppings for his pizza, select size, apply a discount code and choose quantity of pizza.
+
+Stores info about the pizza and the order address in firebase firestore.
+
 # Technologies used
 
 React.js with Typescript
 
 Firebase for authentication and database
+
+React-hook-form for building forms
 
 React-router-dom for navigation
 
