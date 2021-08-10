@@ -8,7 +8,7 @@ Has user authentication with email and password and with google sign up.
 
 Allows user to choose toppings for his pizza, select size, apply a discount code and choose quantity of pizza.
 
-Stores info about the pizza and the order address in firebase firestore.
+Stores info about the order and user emails in firebase firestore.
 
 # Technologies used
 
