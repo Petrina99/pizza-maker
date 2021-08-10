@@ -14,10 +14,6 @@ Redux for state managment
 
 CSS modules for style
 
-# How to run
-
-Clone this repo
-
 # Scripts
 ### yarn install 
 
