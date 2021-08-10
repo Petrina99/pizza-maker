@@ -19,7 +19,8 @@ export const ToppingButtons: React.FC = () => {
     }
   };
 
-  /* ovo sam vratio da bude ovako bez da mapiram toppingArray jer nisam znao kako da drugacije mjenjam stilove kad je button aktivan a kad nije */
+  /* ovo sam vratio da bude ovako bez da mapiram toppingArray jer nisam znao kako da drugacije mjenjam stilove kad je button aktivan a kad nije
+  dost lose rjesenje al radi perfektno */
   return (
     <div className={style.buttonDiv}>
       <button
