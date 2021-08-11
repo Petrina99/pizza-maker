@@ -50,7 +50,6 @@ export const ShippingInfo: React.FC = () => {
       quantity: pizzaData.quantity,
       dicount: pizzaData.discount,
       payment: 'Cash on delivery.',
-      CC: 'Cash on delivery.',
       toppings: toppings.sort((a, b) => a.id - b.id).map((item) => item.title),
     });
     history.push('/success');
