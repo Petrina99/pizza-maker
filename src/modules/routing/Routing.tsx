@@ -9,7 +9,7 @@ import {
   PizzaMaker,
   Order,
   Success,
-} from '../../views';
+} from 'views';
 
 import { useSelector } from 'react-redux';
 import { AppState } from '../redux-store';
@@ -17,22 +17,21 @@ import { AppState } from '../redux-store';
 import { useHistory } from 'react-router-dom';
 
 export const Routing: React.FC = () => {
-  const { user } = useSelector((state: AppState) => state.userReducer);
+  const { user } = useSelector((state: AppState) => state.authReducer);
 
   const history = useHistory();
 
-  console.log(user.email);
-  console.log(user.message);
+  console.log(user);
 
   useEffect(() => {
-    if (user.message === 'User exists.') {
+    if (user) {
       history.push('/builder');
     }
 
-    if (user.message !== 'User exists.') {
+    if (!user) {
       history.push('/register');
     }
-  });
+  }, [user]);
 
   return (
     <Switch>

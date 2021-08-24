@@ -1,4 +1,6 @@
-import { ActionWithPayload } from '../models';
+import { Action, ActionWithPayload } from '../models';
+
+export function createAction<T extends string>(type: T): Action<T>;
 
 export function createAction<T extends string, P>(
   type: T,

@@ -1,0 +1,122 @@
+.finisherSection{
+  flex-basis: 45%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid #F2F2F2;
+  box-sizing: border-box;
+  backdrop-filter: blur(12px);
+  border-radius: 28px 28px 0px 0px;
+  margin-bottom: 0;
+  margin-top: 50px;
+}
+
+.finisherDiv{
+  flex-basis: 100%;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.imgDiv{
+  flex-basis: 20%;
+}
+
+.img{
+  position: relative;
+  margin-top: -50px;
+  width: 100%;
+  height: 100%;
+}
+
+.qtyDiv{
+  flex-basis: 20%;
+  margin: 0;
+  border-right: 1px dashed #DBDBDB;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.inputDiv{
+  flex-basis: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  margin: 0;
+}
+
+.qtyInput{
+  width: 60px;
+  height: 36px;
+  background: #ECECF3;
+  border-radius: 20px;
+  font-size: 16px;
+  text-align: center;
+  outline: none;
+  border: 0;
+}
+
+.qtyP{
+  flex-basis: 70%;
+  text-align: center;
+  margin: 0;
+  color: #B9B9B9;
+  font-size: 12px;
+}
+
+.priceDiv{
+  flex-basis: 20%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  margin: 0;
+}
+
+.price{
+  flex-basis: 70%;
+  font-size: 32px;
+  color: #B95DE4;
+  margin: 0;
+  font-weight: bold;
+}
+
+.orderTotal{
+  flex-basis: 70%;
+  color: #B9B9B9;
+  font-size: 12px;
+  margin: 0;
+}
+
+.btnDiv{
+  flex-basis: 20%;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.btnBuy{
+  flex-basis: 100%;
+  background: #B95DE4;
+  border-radius: 48px;
+  padding: 22px 27px;
+  border: 0;
+  outline: 0;
+  color: #FFFFFF;
+  font-size: 14px;
+  cursor: pointer;
+  transition-duration: 0.2s;
+  font-weight: bold;
+}
+
+.btnBuy:hover{
+  background: #d094ec;
+}

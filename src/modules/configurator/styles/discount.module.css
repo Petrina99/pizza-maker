@@ -1,0 +1,58 @@
+.p{
+  flex-basis: 100%;
+  text-align: center;
+  font-size: 40px;
+  font-weight: bold;
+  margin-top: 60px;
+  margin-bottom: 24px;
+}
+
+.discountSection{
+  flex-basis: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.inputDiv{
+  flex-basis: 24%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: nowrap;
+}
+
+.input{
+  flex-basis: 100%;
+  background: #ECECF3;
+  border-radius: 72px;
+  border: 0;
+  outline: none;
+  font-size: 20px;
+  padding: 30px 40px;
+  color: #8C8C8C;
+}
+
+.discountBtn{
+  position: relative;
+  margin-left: -135px;
+  border: 1px solid #DBDBDB;
+  box-sizing: border-box;
+  border-radius: 36px;
+  font-size: 16px;
+  font-weight: normal;
+  padding: 22px 40px;
+  cursor: pointer;
+  transition-duration: 0.2s;
+  background: #ECECF3;
+}
+
+.discountBtn:hover{
+  background: #B95DE4;
+  color: white;
+}
+
+.message{
+  flex-basis: 100%;
+  text-align: center;
+}

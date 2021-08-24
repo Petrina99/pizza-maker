@@ -1,0 +1,54 @@
+.buttonDiv{
+  display: flex;
+  flex-basis: 45%;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 24px;
+}
+
+.btnOff{
+  width: 98px;
+  height: 148px;
+  background: #FFFFFF;
+  border: 1px solid #F2F2F2;
+  box-shadow: 0px 12px 16px rgba(0, 0, 0, 0.03);
+  border-radius: 56px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  cursor: pointer;
+  padding-top: 11px;
+}
+
+.btnOn{
+  composes: btnOff;
+  background: #E5C3F5;
+}
+
+.btnImgDivOff{
+  width: 76px;
+  height: 76px;
+  line-height: 36px;
+  background: #FFFFFF;
+  box-shadow: 0px 12px 28px rgba(0, 0, 0, 0.03);
+  border-radius: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.btnImgDivOn{
+  composes: btnImgDivOff;
+  opacity: 0.3;
+}
+
+.btnImg{
+  width: 24px;
+  height: 36px;
+}
+
+.btnP{
+  font-size: 14px;
+}

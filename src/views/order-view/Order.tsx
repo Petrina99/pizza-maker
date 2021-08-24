@@ -1,11 +1,15 @@
 import React from 'react';
 
-import { OrderDetails, Header } from '../../modules';
+import { OrderModal } from 'modules/order/components';
+import { Header } from 'modules/configurator/components';
+
+import style from './styles/order.module.css';
+
 export const Order: React.FC = () => {
   return (
-    <div className='order-div'>
+    <div className={style.orderView}>
       <Header />
-      <OrderDetails />
+      <OrderModal />
     </div>
   );
 };

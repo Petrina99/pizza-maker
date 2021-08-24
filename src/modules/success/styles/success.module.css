@@ -1,0 +1,54 @@
+.successDiv{
+  flex-basis: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: nowrap;
+  margin-bottom: 40px;
+  margin-top: 200px;
+  margin-left: 70px;
+}
+
+.imgDiv{
+  flex-basis: 30%;
+  text-align: center;
+}
+
+.textDiv{
+  flex-basis: 70%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.boldDiv{
+  flex-basis: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+
+.title{
+  flex-basis: 100%;
+  text-align: left;
+  font-size: 48px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.smallTextDiv{
+  flex-basis: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.p{
+  flex-basis: 100%;
+  text-align: left;
+  margin: 5px;
+}

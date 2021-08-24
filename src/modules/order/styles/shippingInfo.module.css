@@ -1,0 +1,112 @@
+.shippingInfo{
+  flex-basis: 45%;
+  display: flex;
+  padding: 12px;
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  flex-wrap: wrap;
+  margin: 0;
+}
+
+.form{
+  flex-basis: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: left;
+  align-items: center;
+  padding: 12px;
+}
+
+.shippingTitle{
+ flex-basis: 100%;
+ font-weight: 800;
+ font-size: 20px;
+ margin-bottom: 12px;
+}
+
+.streetInput{
+  flex-basis: 100%;
+  background: #ECECF3;
+  border-radius: 72px;
+  padding: 16px;
+  border: none;
+  outline: none;
+  color: #8C8C8C;
+  margin-bottom: 12px;
+}
+
+.errorMessage{
+  flex-basis: 100%;
+  color: red;
+  text-align: center;
+  margin: 0;
+}
+
+.cityPostalDiv{
+  flex-basis: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 12px;
+  margin-bottom: 12px;
+}
+
+.cityPostalInput{
+  flex-basis: 40%;
+  composes: streetInput;
+  -moz-appearance: textfield;
+}
+
+.cityPostalInput::-webkit-outer-spin-button,
+.cityPostalInput::-webkit-inner-spin-button{
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.countryInput{
+  composes: streetInput;
+}
+
+.paymentDetails{
+  flex-basis: 100%;
+  text-align: left;
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 4px;
+}
+
+.paymentMethod{
+  flex-basis: 100%;
+  text-align: left;
+  font-size: 16px;
+}
+
+.submitDiv{
+  flex-basis: 100%;
+  border-top: 1px dashed #DBDBDB;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 24px;
+  margin-top: 24px;
+}
+
+.finishBtn{
+  background: linear-gradient(93.49deg, #B490DF 4.76%, #C697E9 98.36%);
+  border-radius: 36px;
+  color: #FFFFFF;
+  border: 0;
+  outline: 0;
+  flex-basis: 100%;
+  padding: 20px;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  transition-duration: 0.2s;
+}
+
+.finishBtn:hover{
+  background: linear-gradient(93.49deg, #9e70d6 4.76%, #b478e2 98.36%);
+}

@@ -1,21 +1,7 @@
-import {
-  PizzaReducer,
-  UserReducer,
-  ErrorReducer,
-  MessageReducer,
-  SizeReducer,
-  DiscountReducer,
-  PriceReducer,
-  QuantityReducer,
-} from '../../redux';
+import { AuthReducer } from 'modules/authentication';
+import { OrderReducer } from 'modules/order';
 
 export interface AppState {
-  reducer: ReturnType<typeof PizzaReducer>;
-  userReducer: ReturnType<typeof UserReducer>;
-  errorReducer: ReturnType<typeof ErrorReducer>;
-  messageReducer: ReturnType<typeof MessageReducer>;
-  sizeReducer: ReturnType<typeof SizeReducer>;
-  discountReducer: ReturnType<typeof DiscountReducer>;
-  priceReducer: ReturnType<typeof PriceReducer>;
-  quantityReducer: ReturnType<typeof QuantityReducer>;
+  orderReducer: ReturnType<typeof OrderReducer>;
+  authReducer: ReturnType<typeof AuthReducer>;
 }

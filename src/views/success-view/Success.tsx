@@ -1,46 +1,31 @@
 import React from 'react';
 
-import { useDispatch, useSelector } from 'react-redux';
-import {
-  Actions,
-  SizeAction,
-  QuantityAction,
-  DiscountAction,
-  PriceAction,
-} from '../../modules';
-import { AppState } from '../../modules';
+import { useDispatch } from 'react-redux';
+import { OrderAction } from 'modules/order/redux';
 
-import { Header, SuccessPage } from '../../modules';
+import { SuccessPage } from 'modules/success';
+import { Header } from 'modules/configurator/components';
 
 import { useHistory } from 'react-router-dom';
-export const Success: React.FC = () => {
-  const { toppings } = useSelector((state: AppState) => state.reducer);
-  const { discount } = useSelector((state: AppState) => state.discountReducer);
 
+import style from './styles/successView.module.css';
+
+export const Success: React.FC = () => {
   const history = useHistory();
 
   const dispatch = useDispatch();
+
   const handleAnother = () => {
-    toppings.map((item) => dispatch(Actions.remove(item.id)));
-    dispatch(SizeAction.add('S'));
-    dispatch(QuantityAction.add(1));
-    dispatch(
-      DiscountAction.add({ code: discount.code, valid: false, message: '' }),
-    );
-    dispatch(PriceAction.add(0));
+    dispatch(OrderAction.reset());
     history.push('/builder');
   };
 
   return (
-    <div className='success-sect'>
+    <div className={style.successView}>
       <Header />
       <SuccessPage />
-      <div className='buy-another'>
-        <button
-          type='button'
-          onClick={handleAnother}
-          className='buy-another-btn'
-        >
+      <div className={style.btnDiv}>
+        <button type='button' onClick={handleAnother} className={style.btn}>
           Buy another
         </button>
       </div>
